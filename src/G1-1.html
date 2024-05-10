@@ -1,20 +1,99 @@
-
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G1-1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G1-1</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        cursor: grab;
+        font-family: Arial, sans-serif;
+    }
+    #content {
+        width: 2000px; 
+        height: 1200px; 
+        background-color: #f0f0f0;
+        position: absolute;
+        cursor: grab;
+    }
+    .box {
+        width: 200px;
+        height: 200px;
+        background-color: #ccc;
+        border: 1px solid #999;
+        position: absolute;
+        cursor: pointer;
+    }
+    .comment {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.8); 
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
 </head>
 <body>
+    <div id="content">
+        <div class="box" style="top: 100px; left: 100px;"></div>
+        <div class="box" style="top: 300px; left: 500px;"></div>
+        <div class="box" style="top: 700px; left: 800px;"></div>
+        <p>地球上で最も高い山はエベレストで、標高は8,848メートルです。</p>
+        <p>蜜蜂は飛ぶときに翼を200回から230回ほど振るのです。</p>
+        <p>アメリカのイリノイ州では、バスの運転手はバスを止めて乗客が降りるまで60秒待たなければなりません。</p>
+    </div>
+
+    <script>
+        var content = document.getElementById("content");
+        var isDragging = false;
+        var prevX, prevY;
+
+        content.addEventListener("mousedown", function(event) {
+            isDragging = true;
+            prevX = event.clientX;
+            prevY = event.clientY;
+            content.style.cursor = "grabbing";
+        });
+
+        document.addEventListener("mouseup", function() {
+            isDragging = false;
+            content.style.cursor = "grab";
+        });
+
+        document.addEventListener("mousemove", function(event) {
+            if (isDragging) {
+                var deltaX = event.clientX - prevX;
+                var deltaY = event.clientY - prevY;
+                content.style.left = Math.min(0, Math.max(-content.offsetWidth + window.innerWidth, content.offsetLeft + deltaX)) + "px";
+                content.style.top = Math.min(0, Math.max(-content.offsetHeight + window.innerHeight, content.offsetTop + deltaY)) + "px";
+                prevX = event.clientX;
+                prevY = event.clientY;
+            }
+        });
 
 
-    <header>
-    <!-- サイドバー読み込み位置 -->
-    </header>
+        content.addEventListener("click", function(event) {
+            var mouseX = event.clientX; 
+            var mouseY = event.clientY; 
 
 
+            var commentText = prompt("コメントを入力してください:");
 
 
+            if (commentText.trim() !== "") {
+
+                var comment = document.createElement("div");
+                comment.classList.add("comment");
+                comment.style.left = mouseX + "px";
+                comment.style.top = mouseY + "px";
+                comment.textContent = commentText;
+
+                
+                content.appendChild(comment);
+            }
+        });
+    </script>
 </body>
 </html>
