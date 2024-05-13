@@ -4,13 +4,25 @@ body {
     cursor: grab;
     font-family: Arial, sans-serif;
 }
+
+
+#addCommentButton {
+    background-image: url('../../img/652.png'); /* 画像のURLに置き換える */
+    width: 50px; /* 画像の幅 */
+    height: 50px; /* 画像の高さ */
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
 #content {
-    width: 10000px; 
-    height: 10000px; 
+    width: 10000px;
+    height: 10000px;
     background-color: #f0f0f0;
     position: absolute;
     cursor: grab;
 }
+
 .box {
     width: 200px;
     height: 200px;
@@ -19,22 +31,67 @@ body {
     position: absolute;
     cursor: pointer;
 }
+
 .comment {
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.8); 
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 #addCommentButton {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #007bff;
+
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.post-container {
+    border: 1px solid #ccc;
+    width: 400px; /* 枠を小さく */
+    margin: 50px auto; /* 画面の中央に配置 */
+    padding: 10px;
+    background-color: #fff; /* 追加 */
+    position: absolute; /* 追加 */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.post-content {
+    margin-bottom: 10px;
+}
+
+.interaction {
+    display: flex;
+    align-items: center;
+}
+
+.comment-icon, .like-icon {
+    margin-right: 5px;
+}
+
+.comment-count, .like-count {
+    margin-right: 10px;
 }
