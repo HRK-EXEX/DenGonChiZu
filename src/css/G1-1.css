@@ -7,9 +7,9 @@ body {
 
 
 #addCommentButton {
-    background-image: url('../../img/652.png'); /* 画像のURLに置き換える */
-    width: 50px; /* 画像の幅 */
-    height: 50px; /* 画像の高さ */
+    background-image: url('../../img/aim.png'); /* 画像のURLに置き換える */
+    width: auto; 
+    height: auto; 
     background-size: contain;
     border: none;
     cursor: pointer;
