@@ -1,27 +1,33 @@
 body {
     margin: 0;
     overflow: hidden;
-    cursor: grab;
     font-family: Arial, sans-serif;
 }
 
 
 #addCommentButton {
+    position: fixed;
+    width: 40px;
+    height: 40px;
     background-image: url('../../img/aim.png'); /* 画像のURLに置き換える */
-    width: auto; 
-    height: auto; 
     background-size: contain;
     border: none;
     cursor: pointer;
 }
 
+
+
 #content {
+    position: absolute;
     width: 10000px;
     height: 10000px;
     background-color: #f0f0f0;
-    position: absolute;
     cursor: grab;
+    left: 50%; /* 表示領域の中央からスタート */
+    top: 50%; /* 表示領域の中央からスタート */
+    transform: translate(-50%, -50%); /* ページの中央に配置 */
 }
+
 
 .box {
     width: 200px;

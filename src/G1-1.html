@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="content">
+        <!-- 投稿座標部分 -->
         <div class="post-container" style="top: 200px; left: 300px;">
             <div class="user-info">
                 <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
@@ -28,6 +29,8 @@
     </div>
 
     <script>
+
+        
         var content = document.getElementById("content");
         var isDragging = false;
         var initialX, initialY;
@@ -77,6 +80,8 @@
                 content.appendChild(comment);
             }
         });
+
+        
     </script>
 </body>
 </html>
