@@ -12,8 +12,8 @@
         font-family: Arial, sans-serif;
     }
     #content {
-        width: 2000px; 
-        height: 1200px; 
+        width: 10000px; 
+        height: 10000px; 
         background-color: #f0f0f0;
         position: absolute;
         cursor: grab;
@@ -33,6 +33,18 @@
         border: 1px solid #ccc;
         border-radius: 5px;
     }
+    #addCommentButton {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
 </style>
 </head>
 <body>
@@ -40,6 +52,7 @@
         <div class="box" style="top: 100px; left: 100px;"></div>
         <div class="box" style="top: 300px; left: 500px;"></div>
         <div class="box" style="top: 700px; left: 800px;"></div>
+        <button id="addCommentButton">投稿</button>
         <p>地球上で最も高い山はエベレストで、標高は8,848メートルです。</p>
         <p>蜜蜂は飛ぶときに翼を200回から230回ほど振るのです。</p>
         <p>アメリカのイリノイ州では、バスの運転手はバスを止めて乗客が降りるまで60秒待たなければなりません。</p>
@@ -73,24 +86,21 @@
             }
         });
 
-
-        content.addEventListener("click", function(event) {
-            var mouseX = event.clientX; 
-            var mouseY = event.clientY; 
-
+        var addCommentButton = document.getElementById("addCommentButton");
+        addCommentButton.addEventListener("click", function(event) {
+            var buttonRect = addCommentButton.getBoundingClientRect();
+            var mouseX = buttonRect.left + buttonRect.width / 2;
+            var mouseY = buttonRect.top + buttonRect.height / 2;
 
             var commentText = prompt("コメントを入力してください:");
 
-
             if (commentText.trim() !== "") {
-
                 var comment = document.createElement("div");
                 comment.classList.add("comment");
                 comment.style.left = mouseX + "px";
                 comment.style.top = mouseY + "px";
                 comment.textContent = commentText;
 
-                
                 content.appendChild(comment);
             }
         });
