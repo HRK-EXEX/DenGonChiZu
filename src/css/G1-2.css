@@ -18,13 +18,21 @@ body, html {
     margin: 10px;
     font-size: 16px;
     border: none;
-    background-color: #3498db;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
+    background-color: #3498db; 
     transition: background-color 0.3s ease;
 }
 
+.red {
+    background-color: #e74c3c; 
+}
+
+.yellow {
+    background-color: #f1c40f; 
+}
+
 .button:hover {
-    background-color: #2980b9;
+    background-color: #cacbd2; 
 }
