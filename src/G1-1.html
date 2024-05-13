@@ -5,11 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>G1-1</title>
 <link rel="stylesheet" href="css/G1-1.css">
-
 </head>
 <body>
     <div id="content">
-        <div class="post-container" style="top: 200px; left: 300px;"> <!-- x座標: 300px, y座標: 200px -->
+        <div class="post-container" style="top: 200px; left: 300px;">
             <div class="user-info">
                 <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
                 <span class="username">ユーザ名</span>
@@ -31,30 +30,34 @@
     <script>
         var content = document.getElementById("content");
         var isDragging = false;
-        var prevX, prevY;
+        var initialX, initialY;
 
         content.addEventListener("mousedown", function(event) {
-            isDragging = true;
-            prevX = event.clientX;
-            prevY = event.clientY;
-            content.style.cursor = "grabbing";
+            if (event.target.id !== "addCommentButton") {
+                isDragging = true;
+                initialX = event.clientX - content.offsetLeft;
+                initialY = event.clientY - content.offsetTop;
+                content.style.cursor = "grabbing";
+                content.addEventListener("mousemove", mousemoveHandler);
+            }
         });
 
         document.addEventListener("mouseup", function() {
-            isDragging = false;
-            content.style.cursor = "grab";
-        });
-
-        document.addEventListener("mousemove", function(event) {
             if (isDragging) {
-                var deltaX = event.clientX - prevX;
-                var deltaY = event.clientY - prevY;
-                content.style.left = Math.min(0, Math.max(-content.offsetWidth + window.innerWidth, content.offsetLeft + deltaX)) + "px";
-                content.style.top = Math.min(0, Math.max(-content.offsetHeight + window.innerHeight, content.offsetTop + deltaY)) + "px";
-                prevX = event.clientX;
-                prevY = event.clientY;
+                isDragging = false;
+                content.style.cursor = "grab";
+                content.removeEventListener("mousemove", mousemoveHandler);
             }
         });
+
+        function mousemoveHandler(event) {
+            if (isDragging) {
+                var newX = event.clientX - initialX;
+                var newY = event.clientY - initialY;
+                content.style.left = newX + "px";
+                content.style.top = newY + "px";
+            }
+        }
 
         var addCommentButton = document.getElementById("addCommentButton");
         addCommentButton.addEventListener("click", function(event) {
