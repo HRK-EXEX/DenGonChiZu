@@ -4,21 +4,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* 中央表示投稿ボタン。画面を移動しても追尾できるようにしたい*/
-
-#addCommentButton {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-image: url('../../img/aim.png');
-    background-color: #ccc;
-    border: none;
-    cursor: pointer;
-}
-
 
 /* 投稿表示領域。中央からスタートにしてる */
 #content {
@@ -32,6 +17,18 @@ body {
     transform: translate(-50%, -50%); /* ページの中央に配置 */
 }
 
+/* 中央表示投稿ボタン。画面を移動しても追尾できるようにしたい*/
+#addCommentButton {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('../../img/aim.png');
+    border: none;
+    cursor: pointer;
+}
 
 
 
