@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G4-2</title>
+    <!--bulma-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+
+    <header>
+    <!-- サイドバー読み込み位置 -->
+    </header>
+
+    <div class="title">
+        <h4>会員情報変更</h4>
+    </div>
+    <hr  color="black">
+
+    <!-- selectで情報表示 -->
+
+    <form action="*" method="post"><!-- update.php指定? -->
+        <div class="table-container">
+            <table class="table is-striped">
+                <tbody>
+                    <input type="hidden" name="user_id" value="user_id">
+                    <tr><th>ユーザー名</th><td><input type="text" name="name"></td></tr>
+                    <tr><th>メールアドレス</th><td><input type="email" name="mail"></td></tr>
+                    <tr><th>パスワード</th><td><input type="password" name="pass"></td></tr>
+                    <tr><th>生年月日</th><td><input type="date" name="birth"></td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+            <input class="button is-info is-medium" type = "submit"  value="変更"></button>
+        
+    </form>
+
+
+</body>
+</html>
