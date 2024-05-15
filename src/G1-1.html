@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="content">
-        <!-- 投稿座標部分 -->
+        <!-- 投稿座標部分。phpで関数化する予定 -->
         <div class="post-container" style="top: 200px; left: 300px;">
             <div class="user-info">
                 <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
@@ -24,17 +24,36 @@
                 <span class="like-count">10</span>
             </div>
         </div>
+
+        <!-- サンプル部分。後でバッグエンドで関数化して追加方式に変更する -->
+        <div class="post-container" style="top: 400px; left: 700px;">
+            <div class="user-info">
+                <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
+                <span class="username">ユーザ名</span>
+            </div>
+            <div class="post-content">
+                <p>投稿内容がここに表示されます。投稿内容がここに表示されます。投稿内容がここに表示されます。
+                    投稿内容がここに表示されます。投稿内容がここに表示されます。投稿内容がここに表示されます。
+                    
+                </p>
+            </div>
+            <div class="interaction">
+                <span class="comment-icon">💬</span>
+                <span class="comment-count">25</span>
+                <span class="like-icon">❤️</span>
+                <span class="like-count">190</span>
+            </div>
+        </div>
         
         <button id="addCommentButton"></button>
     </div>
 
     <script>
-
-        
         var content = document.getElementById("content");
         var isDragging = false;
         var initialX, initialY;
 
+        // マウスが押された時のイベントリスナーの設定
         content.addEventListener("mousedown", function(event) {
             if (event.target.id !== "addCommentButton") {
                 isDragging = true;
@@ -45,6 +64,7 @@
             }
         });
 
+        // マウスが離された時のイベントリスナーの設定
         document.addEventListener("mouseup", function() {
             if (isDragging) {
                 isDragging = false;
@@ -53,6 +73,7 @@
             }
         });
 
+        // マウスが動いた時のイベントリスナーの設定
         function mousemoveHandler(event) {
             if (isDragging) {
                 var newX = event.clientX - initialX;
@@ -63,6 +84,8 @@
         }
 
         var addCommentButton = document.getElementById("addCommentButton");
+
+        // 「コメント追加」ボタンがクリックされた時のイベントリスナーの設定
         addCommentButton.addEventListener("click", function(event) {
             var buttonRect = addCommentButton.getBoundingClientRect();
             var mouseX = buttonRect.left + buttonRect.width / 2;
@@ -80,8 +103,6 @@
                 content.appendChild(comment);
             }
         });
-
-        
     </script>
 </body>
 </html>
