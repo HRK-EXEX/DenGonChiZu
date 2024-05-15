@@ -87,16 +87,27 @@
 
         // ボタンがクリックされた時のイベントリスナーの設定
         addCommentButton.addEventListener("click", function(event) {
-            var buttonRect = addCommentButton.getBoundingClientRect();
-            var mouseX = buttonRect.left + buttonRect.width / 2;
-            var mouseY = buttonRect.top + buttonRect.height / 2;
+            // クリックしたときのマウス座標を取得
+            var mouseX = event.clientX;
+            var mouseY = event.clientY;
+
+            // #content の位置を取得
+            var contentRect = content.getBoundingClientRect();
+            var contentLeft = contentRect.left;
+            var contentTop = contentRect.top;
+
+            // マウス座標を #content からの相対座標に変換
+            var relativeX = mouseX - contentLeft;
+            var relativeY = mouseY - contentTop;
 
             // 座標情報をURLのクエリパラメータに追加して画面遷移
-            // var url = `newPage.html?x=${mouseX}&y=${mouseY}`;
+            // var url = `newPage.html?x=${relativeX}&y=${relativeY}`;
             // window.location.href = url;
-            alert(mouseX);
-            alert(mouseY);
+
+            alert(`Relative X: ${relativeX}px`);
+            alert(`Relative Y: ${relativeY}px`);
         });
+
     </script>
 </body>
 </html>
