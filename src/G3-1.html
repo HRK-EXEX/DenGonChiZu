@@ -4,42 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G3-1</title>
-    <style>
-        .container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .container img {
-            margin-right: 10px; 
-        }
-        .container p {
-            margin: 0 10px; 
-        }
-        .container button {
-            margin-left: 10px;
-        }
-        .follow-info {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-        .follow-info div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/G3-1.css">
 </head>
 <body>
-    <img src="画像のURL" alt="画像の説明">
-    <p>野生の深井君</p>
-    <button type="button">フォロー</button><br>
-    <a href="">1000</a>
-    <p>フォロー</p>
-    <a href="">20000</a>
-    <p>フォロワー</p><br>
+    <div class="container">
+        <img src="画像のURL" alt="画像の説明">
+        <p>野生の深井君</p>
+        <button type="button">フォロー</button>
+    </div>
+    <div class="follow-info">
+        <div>
+            <a href="">1000</a>
+            <p>フォロー</p>
+        </div>
+        <div>
+            <a href="">20000</a>
+            <p>フォロワー</p>
+        </div>
+    </div>
     <a href="">戻る</a>
 </body>
 </html>
