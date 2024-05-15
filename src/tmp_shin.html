@@ -1,73 +1,39 @@
+<!-- G1-1遷移先座標受け取り関数 -->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>投稿閲覧画面</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-    }
-
-    .post-container {
-        border: 1px solid #ccc;
-        width: 400px; /* 枠を小さく */
-        margin: 50px auto; /* 画面の中央に配置 */
-        padding: 10px;
-    }
-
-    .user-info {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .user-info img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
-
-    .username {
-        font-weight: bold;
-    }
-
-    .post-content {
-        margin-bottom: 10px;
-    }
-
-    .interaction {
-        display: flex;
-        align-items: center;
-    }
-
-    .comment-icon, .like-icon {
-        margin-right: 5px;
-    }
-
-    .comment-count, .like-count {
-        margin-right: 10px;
-    }
-</style>
+<title>New Page</title>
+<link rel="stylesheet" href="css/newPage.css">
 </head>
 <body>
-<div class="post-container">
-    <div class="user-info">
-        <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
-        <span class="username">ユーザ名</span>
+    <div id="content">
+        <!-- ここにコンテンツを追加 -->
     </div>
-    <div class="post-content">
-        <p>投稿内容がここに表示されます。投稿内容がここに表示されます。投稿内容がここに表示されます。</p>
-    </div>
-    <div class="interaction">
-        <span class="comment-icon">コメント</span>
-        <span class="comment-count">5</span>
-        <span class="like-icon">❤️</span>
-        <span class="like-count">10</span>
-    </div>
-</div>
+
+    <script>
+        // URLのクエリパラメータから座標を取得
+        function getQueryParams() {
+            var params = {};
+            var queryString = window.location.search.slice(1);
+            var pairs = queryString.split("&");
+            pairs.forEach(function(pair) {
+                var keyValue = pair.split("=");
+                params[keyValue[0]] = decodeURIComponent(keyValue[1]);
+            });
+            return params;
+        }
+
+        var params = getQueryParams();
+        var mouseX = params.x;
+        var mouseY = params.y;
+
+        // 座標を使用して何かをする
+        console.log(`X座標: ${mouseX}, Y座標: ${mouseY}`);
+
+        // 必要に応じて、ここで座標を使用してコンテンツを配置
+    </script>
 </body>
 </html>
