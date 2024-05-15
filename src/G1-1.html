@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="content">
-        <!-- 投稿座標部分。phpで関数化する予定 -->
+        <!-- 投稿座標部分 -->
         <div class="post-container" style="top: 200px; left: 300px;">
             <div class="user-info">
                 <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
@@ -34,7 +34,6 @@
             <div class="post-content">
                 <p>投稿内容がここに表示されます。投稿内容がここに表示されます。投稿内容がここに表示されます。
                     投稿内容がここに表示されます。投稿内容がここに表示されます。投稿内容がここに表示されます。
-                    
                 </p>
             </div>
             <div class="interaction">
@@ -44,9 +43,10 @@
                 <span class="like-count">190</span>
             </div>
         </div>
-        
-        <button id="addCommentButton"></button>
     </div>
+
+    <!-- ボタンは #content の外に配置 -->
+    <button id="addCommentButton"></button>
 
     <script>
         var content = document.getElementById("content");
