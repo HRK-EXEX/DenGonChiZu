@@ -85,23 +85,17 @@
 
         var addCommentButton = document.getElementById("addCommentButton");
 
-        // 「コメント追加」ボタンがクリックされた時のイベントリスナーの設定
+        // ボタンがクリックされた時のイベントリスナーの設定
         addCommentButton.addEventListener("click", function(event) {
             var buttonRect = addCommentButton.getBoundingClientRect();
             var mouseX = buttonRect.left + buttonRect.width / 2;
             var mouseY = buttonRect.top + buttonRect.height / 2;
 
-            var commentText = prompt("コメントを入力してください:");
-
-            if (commentText.trim() !== "") {
-                var comment = document.createElement("div");
-                comment.classList.add("comment");
-                comment.style.left = mouseX + "px";
-                comment.style.top = mouseY + "px";
-                comment.textContent = commentText;
-
-                content.appendChild(comment);
-            }
+            // 座標情報をURLのクエリパラメータに追加して画面遷移
+            // var url = `newPage.html?x=${mouseX}&y=${mouseY}`;
+            // window.location.href = url;
+            alert(mouseX);
+            alert(mouseY);
         });
     </script>
 </body>
