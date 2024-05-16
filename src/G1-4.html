@@ -12,19 +12,19 @@
     <table>
         <tr>
             <td>ユーザ名</td>
-            <td>aaaa</td> <!-- ユーザ名の実際の値に置き換える -->
+            <td>aaaa</td> 
         </tr>
         <tr>
             <td>メールアドレス</td>
-            <td>example@example.com</td> <!-- メールアドレスの実際の値に置き換える -->
+            <td>example@example.com</td> 
         </tr>
         <tr>
             <td>パスワード</td>
-            <td>********</td> <!-- パスワードはセキュリティ上、表示しない方が良い -->
+            <td>********</td> 
         </tr>
         <tr>
             <td>生年月日</td>
-            <td>1990-01-01</td> <!-- 生年月日の実際の値に置き換える -->
+            <td>1990-01-01</td> 
         </tr>
     </table>
     <div class="button-container">
@@ -32,5 +32,17 @@
         <button class="btn-register">登録</button>
     </div>
 </div>
+
+<script>
+    // 戻るボタンのクリックイベント
+    document.querySelector(".btn-back").addEventListener("click", function() {
+        window.location.href = "G1-3.html";
+    });
+
+    // 登録ボタンのクリックイベント
+    document.querySelector(".btn-register").addEventListener("click", function() {
+        window.location.href = "G1-5.html";
+    });
+</script>
 </body>
 </html>
