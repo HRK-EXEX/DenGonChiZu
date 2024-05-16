@@ -2,19 +2,16 @@
     display: flex;
     align-items: center;
     margin-left: 2cm;
+    /* text-indent: 0.8em; 
+    font-weight: bold; 
+    margin-left: 30px;
+    margin-top:14px;
+    margin-bottom:14px; */
   }
 
   .add-button {
     margin-right: auto;
   }
-
-.h4{
-    text-indent: 0.8em; 
-    font-weight: bold; 
-    margin-left: 30px;
-    margin-top:14px;
-    margin-bottom:14px;
-} 
 
 .left-column {
     margin-top:auto;

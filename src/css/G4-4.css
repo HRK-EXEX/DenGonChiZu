@@ -1,0 +1,10 @@
+h1.title.is-4 {
+    text-align: center;
+}
+
+.contents {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
