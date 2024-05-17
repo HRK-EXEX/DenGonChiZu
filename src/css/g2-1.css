@@ -34,25 +34,35 @@ body {
 	transition: all 0.1s;
 }
 
-.back { background: #c0c0c0;}
-.proceed { background: #E4FF3F;}
+.back { background: #C0C0C0 }
+.proceed { background: #E4FF3F }
+.delete { background: #F46A6A }
 
 .back:hover {
-	background: rgb(72,72,72);
+	background: #484848;
     color: white;
 }
 .proceed:hover {
-	background: rgb(53, 50, 255);
+	background: #3532FF;
     color: wheat;
 }
+.delete:hover { 
+    background: #202020;
+    color: #F46A6A;
+}
+
 
 .back:active {
-	background: rgb(221, 222, 223);
+	background: #DDDDDD;
 	color: black;
 }
 .proceed:active {
-	background: rgb(167, 167, 255);
+	background: #C7C6FF;
 	color: black;
+}
+.delete:active { 
+    background: #FFCFCF;
+    color: black;
 }
 
 .operation {
@@ -72,6 +82,7 @@ body {
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
 
     font-size: xx-large;
     font-weight: bold;
