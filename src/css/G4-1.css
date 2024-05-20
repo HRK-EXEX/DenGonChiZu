@@ -1,37 +1,54 @@
-.title {
-    display: flex;
-    align-items: center;
-    margin-left: 2cm;
-  }
+ .title {
+  display: flex;
+  align-items: center;
+  margin-left: 2cm;
+}
 
-  .add-button {
-    margin-right: auto;
-  }
+.add-button {
+  margin-right: auto;
+}
+
+.container{
+  width: 100%;
+  justify-content: center;
+}
 
 .h4{
-    text-indent: 0.8em; 
-    font-weight: bold; 
-    margin-left: 30px;
-    margin-top:14px;
-    margin-bottom:14px;
+  text-indent: 0.8em; 
+  font-weight: bold; 
+  margin-left: 30px;
+  margin-top:14px;
+  margin-bottom:14px;
 } 
 
 .left-column {
-    margin-top:auto;
-    margin-left: 2cm;
+  margin-top:auto;
+  margin-left: 2cm;
 }
 
 .right-column {
-    display: block;
-    margin-left: auto;
-    margin-right: 5em;
-    margin-top: 2em;
+  display: block;
+  margin-left: auto;
+  margin-right: 5em;
+  margin-top: 2em;
 }
 
 .table{
-  margin: auto;
+margin: auto;
 }
 
-tbody,tr,th,td {
-  border: 1px solid #ccc;
+tbody{
+border: 1px solid #ccc;
+}
+
+.columns .column {
+
+margin-right: 200px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 300px; /* ボタン全体を右に調整 */
+  margin-top: 50px;
 }

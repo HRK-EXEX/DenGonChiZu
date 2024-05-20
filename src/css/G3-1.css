@@ -1,25 +1,89 @@
-.container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.container img {
-    margin-right: 10px; 
-}
-.container p {
-    margin: 0 10px; 
-}
-.container button {
-    margin-left: 10px;
-}
-.follow-info {
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    align-items: center;
+    background-color: #f0f0f0;
 }
-.follow-info div {
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 80px);
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
     align-items: center;
-    margin: 0 10px;
+    margin-bottom: 40px;
+}
+
+.profile-pic {
+    width: 70px;
+    height: 70px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+.follow-btn {
+    margin-left: 20px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.link {
+    font-size: 1.2em;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    padding: 20px 40px;
+    font-size: 1.2em;
+    color: black;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
