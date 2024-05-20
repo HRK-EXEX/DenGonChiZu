@@ -8,9 +8,23 @@
 </head>
 <body>
     <div class="container">
-        <button class="button">ログイン</button>
-        <button class="button red">館員登録</button>
-        <button class="button yellow">ゲスト</button>
+        <button class="button" id="loginButton">ログイン</button>
+        <button class="button red" id="registerButton">会員登録</button>
+        <button class="button yellow" id="guestButton">ゲスト</button>
     </div>
+
+    <script>
+        document.getElementById("loginButton").addEventListener("click", function() {
+            window.location.href = "G1-6.html";
+        });
+
+        document.getElementById("registerButton").addEventListener("click", function() {
+            window.location.href = "G1-3.html";
+        });
+
+        document.getElementById("guestButton").addEventListener("click", function() {
+            window.location.href = "G1-1.html";
+        });
+    </script>
 </body>
 </html>
