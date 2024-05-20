@@ -1,0 +1,19 @@
+.title {
+    display: flex;
+    align-items: center;
+    margin-left: 2cm;
+    margin-top: 1cm;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 2cm;
+  }
+
+  .table{
+    margin: auto;
+  }
+
+  tbody,tr,th,td {
+    border: 1px solid #ccc;
+}

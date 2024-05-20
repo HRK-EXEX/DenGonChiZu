@@ -5,19 +5,9 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G4-1</title>
-    <link rel="stylesheet" href="css/G4-1.css">
     <!--bulma-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <!-- <style>
-        .title {
-          display: flex;
-          align-items: center;
-        }
-    
-        .add-button {
-          margin-right: auto;
-        }
-      </style> -->
+    <link rel="stylesheet" href="css/G4-1.css">
 </head>
 <body>
 
@@ -31,32 +21,32 @@
             <h4>会員情報</h4>
         </div>
         <div class="right-column">
-        <button class="button is-danger is-medium" onclick="location.href='G4-3.html'">退会</button>
+            <button class="button is-danger is-medium" onclick="location.href='G4-3.html'">退会</button>
         </div>
     </div>
     <hr  color="black">
 
-    <!-- selectで情報表示,user_idを送信 -->
+    <!-- selectで情報取得,user_idを送信 -->
 
     <form action="G4-2.html" method="post">
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-half">
                     <table class="table is-striped">
-                        <body>
+                        <tbody>
                             <input type="hidden" name="user_id" value="user_id">
                                 <tr><th>ユーザー名</th><td>〇〇〇〇</td></tr>
                                 <tr><th>メールアドレス</th><td>aaaa@s.asojuku</td></tr>
                                 <tr><th>パスワード</th><td>********</td></tr>
                                 <tr><th>生年月日</th><td>2024/05/13</td></tr>
-                        </body>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
         <div class="columns is-mobile is-centered">
             <div class="column is-one-quarter">
-                <button class="button is-medium" type="button" onclick="history.back()">戻る</button>
+                <button class="button has-background-grey-light is-medium" onclick="location.href='./G1-1.html'">戻る</button>
             </div>
             <!-- <div class="has-text-right"> -->
                 <div class="column is-one-quarter">

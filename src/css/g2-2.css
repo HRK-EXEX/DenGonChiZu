@@ -1,0 +1,144 @@
+.parent {
+    margin: 32px 5vw;
+}
+
+.show-part {
+    width: 72%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.details-part {
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: left;
+    
+    height: 52vh;
+}
+
+.comments {
+    border: 1px solid black;
+    overflow-y: auto;
+}
+
+.title-base {
+    padding: 0px;
+    margin: 2px;
+    height: 30vh;
+}
+
+.button-base {
+    font-size: x-large;
+	
+    margin: 0px;
+	padding: 8px;
+	border: 1px solid black;
+	border-radius: 5px;
+	width: 12%;
+	color: inherit;
+	cursor: pointer;
+
+	transition: all 0.1s;
+}
+
+.back { background: #C0C0C0;}
+.proceed { background: #E4FF3F;}
+.send { background: #fbba6d;}
+
+.back:hover {
+	background: rgb(72,72,72);
+    color: white;
+}
+.proceed:hover {
+	background: rgb(53, 50, 255);
+    color: wheat;
+}
+.send:hover {
+	background: rgb(109, 135, 251);
+    color: wheat;
+}
+
+.back:active {
+	background: rgb(221, 222, 223);
+	color: black;
+}
+.proceed:active {
+	background: rgb(167, 167, 255);
+	color: black;
+}
+.send:active {
+	background: rgb(172, 187, 255);
+	color: black;
+}
+
+.operation {
+    display: flex;
+    margin-top: 32px;
+    justify-content: space-between;
+}
+
+.method {
+    display: flex;
+    padding: 0px;
+    border: 0px;
+    height: 30vh;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border: 1px black solid;
+    
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.image-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    height: 30vh;
+    padding: 0px;
+}
+
+.title {
+    height: 20vh;
+}
+
+.content {
+    height: auto;
+}
+
+.edit {
+    position: fixed;
+    width: 80%;
+    left: 84%;
+}
+
+.comment-info {
+    padding: 16px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    margin-left: 8px;
+}
+
+.icon-image {
+    width: 64px;
+    height: 64px;
+    border: 1px solid black;
+    border-radius: 100%;
+}
