@@ -1,19 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G4-1</title>
-    <!--bulma-->
+    <!-- bulma -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="css/G4-1.css">
 </head>
 <body>
 
-
     <header>
-    <!-- サイドバー読み込み位置 -->
+    <!-- サイドバー読み込み位置  -->
     </header>
 
     <div class="title">
@@ -26,13 +24,13 @@
     </div>
     <hr  color="black">
 
-    <!-- selectで情報取得,user_idを送信 -->
+    <!-- selectで情報取得,user_idを送信  -->
 
     <form action="G4-2.html" method="post">
         <div class="container">
             <div class="columns is-centered">
-                <div class="column is-half">
-                    <table class="table is-striped">
+                <div class="column is-half is-offset-one-quarter">
+                    <table class="table is-striped is-fullwidth">
                         <tbody>
                             <input type="hidden" name="user_id" value="user_id">
                                 <tr><th>ユーザー名</th><td>〇〇〇〇</td></tr>
@@ -44,15 +42,14 @@
                 </div>
             </div>
         </div>
-        <div class="columns is-mobile is-centered">
-            <div class="column is-one-quarter">
-                <button class="button has-background-grey-light is-medium" onclick="location.href='./G1-1.html'">戻る</button>
-            </div>
-            <!-- <div class="has-text-right"> -->
-                <div class="column is-one-quarter">
-                    <input class="button is-info is-medium" type = "submit"  value="変更"></button>
+        <div class="columns is-centered">
+            <div class="buttons-container">
+                <div class="column is-narrow">
+                    <button class="button has-background-grey-light is-medium" onclick="location.href='./G1-1.html'">戻る</button>
                 </div>
-                    <!-- </div> -->
+                <div class="column is-narrow">
+                    <input class="button is-info is-medium" type="submit" value="変更">
+                </div>
             </div>
         </div>
     </form>
