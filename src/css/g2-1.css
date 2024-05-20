@@ -4,7 +4,7 @@ body {
 }
 
 .parent {
-    margin: 32px 5vw;
+    margin: 3vh 5vw;
 }
 
 .main-part {
@@ -36,6 +36,7 @@ body {
 
 .back { background: #C0C0C0 }
 .proceed { background: #E4FF3F }
+.send { background: #FBBA6D;}
 .delete { background: #F46A6A }
 
 .back:hover {
@@ -46,11 +47,14 @@ body {
 	background: #3532FF;
     color: wheat;
 }
+.send:hover {
+	background: #6D87FB;
+    color: wheat;
+}
 .delete:hover { 
     background: #202020;
     color: #F46A6A;
 }
-
 
 .back:active {
 	background: #DDDDDD;
@@ -58,6 +62,10 @@ body {
 }
 .proceed:active {
 	background: #C7C6FF;
+	color: black;
+}
+.send:active {
+	background: #ACBBFF;
 	color: black;
 }
 .delete:active { 
