@@ -25,18 +25,21 @@
     <form action="*" method="post"><!-- update.php指定? -->
         <div class="table-container">
             <!-- <table class="table is-striped"></table> -->
-            <table class="table">
+            <!-- <table class="table"> -->
+                <div class="column is-half is-offset-one-quarter">
+                    <table class="table is-striped is-fullwidth">
                 <tbody>
                     <input type="hidden" name="user_id" value="user_id">
-                    <tr><th>ユーザー名</th><td><input type="text" name="name"></td></tr>
-                    <tr><th>メールアドレス</th><td><input type="email" name="mail"></td></tr>
-                    <tr><th>パスワード</th><td><input type="password" name="pass"></td></tr>
+                    <tr><th>ユーザー名</th><td><input type="text" size="50" name="name"></td></tr>
+                    <tr><th>メールアドレス</th><td><input type="email" size="50" name="mail"></td></tr>
+                    <tr><th>パスワード</th><td><input type="password" size="50" name="pass"></td></tr>
                     <tr><th>生年月日</th><td><input type="date" name="birth"></td></tr>
                 </tbody>
             </table>
         </div>
+    </div></div>
         <p>
-            <input class="button is-info is-medium" type = "submit"  value="変更"></button>
+            <input class="button is-info is-large" type = "submit"  value="変更"></button>
         </p>
         <!-- update後G1-1に遷移 -->
     </form>

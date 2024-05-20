@@ -49,6 +49,6 @@ margin-right: 200px;
 .buttons-container {
   display: flex;
   justify-content: flex-end;
-  margin-left: 200px; /* ボタン全体を右に調整 */
+  margin-left: 300px; /* ボタン全体を右に調整 */
   margin-top: 50px;
 }
