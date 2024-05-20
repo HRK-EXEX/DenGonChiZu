@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="css/side.css">
 </head>
 <body>
-    <div id="sidebar-container"></div>
 
+    <div id="sidebar-container"></div>
 
     <div id="content">
         <!-- 投稿座標部分 -->
@@ -53,12 +53,18 @@
     <button id="addCommentButton"></button>
 
     <script>
-                // サイドバーを読み込むスクリプト
-                fetch('side.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar-container').innerHTML = data;
-            });
+                // 他のHTMLファイルを読み込む関数
+                function loadHTML(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                })
+                .catch(error => console.error('Error loading HTML:', error));
+            }
+
+            // サイドバーを読み込む
+            loadHTML('side.html', 'sidebar-container');
 
 
         var content = document.getElementById("content");
@@ -119,6 +125,8 @@
             alert(`Relative X: ${relativeX}px`);
             alert(`Relative Y: ${relativeY}px`);
         });
+
+
 
     </script>
 </body>

@@ -24,7 +24,8 @@
 
     <form action="*" method="post"><!-- update.php指定? -->
         <div class="table-container">
-            <table class="table is-striped">
+            <!-- <table class="table is-striped"></table> -->
+            <table class="table">
                 <tbody>
                     <input type="hidden" name="user_id" value="user_id">
                     <tr><th>ユーザー名</th><td><input type="text" name="name"></td></tr>
@@ -34,7 +35,9 @@
                 </tbody>
             </table>
         </div>
-        <input class="button is-info is-medium" type = "submit"  value="変更"></button>
+        <p>
+            <input class="button is-info is-medium" type = "submit"  value="変更"></button>
+        </p>
         <!-- update後G1-1に遷移 -->
     </form>
 </body>

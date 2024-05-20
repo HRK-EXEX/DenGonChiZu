@@ -27,3 +27,11 @@
     margin-right: 5em;
     margin-top: 2em;
 }
+
+.table{
+  margin: auto;
+}
+
+tbody,tr,th,td {
+  border: 1px solid #ccc;
+}
