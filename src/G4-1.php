@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/G4-1.css">
 </head>
 <body>
+<?php require 'php/db.php'; ?>
 
     <div class="main">
 
@@ -27,19 +28,28 @@
     <hr  color="black">
 
     <!-- selectで情報取得,user_idを送信  -->
+<?php
+    // idの取得
+    $user_id = $_GET[''];
+    $sql=$pdo->prepare('select * from User where user_id=?');
+    $sql->execute([$user_id]);
+    $result = $sql->fetch(PDO::FETCH_ASSOC);
+?>
 
-    <form action="G4-2.html" method="post">
+    <form action="G4-2.php" method="post">
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-half is-offset-one-quarter">
                     <table class="table is-striped is-fullwidth">
-                        <tbody>
-                            <input type="hidden" name="user_id" value="user_id">
-                                <tr><th>ユーザー名</th><td>〇〇〇〇</td></tr>
-                                <tr><th>メールアドレス</th><td>aaaa@s.asojuku</td></tr>
-                                <tr><th>パスワード</th><td>********</td></tr>
-                                <tr><th>生年月日</th><td>2024/05/13</td></tr>
-                        </tbody>
+                    <?php    
+                        '<tbody>';
+                            echo '<input type="hidden" name="user_id" value="7 , $user_id ,'">';
+                            echo '<tr>','<th>ユーザー名</th>','<td>',$result['user_name'],'</td>','</tr>';
+                            echo '<tr>','<th>メールアドレス</th>','<td>',$result['mail'],'</td>','</tr>';
+                            echo '<tr>','<th>パスワード</th>','<td>',$result['pass'],'</td>','</tr>';
+                            echo '<tr>','<th>生年月日</th>','<td>',$result['birthday'],'</td>','</tr>';
+                        '</tbody>';
+                        ?>
                     </table>
                 </div>
             </div>
@@ -47,7 +57,7 @@
         <div class="columns is-centered">
             <div class="buttons-container">
                 <div class="column is-narrow">
-                    <button class="button has-background-grey-light is-large" onclick="location.href='./G1-1.html'">戻る</button>
+                    <button class="button has-background-grey-light is-large" onclick="location.href='./G1-1.php'">戻る</button>
                 </div>
                 <div class="column is-narrow">
                     <input class="button is-info is-large" type="submit" value="変更">

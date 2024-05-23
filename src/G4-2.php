@@ -11,6 +11,8 @@
 </head>
 <body>
 
+<?php require 'php/db.php'; ?>
+
     <div class="main">
 
     <header>
@@ -24,7 +26,16 @@
 
     <!-- id受け取り,selectで情報表示 -->
 
-    <form action="*" method="post"><!-- update.php指定? -->
+    <?php
+    // idの取得
+    $user_id = $_[''];
+    $sql=$pdo->prepare('select * from User where user_id=?');
+    $sql->execute([$_POST['$user_id']]);
+    $sql->execute([$user_id]);
+    $result = $sql->fetch(PDO::FETCH_ASSOC);
+?>
+
+    <form action="*" method="post"><!-- update -->
         <div class="table-container">
             <!-- <table class="table is-striped"></table> -->
             <!-- <table class="table"> -->
@@ -44,7 +55,7 @@
         <p>
             <input class="button is-info is-large" type = "submit"  value="変更"></button>
         </p>
-        <!-- update後G1-1に遷移 -->
+         <!-- update後G1-1に遷移 -->
     </form>
 </div>
 
