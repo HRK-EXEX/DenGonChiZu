@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="css/G4-3.css">
 </head>
 <body>
-
+<?php require 'php/db.php'; ?>
     <!-- <div class="main"> -->
         <div class="contents">    
             <h1 class="title is-3">退会を確定しますか</h1>
                 <div class="buttons">
-                    <form action="G4-4.html" method="post">
+                    <form action="G4-4.php" method="post">
                         <input type="hidden" name="user_id" value="user_id">
                         <button class="button is-danger is-large" type="submit">退会</button>
                     </form>
