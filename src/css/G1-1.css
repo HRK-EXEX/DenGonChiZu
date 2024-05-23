@@ -12,12 +12,12 @@ body {
     height: 10000px;
     background-color: #f0f0f0;
     cursor: grab;
-    left: 50%; /* 表示領域の中央からスタート */
-    top: 50%; /* 表示領域の中央からスタート */
-    transform: translate(-50%, -50%); /* ページの中央に配置 */
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
 }
 
-/* 中央表示投稿ボタン。画面を移動しても追尾できるようにしたい*/
+/* 中央表示投稿ボタン。画面を移動しても追尾*/
 #addCommentButton {
     position: fixed;
     width: 60px;
@@ -26,15 +26,11 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background-image: url('../../img/aim.png');
-    background-size: cover; /* 画像サイズをボタンに合わせる */
-    background-repeat: no-repeat; /* 画像を繰り返さない */
+    background-size: cover;
+    background-repeat: no-repeat; /* 画像重複削除 */
     border: none;
     cursor: pointer;
 }
-
-
-
-
 
 
 .comment {
@@ -49,11 +45,11 @@ body {
 
 .post-container {
     border: 1px solid #ccc;
-    width: 400px; /* 枠を小さく */
-    margin: 50px auto; /* 画面の中央に配置 */
+    width: 400px; 
+    margin: 50px auto;
     padding: 10px;
-    background-color: #fff; /* 追加 */
-    position: absolute; /* 追加 */
+    background-color: #fff; 
+    position: absolute; 
 }
 
 .user-info {
