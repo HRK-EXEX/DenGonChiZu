@@ -12,21 +12,20 @@
 <div id="sidebar-container"></div>
 
 <div id="content">
-
     <?php
     class Database {
-        private $conn;
-    
-        public function connect() {
-            try {
-                $this->conn = new PDO('mysql:host=mysql305.phy.lolipop.lan;dbname=LAA1517436-linedwork;charset=utf8', 'LAA1517436', 'hyperBassData627');
-                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
-                echo 'Connection Error: ' . $e->getMessage();
-            }
-            return $this->conn;
+    private $conn;
+
+    public function connect() {
+        try {
+            $this->conn = new PDO('mysql:host=mysql305.phy.lolipop.lan;dbname=LAA1517436-linedwork;charset=utf8', 'LAA1517436', 'hyperBassData627');
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo 'Connection Error: ' . $e->getMessage();
         }
+        return $this->conn;
     }
+}
 
     class Post {
         private $db;
@@ -37,7 +36,7 @@
         }
 
         public function fetchPosts() {
-            $query = 'SELECT p.user_id, p.content, p.image, p.comment_count, p.like_count, u.user_name FROM Posts p JOIN Users u ON p.user_id = u.user_id ORDER BY p.date DESC';
+            $query = 'SELECT * FROM Post ORDER BY date DESC';
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -61,7 +60,7 @@
                 echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
                 echo '    <div class="user-info">';
                 echo '        <img src="../img/user_icon.jpg" alt="ユーザのアイコン">';
-                echo '        <span class="username">' . htmlspecialchars($post->user_name) . '</span>';
+                echo '        <span class="username">' . htmlspecialchars($post->username) . '</span>';
                 echo '    </div>';
                 echo '    <div class="post-content">';
                 echo '        <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
