@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,9 +10,6 @@
     <link rel="stylesheet" href="css/G2-1.css">
 </head>
 <body>
-    <?php
-
-    ?>
     <form class="parent">
         <div class="main-part">
             <div class="method">新規投稿</div>
