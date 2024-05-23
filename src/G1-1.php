@@ -12,7 +12,7 @@
 <div id="sidebar-container"></div>
 
 <div id="content">
-    
+
     <?php
     class Database {
         private $conn;
@@ -37,7 +37,7 @@
         }
 
         public function fetchPosts() {
-            $query = 'SELECT * FROM Post ORDER BY date DESC';
+            $query = 'SELECT * FROM Posts ORDER BY date DESC';
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
