@@ -9,51 +9,72 @@
 </head>
 <body>
 
-    <div id="sidebar-container"></div>
+<div id="sidebar-container"></div>
 
-    <div id="content">
-        <!-- 投稿座標部分 -->
-        <div class="post-container" style="top: 200px; left: 300px;">
-            <div class="user-info">
-                <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
-                <span class="username">ユーザ名</span>
-            </div>
-            <div class="post-content">
-                <p>投稿内容がここに表示されます。投稿内容がここに表示されます。投稿内容がここに表示されます。</p>
-            </div>
-            <div class="interaction">
-                <span class="comment-icon">💬</span>
-                <span class="comment-count">5</span>
-                <span class="like-icon">❤️</span>
-                <span class="like-count">10</span>
-            </div>
-        </div>
+<div id="content">
+    <?php
+    require_once 'php/db.php';
 
-        <!-- 後で投稿部分はphp関数化する -->
-        <div class="post-container" style="top: 400px; left: 700px;">
-            <div class="user-info">
-                <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
-                <span class="username">ユーザ名</span>
-            </div>
-            <div class="post-content">
-                <p>投稿内容がここに表示されます。投稿内容がここに表示されます。投稿内容がここに表示されます。
-                    投稿内容がここに表示されます。投稿内容がここに表示されます。投稿内容がここに表示されます。
-                </p>
-                <img src="../img/user_icon.jpg" alt="投稿画像">
+    class Post {
+        private $db;
 
-            </div>
-            <div class="interaction">
-                <span class="comment-icon">💬</span>
-                <span class="comment-count">25</span>
-                <span class="like-icon">❤️</span>
-                <span class="like-count">190</span>
-            </div>
-        </div>
-    </div>
+        public function __construct() {
+            $database = new Database();
+            $this->db = $database->connect();
+        }
 
-    <!-- ボタンは #content の外に配置 -->
-    <button id="addCommentButton"></button>
+        public function fetchPosts() {
+            $query = 'SELECT * FROM Post ORDER BY date DESC';
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
 
-    <script src="js/G1-1.js"></script>
+        public function calculatePosition($index, $totalPosts) {
+            $centerX = 5000; // 10000px の中央
+            $centerY = 5000; // 10000px の中央
+            $angle = (2 * M_PI / $totalPosts) * $index; // 円周上の等間隔の角度
+            $radius = 500; // 中心からの距離(調整予定)
+            $x = $centerX + $radius * cos($angle);
+            $y = $centerY + $radius * sin($angle);
+            return ['x' => $x, 'y' => $y];
+        }
+
+        public function displayPosts() {
+            $posts = $this->fetchPosts();//posts情報を取得
+            $totalPosts = count($posts);//合計値から配置間隔の割り出しをする用
+            foreach ($posts as $index => $post) {
+                $position = $this->calculatePosition($index, $totalPosts);
+                echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
+                echo '    <div class="user-info">';
+                echo '        <img src="../img/user_icon.jpg" alt="ユーザのアイコン">';
+                echo '        <span class="username">' . htmlspecialchars($post->username) . '</span>';
+                echo '    </div>';
+                echo '    <div class="post-content">';
+                echo '        <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
+                if (!empty($post->image)) {
+                    echo '        <img src="' . htmlspecialchars($post->image) . '" alt="投稿画像">';
+                }
+                echo '    </div>';
+                echo '    <div class="interaction">';
+                echo '        <span class="comment-icon">💬</span>';
+                echo '        <span class="comment-count">' . htmlspecialchars($post->comment_count) . '</span>';
+                echo '        <span class="like-icon">❤️</span>';
+                echo '        <span class="like-count">' . htmlspecialchars($post->like_count) . '</span>';
+                echo '    </div>';
+                echo '</div>';
+            }
+        }
+    }
+
+    $post = new Post();
+    $post->displayPosts();
+    ?>
+</div>
+
+<!-- ボタンは #content の外に配置 -->
+<button id="addCommentButton"></button>
+
+<script src="js/G1-1.js"></script>
 </body>
 </html>
