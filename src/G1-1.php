@@ -37,7 +37,7 @@
         }
 
         public function fetchPosts() {
-            $query = 'SELECT * FROM Posts ORDER BY date DESC';
+            $query = 'SELECT p.*, u.user_name, u.user_icon FROM Posts p JOIN Users u ON p.user_id = u.user_id ORDER BY p.date DESC';
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -61,7 +61,7 @@
                 echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
                 echo '    <div class="user-info">';
                 echo '        <img src="../img/user_icon.jpg" alt="ユーザのアイコン">';
-                echo '        <span class="username">' . htmlspecialchars($post->username) . '</span>';
+                echo '        <span class="username">' . htmlspecialchars($post->user_name) . '</span>';
                 echo '    </div>';
                 echo '    <div class="post-content">';
                 echo '        <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
