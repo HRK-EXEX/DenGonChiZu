@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/G2-1.css">
 </head>
 <body>
-    <form class="parent">
+    <form class="parent" method="POST">
         <div class="main-part">
             <div class="method">新規投稿</div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
