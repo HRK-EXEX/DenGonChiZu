@@ -1,3 +1,13 @@
+<?php require 'php/db.php'; ?>
+<?php
+    // update処理,G1-1に遷移
+    if(!empty($_POST)){
+        $sql=$db->prepare('update Users set user_name=?, mail=?, pass=?, birthday=? where knowledge_id=?');
+        $sql->execute([$_POST['user_name'],$_POST['mail'],$_POST['pass'],$_POST['birth']]);
+        header("Location: G1-1.php");
+        exit;
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -10,8 +20,6 @@
     <link rel="stylesheet" href="css/G4-2.css">
 </head>
 <body>
-
-<?php require 'php/db.php'; ?>
 
     <div class="main">
 
@@ -57,7 +65,6 @@
         <p>
             <input class="button is-info is-large" type = "submit"  value="変更"></button>
         </p>
-         <!-- update後G1-1に遷移 -->
     </form>
 </div>
 
