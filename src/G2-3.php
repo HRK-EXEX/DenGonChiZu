@@ -1,3 +1,13 @@
+<?php
+    require 'php/db.php';
+    $pid = $_GET["post_id"];
+    $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $pid");
+    $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
+    $title = $sql['post_id'];
+    $image = $sql['post_img'];
+    $text = $sql['post_text'];
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -15,9 +25,9 @@
             <textarea class="box-base content" placeholder="本文を入力..."></textarea>
         </div>
         <div class="operation">
-            <button onclick="location.href='G2-4.html'" class="button-base delete">削除</button>
-            <button onclick="location.href='G2-2.html'" class="button-base back">戻る</button>
-            <button onclick="location.href='G2-2.html'" class="button-base proceed">投稿</button>
+            <button onclick="location.href='G2-4.php'" class="button-base delete">削除</button>
+            <button onclick="location.href='G2-2.php'" class="button-base back">戻る</button>
+            <button onclick="location.href='G2-2.php'" class="button-base proceed">投稿</button>
         </div>
     </div>
 </body>
