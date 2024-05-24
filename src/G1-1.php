@@ -17,7 +17,7 @@
     <?php
     class Database {
         private $conn;
-    
+
         public function connect() {
             try {
                 $this->conn = new PDO('mysql:host=mysql305.phy.lolipop.lan;dbname=LAA1517436-linedwork;charset=utf8', 'LAA1517436', 'hyperBassData627');
