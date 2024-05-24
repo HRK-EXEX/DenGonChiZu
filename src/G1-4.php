@@ -29,7 +29,7 @@
     </table>
     <div class="button-container">
         <button class="btn-back">戻る</button>
-        <button class="btn-register">登録</button>
+        <button class="btn-register">登録確定</button>
     </div>
 </div>
 
