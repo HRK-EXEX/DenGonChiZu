@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="css/G2-1.css">
 </head>
 <body>
-    <div class="main-part">
-        <form id="newing" class="parent" method="POST">
+    <div class="parent">
+        <form id="newing" class="main-part" method="POST">
             <div class="method">新規投稿</div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
             <div class="box-base image-box">
@@ -25,10 +25,10 @@
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..." required><?=$text?></textarea>
         </form>
-    </div>
-    <div class="operation">
-        <button onclick="location.href='G2-2.php'" class="button-base back">戻る</button>
-        <button type="submit" form="newing" class="button-base proceed">投稿</button>
+        <div class="operation">
+            <button onclick="location.href='G2-2.php'" class="button-base back">戻る</button>
+            <button type="submit" form="newing" class="button-base proceed">投稿</button>
+        </div>
     </div>
 </body>
 </html>
