@@ -1,3 +1,13 @@
+<?php
+    require 'php/db.php';
+    $pid = $_GET["post_id"];
+    $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $pid");
+    $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
+    $title = $sql['post_id'];
+    $image = $sql['post_img'];
+    $text = $sql['post_text'];
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
