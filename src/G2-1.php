@@ -7,7 +7,12 @@
     $text = $_POST['post_text'] ?? "";
 
     if($posted) {
-        
+        $sql = $db -> query(
+            "INSERT INTO Posts VALUES
+            (null, null, $title, $text, $image)"
+        );
+        $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
         header("Location: G1-1.php");
     }
 ?>
