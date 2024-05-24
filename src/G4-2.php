@@ -28,9 +28,9 @@
 
     <?php
     // idの取得
-    $user_id = $_[''];
-    $sql=$pdo->prepare('select * from User where user_id=?');
-    $sql->execute([$_POST['$user_id']]);
+    $user_id = $_POST['user_id'];
+    $sql=$db->prepare('select * from Users where user_id=?');
+    // $sql->execute([$_POST['$user_id']]);
     $sql->execute([$user_id]);
     $result = $sql->fetch(PDO::FETCH_ASSOC);
 ?>
@@ -42,13 +42,15 @@
                 <!-- <div class="column is-half is-offset-one-quarter"> -->
                     <div class="column is-offset-one-quarter">
                     <table class="table is-striped is-fullwidth">
-                <tbody>
-                    <input type="hidden" name="user_id" value="user_id">
-                    <tr><th>ユーザー名</th><td><input type="text" name="name"></td></tr>
-                    <tr><th>メールアドレス</th><td><input type="email"  name="mail"></td></tr>
-                    <tr><th>パスワード</th><td><input type="password" name="pass"></td></tr>
-                    <tr><th>生年月日</th><td><input type="date" name="birth"></td></tr>
-                </tbody>
+                    <?php    
+                        '<tbody>';
+                        echo '<input type="hidden" name="user_id" value="' , $user_id ,'">';
+                        echo '<tr>','<th>ユーザー名</th>','<td>','<input type="text" name="name" value="', $result['user_name'] ,'">','</td>','</tr>';
+                        echo '<tr>','<th>メールアドレス</th>','<td>','<input type="email"  name="mail" value="', $result['mail'] ,'">','</td>','</tr>';
+                        echo '<tr>','<th>パスワード</th>','<td>','<input type="password" name="pass" value="', $result['pass'] ,'">','</td>','</tr>';
+                        echo '<tr>','<th>生年月日</th>','<td>','<input type="date" name="birth" value="', $result['birthday'] ,'">','</td>','</tr>';
+                    '</tbody>';
+                    ?>
             </table>
         </div>
     </div>
