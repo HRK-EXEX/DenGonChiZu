@@ -41,6 +41,7 @@
             $query = '
             SELECT 
                 p.user_id, 
+                p.post_id,
                 p.content, 
                 p.title, 
                 p.img_path, 
@@ -55,6 +56,7 @@
                 Comments c ON p.post_id = c.post_id
             GROUP BY 
                 p.user_id, 
+                p.post_id,
                 p.content, 
                 p.title, 
                 p.img_path, 
