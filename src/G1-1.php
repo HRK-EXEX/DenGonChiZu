@@ -82,6 +82,7 @@
             return ['x' => $x, 'y' => $y];
         }
 
+        //取得した情報を使って投稿を表示する
         public function displayPosts() {
             $posts = $this->fetchPosts(); 
             $totalPosts = count($posts); // 合計値から配置間隔の割り出しをする用
@@ -96,7 +97,8 @@
                 echo '        <a href="G2-2.php?post_id=' . htmlspecialchars($post->post_id) . '&user_id=' . htmlspecialchars($post->user_id) . '">';
                 echo '            <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
                 echo '        </a>';
-                if (!empty($post->img_path)) {
+                // img_pathがnullでない、かつ画像が存在する場合のみ表示
+                if (!empty($post->img_path) && file_exists(__DIR__ . '../img/' . $post->img_path)) {
                     echo '        <img src="' . htmlspecialchars($post->img_path) . '" alt="投稿画像">';
                 }
                 echo '    </div>';
