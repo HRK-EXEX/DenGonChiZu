@@ -19,7 +19,7 @@
             <div class="box-base image-box">
                 <input type="file" name="post_img" accept="image" value="<?=$image?>"/>
             </div>
-            <textarea name="post_text" class="box-base content" placeholder="本文を入力..." value="<?=$text?>"></textarea>
+            <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </div>
         <div class="operation">
             <button onclick="location.href='G1-1.html'" class="button-base back">戻る</button>
