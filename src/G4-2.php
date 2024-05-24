@@ -1,8 +1,8 @@
 <?php require 'php/db.php'; ?>
 <?php
-    // update処理,G1-1に遷移
-    if(!empty($_POST)){
-        $sql=$db->prepare('update Users set user_name=?, mail=?, pass=?, birthday=? where knowledge_id=?');
+    // update処理,G1-1に遷移したい
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $sql=$db->prepare('update Users set user_name=?, mail=?, pass=?, birthday=? where user_id=?');
         $sql->execute([$_POST['user_name'],$_POST['mail'],$_POST['pass'],$_POST['birth']]);
         header("Location: G1-1.php");
         exit;
@@ -43,11 +43,8 @@
     $result = $sql->fetch(PDO::FETCH_ASSOC);
 ?>
 
-    <form action="*" method="post"><!-- update -->
+    <form action="update.php" method="post"><!-- update -->
         <div class="table-container">
-            <!-- <table class="table is-striped"></table> -->
-            <!-- <table class="table"> -->
-                <!-- <div class="column is-half is-offset-one-quarter"> -->
                     <div class="column is-offset-one-quarter">
                     <table class="table is-striped is-fullwidth">
                     <?php    
