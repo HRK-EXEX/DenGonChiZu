@@ -26,9 +26,10 @@
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..." required><?=$text?></textarea>
         </div>
         <div class="operation">
-            <a href="G1-1.html" class="button-base back">
-                <button type="button">戻る</button>
-            </a>
+            <button type="button" class="button-base back">
+                <a href="G1-1.html">戻る</a>
+            </button>
+           
             <button type="submit" class="button-base proceed">投稿</button>
         </div>
     </form>
