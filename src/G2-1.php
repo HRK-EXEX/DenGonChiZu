@@ -22,7 +22,9 @@
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </div>
         <div class="operation">
-            <button type="button" onclick="location.href='G1-1.html'" class="button-base back">戻る</button>
+            <a href='G1-1.html'>
+                <button type="button" class="button-base back">戻る</button>
+            </a>
             <button type="submit" class="button-base proceed">投稿</button>
         </div>
     </form>
