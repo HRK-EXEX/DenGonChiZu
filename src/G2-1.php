@@ -1,11 +1,20 @@
 <?php
     require 'php/db.php';
+    $posted = $_POST["posted"] ?? false;
 
     $title = $_POST['post_title'] ?? "";
     $image = $_POST['post_img'] ?? "";
     $text = $_POST['post_text'] ?? "";
 
+    if($posted) {
+        $sql = $db -> query(
+            "INSERT INTO Posts VALUES
+            (null, null, $title, $text, $image)"
+        );
+        $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
+        header("Location: G1-1.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -18,6 +27,7 @@
 <body>
     <div class="parent">
         <form id="newing" class="main-part" method="POST">
+            <input type="hidden" name="posted" value="true">
             <div class="method">新規投稿</div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
             <div class="box-base image-box">
