@@ -18,7 +18,7 @@
         <div class="contents">    
             <h1 class="title is-3">退会を確定しますか</h1>
                 <div class="buttons">
-                    <form action="G4-4.php" method="post">
+                    <form action="G4-4.php" method="post"><!-- delete -->
                         <?php
                         echo '<input type="hidden" name="',$user_id,'" value="user_id">';
                         echo '<button class="button is-danger is-large" type="submit">','退会','</button>';
@@ -27,6 +27,6 @@
                     <button class="button has-background-grey-light is-large" type="button" onclick="history.back()">戻る</button>
                 </div>
         </div>
-    <!-- </div> -->
+    <!-- </div> -->    
 </body>
 </html>
