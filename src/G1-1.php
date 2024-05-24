@@ -37,7 +37,7 @@
         }
 
         public function fetchPosts() {
-            $query = 'SELECT p.user_id, p.content, p.image, p.comment_count, p.like_count, u.user_name FROM Posts p JOIN Users u ON p.user_id = u.user_id ORDER BY p.date DESC';
+            $query = 'SELECT p.user_id, p.content, p.title, p.img_path, p.content, p.post_good, u.user_name FROM Posts p JOIN Users u ON p.user_id = u.user_id ORDER BY p.date DESC';
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
