@@ -12,37 +12,38 @@
     <table>
         <tr>
             <td>ユーザ名</td>
-            <td>aaaa</td> 
+            <td><?php echo htmlspecialchars($_POST['username']); ?></td>
         </tr>
         <tr>
             <td>メールアドレス</td>
-            <td>example@example.com</td> 
+            <td><?php echo htmlspecialchars($_POST['mail']); ?></td>
         </tr>
         <tr>
             <td>パスワード</td>
-            <td>********</td> 
+            <td>********</td>
         </tr>
         <tr>
             <td>生年月日</td>
-            <td>1990-01-01</td> 
+            <td><?php echo htmlspecialchars($_POST['birthdate']); ?></td>
         </tr>
     </table>
     <div class="button-container">
-        <button class="btn-back">戻る</button>
-        <button class="btn-register">登録</button>
+        <button class="btn-back" onclick="history.back()">戻る</button>
+        <form action="G1-5.php" method="post">
+            <input type="hidden" name="username" value="<?php echo htmlspecialchars($_POST['username']); ?>">
+            <input type="hidden" name="mail" value="<?php echo htmlspecialchars($_POST['mail']); ?>">
+            <input type="hidden" name="pass" value="<?php echo htmlspecialchars($_POST['pass']); ?>">
+            <input type="hidden" name="birthdate" value="<?php echo htmlspecialchars($_POST['birthdate']); ?>">
+            <button type="submit" class="btn-register">登録確定</button>
+        </form>
     </div>
 </div>
 
 <script>
-    // 戻るボタンのクリックイベント
-    document.querySelector(".btn-back").addEventListener("click", function() {
-        window.location.href = "G1-3.html";
-    });
-
-    // 登録ボタンのクリックイベント
-    document.querySelector(".btn-register").addEventListener("click", function() {
-        window.location.href = "G1-5.html";
-    });
+// 戻るボタンのクリックイベント
+document.querySelector(".btn-back").addEventListener("click", function() {
+    window.history.back();
+});
 </script>
 </body>
 </html>

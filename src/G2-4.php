@@ -15,8 +15,8 @@
             <div class="box-base content">くぁｗせｄｒｆｔｇｙふじこｌｐくぁｗせｄｒｆｔｇｙふじこｌｐくぁｗせｄｒｆｔｇｙふじこｌｐ</div>
         </div>
         <div class="operation">
-            <button onclick="location.href='G2-2.html'" class="button-base back">戻る</button>
-            <button onclick="location.href='G1-1.html'" class="button-base delete">削除</button>
+            <button onclick="location.href='G2-2.php'" class="button-base back">戻る</button>
+            <button onclick="location.href='G1-1.php'" class="button-base delete">削除</button>
         </div>
     </div>
 </body>

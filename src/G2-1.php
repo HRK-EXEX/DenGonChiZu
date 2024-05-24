@@ -1,3 +1,21 @@
+<?php
+    require 'php/db.php';
+    $posted = $_POST["posted"] ?? false;
+
+    $title = $_POST['post_title'] ?? "";
+    $image = $_POST['post_img'] ?? "";
+    $text = $_POST['post_text'] ?? "";
+
+    if($posted) {
+        $sql = $db -> query(
+            "INSERT INTO Posts VALUES
+            (null, null, $title, $text, $image)"
+        );
+        $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
+        header("Location: G1-1.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,15 +26,18 @@
 </head>
 <body>
     <div class="parent">
-        <div class="main-part">
+        <form id="newing" class="main-part" method="POST">
+            <input type="hidden" name="posted" value="true">
             <div class="method">新規投稿</div>
-            <input class="box-base title" placeholder="投稿タイトルを入力...">
-            <div class="box-base image-box"><img class="image" src="../img/NoImage.png"></div>
-            <textarea class="box-base content" placeholder="本文を入力..."></textarea>
-        </div>
+            <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
+            <div class="box-base image-box">
+                <input type="file" name="post_img" accept="image/jpg, image/jpeg, image/png, image/webp" value="<?=$image?>"/>
+            </div>
+            <textarea name="post_text" class="box-base content" placeholder="本文を入力..." required><?=$text?></textarea>
+        </form>
         <div class="operation">
-            <button onclick="location.href='G1-1.html'" class="button-base back">戻る</button>
-            <button onclick="location.href='G1-1.html'" class="button-base proceed">投稿</button>
+            <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
+            <button type="submit" form="newing" class="button-base proceed">投稿</button>
         </div>
     </div>
 </body>
