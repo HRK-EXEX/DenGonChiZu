@@ -12,20 +12,21 @@
 <div id="sidebar-container"></div>
 
 <div id="content">
+
     <?php
     class Database {
-    private $conn;
-
-    public function connect() {
-        try {
-            $this->conn = new PDO('mysql:host=mysql305.phy.lolipop.lan;dbname=LAA1517436-linedwork;charset=utf8', 'LAA1517436', 'hyperBassData627');
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo 'Connection Error: ' . $e->getMessage();
+        private $conn;
+    
+        public function connect() {
+            try {
+                $this->conn = new PDO('mysql:host=mysql305.phy.lolipop.lan;dbname=LAA1517436-linedwork;charset=utf8', 'LAA1517436', 'hyperBassData627');
+                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo 'Connection Error: ' . $e->getMessage();
+            }
+            return $this->conn;
         }
-        return $this->conn;
     }
-}
 
     class Post {
         private $db;
@@ -36,7 +37,32 @@
         }
 
         public function fetchPosts() {
-            $query = 'SELECT * FROM Post ORDER BY date DESC';
+            $query = '
+            SELECT 
+                p.user_id, 
+                p.content, 
+                p.title, 
+                p.img_path, 
+                p.post_good, 
+                u.user_name, 
+                COUNT(c.comment_id) AS comment_count
+            FROM 
+                Posts p 
+            JOIN 
+                Users u ON p.user_id = u.user_id
+            LEFT JOIN 
+                Comments c ON p.post_id = c.post_id
+            GROUP BY 
+                p.user_id, 
+                p.content, 
+                p.title, 
+                p.img_path, 
+                p.post_good, 
+                u.user_name, 
+                p.date
+            ORDER BY 
+                p.date DESC
+        ';
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -60,19 +86,19 @@
                 echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
                 echo '    <div class="user-info">';
                 echo '        <img src="../img/user_icon.jpg" alt="ユーザのアイコン">';
-                echo '        <span class="username">' . htmlspecialchars($post->username) . '</span>';
+                echo '        <span class="username">' . htmlspecialchars($post->user_name) . '</span>';
                 echo '    </div>';
                 echo '    <div class="post-content">';
                 echo '        <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
                 if (!empty($post->image)) {
-                    echo '        <img src="' . htmlspecialchars($post->image) . '" alt="投稿画像">';
+                    echo '        <img src="' . htmlspecialchars($post->img_path) . '" alt="投稿画像">';
                 }
                 echo '    </div>';
                 echo '    <div class="interaction">';
                 echo '        <span class="comment-icon">💬</span>';
                 echo '        <span class="comment-count">' . htmlspecialchars($post->comment_count) . '</span>';
                 echo '        <span class="like-icon">❤️</span>';
-                echo '        <span class="like-count">' . htmlspecialchars($post->like_count) . '</span>';
+                echo '        <span class="like-count">' . htmlspecialchars($post->post_good) . '</span>';
                 echo '    </div>';
                 echo '</div>';
             }
