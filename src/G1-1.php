@@ -9,9 +9,10 @@
 </head>
 <body>
 
-<div id="sidebar-container"></div>
+    <div id="sidebar-container"></div>
+    <?php include 'side.php'; ?>
 
-<div id="content">
+    <div id="content">
 
     <?php
     class Database {
@@ -46,8 +47,8 @@
                 p.post_good, 
                 u.user_name, 
                 COUNT(c.comment_id) AS comment_count
-            FROM 
-                Posts p 
+            FROM
+                Posts p
             JOIN 
                 Users u ON p.user_id = u.user_id
             LEFT JOIN 
@@ -68,6 +69,7 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
+        //投稿ごとに距離を確保して表示範囲中心から出力する
         public function calculatePosition($index, $totalPosts) {
             $centerX = 5000; // 10000px の中央
             $centerY = 5000; // 10000px の中央
@@ -79,18 +81,20 @@
         }
 
         public function displayPosts() {
-            $posts = $this->fetchPosts();//posts情報を取得
-            $totalPosts = count($posts);//合計値から配置間隔の割り出しをする用
+            $posts = $this->fetchPosts(); 
+            $totalPosts = count($posts); // 合計値から配置間隔の割り出しをする用
             foreach ($posts as $index => $post) {
                 $position = $this->calculatePosition($index, $totalPosts);
                 echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
                 echo '    <div class="user-info">';
-                echo '        <img src="../img/user_icon.jpg" alt="ユーザのアイコン">';
+                echo '        <img src="../img/user_icon.jpg" alt="ユーザのアイコン">'; // テーブルにないから追加？
                 echo '        <span class="username">' . htmlspecialchars($post->user_name) . '</span>';
                 echo '    </div>';
                 echo '    <div class="post-content">';
-                echo '        <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
-                if (!empty($post->image)) {
+                echo '        <a href="G2-2.php?post_id=' . htmlspecialchars($post->post_id) . '&user_id=' . htmlspecialchars($post->user_id) . '">';
+                echo '            <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
+                echo '        </a>';
+                if (!empty($post->img_path)) {
                     echo '        <img src="' . htmlspecialchars($post->img_path) . '" alt="投稿画像">';
                 }
                 echo '    </div>';
