@@ -19,7 +19,7 @@ try {
     $stmt = $dbh->prepare("INSERT INTO Users (username, mail, pass, birthdate) VALUES (:username, :mail, :pass, :birthdate)");
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':mail', $mail);
-    $stmt->bindParam(':pass', password_hash($pass, PASSWORD_DEFAULT)); // パスワードをハッシュ化
+    $stmt->bindParam(':pass', password_hash($pass, PASSWORD_DEFAULT));
     $stmt->bindParam(':birthdate', $birthdate);
     $stmt->execute();
 
