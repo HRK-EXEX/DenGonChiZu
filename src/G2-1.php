@@ -7,15 +7,18 @@
     $text = $_POST['post_text'] ?? "";
 
     if($posted) {
-        $sql = $db -> query(
-            "INSERT INTO Posts VALUES
-            (null, null, $title, $text, $image)"
-        );
-        $res = $sql -> fetch(PDO::FETCH_ASSOC);
+        $date = date("Y-m-d H:i:s");
 
-        header("Location: G1-1.php");
+        // $sql = $db -> query(
+        //     "INSERT INTO Posts VALUES
+        //     (null, null, $title, $text, $image, )"
+        // );
+        // $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
+        // header("Location: G1-1.php");
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -37,6 +40,7 @@
         </form>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
+            <span><?=$date?></span>
             <button type="submit" form="newing" class="button-base proceed">投稿</button>
         </div>
     </div>
