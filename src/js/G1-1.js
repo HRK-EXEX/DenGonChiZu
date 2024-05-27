@@ -1,15 +1,3 @@
-// 他のHTMLファイルを読み込む関数
-function loadHTML(url, elementId) {
-    fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById(elementId).innerHTML = data;
-        })
-        .catch(error => console.error('Error loading HTML:', error));
-    }
-
-    // サイドバーを読み込む
-    loadHTML('side.html', 'sidebar-container');
 
 
 var content = document.getElementById("content");
