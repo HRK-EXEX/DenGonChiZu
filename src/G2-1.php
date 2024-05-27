@@ -4,7 +4,7 @@
     $posted = $_POST["posted"] ?? false;
 
     $title = $_POST['post_title'] ?? "";
-    $image = $_FILES['post_img'] ?? "";
+    $image = $_FILES['post_img']['name'] ?? "";
     $text = $_POST['post_text'] ?? "";
 
     $target = "";
@@ -41,7 +41,7 @@
             <div class="method">新規投稿</div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
             <div class="box-base image-box">
-                <input type="file" name="post_img" accept="image/jpg, image/jpeg, image/png, image/webp" value="<?=$image?>"/>
+                <input type="file" name="post_img" accept="image/*" enctype="multipart/form-data"/>
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..." required><?=$text?></textarea>
         </form>
