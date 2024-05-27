@@ -1,9 +1,10 @@
 <?php
     require 'php/db.php';
+    var_dump($_FILES, $_POST);
     $posted = $_POST["posted"] ?? false;
 
     $title = $_POST['post_title'] ?? "";
-    $image = $_FILES['post_img'];
+    $image = $_FILES['post_img'] ?? "";
     $text = $_POST['post_text'] ?? "";
 
     $target = "";
