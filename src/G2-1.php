@@ -33,7 +33,7 @@
 </head>
 <body>
     <div class="parent">
-        <form id="newing" class="main-part" method="POST" enctype="multipart/form-data">
+        <form id="newing" class="main-part" method="post" enctype="multipart/form-data">
             <input type="hidden" name="posted" value="true">
             <div class="method">新規投稿</div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
