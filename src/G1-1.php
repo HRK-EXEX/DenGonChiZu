@@ -15,6 +15,7 @@
     <div id="content">
 
     <?php
+    session_start();
 
     
     class Database {
