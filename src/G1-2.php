@@ -15,15 +15,15 @@
 
     <script>
         document.getElementById("loginButton").addEventListener("click", function() {
-            window.location.href = "G1-6.html";
+            window.location.href = "G1-6.php";
         });
 
         document.getElementById("registerButton").addEventListener("click", function() {
-            window.location.href = "G1-3.html";
+            window.location.href = "G1-3.php";
         });
 
         document.getElementById("guestButton").addEventListener("click", function() {
-            window.location.href = "G1-1.html";
+            window.location.href = "G1-1.php";
         });
     </script>
 </body>

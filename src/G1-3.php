@@ -9,7 +9,7 @@
 <body>
     <div class="main">
     
-    <form  action="G1-4.html"  method="post">
+    <form  action="G1-4.php"  method="post">
         <p>
             <label for="username">ユーザ名</label><br>
             <div class="box1">

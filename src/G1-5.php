@@ -4,11 +4,13 @@ $dsn = 'mysql:host=mysql305.phy.lolipop.lan;dbname=LAA1517436-linedwork;charset=
 $user = 'LAA1517436';
 $password = 'hyperBassData627';
 
-// POSTデータを取得
+
 $username = $_POST['username'];
 $mail = $_POST['mail'];
 $pass = $_POST['pass'];
 $birthdate = $_POST['birthdate'];
+
+$hashedPass = password_hash($pass, PASSWORD_DEFAULT);
 
 try {
     // データベースに接続
@@ -16,10 +18,10 @@ try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // データベースにデータを挿入
-    $stmt = $dbh->prepare("INSERT INTO Users (username, mail, pass, birthdate) VALUES (:username, :mail, :pass, :birthdate)");
+    $stmt = $dbh->prepare("INSERT INTO Users (user_name, mail, pass, birthday) VALUES (:username, :mail, :pass, :birthdate)");
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':mail', $mail);
-    $stmt->bindParam(':pass', password_hash($pass, PASSWORD_DEFAULT));
+    $stmt->bindParam(':pass', $hashedPass); 
     $stmt->bindParam(':birthdate', $birthdate);
     $stmt->execute();
 
@@ -27,6 +29,7 @@ try {
 } catch (PDOException $e) {
     $message = "エラーが発生しました: " . $e->getMessage();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +60,7 @@ try {
                 </tr>
             </table>
         <?php endif; ?>
-        <a href="G1-3.html">TOP画面に戻る</a>
+        <a href="G1-3.php">TOP画面に戻る</a>
     </div>
 </body>
 </html>
