@@ -4,7 +4,6 @@ $dsn = 'mysql:host=mysql305.phy.lolipop.lan;dbname=LAA1517436-linedwork;charset=
 $user = 'LAA1517436';
 $password = 'hyperBassData627';
 
-
 $username = $_POST['username'];
 $mail = $_POST['mail'];
 $pass = $_POST['pass'];
@@ -25,7 +24,20 @@ try {
     $stmt->bindParam(':birthdate', $birthdate);
     $stmt->execute();
 
-    $message = "登録が完了しました。";
+    // 登録が完了したらユーザー情報を取得してセッションに保存
+    $stmt = $dbh->prepare("SELECT * FROM Users WHERE mail = :mail");
+    $stmt->bindParam(':mail', $mail);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // セッションにユーザー情報を保存
+    session_start();
+    $_SESSION['user'] = $user;
+
+    // リダイレクト
+    header("Location: G1-1.php");
+    exit();
+
 } catch (PDOException $e) {
     $message = "エラーが発生しました: " . $e->getMessage();
 }
@@ -60,7 +72,6 @@ try {
                 </tr>
             </table>
         <?php endif; ?>
-        <a href="G1-3.php">TOP画面に戻る</a>
     </div>
 </body>
 </html>
