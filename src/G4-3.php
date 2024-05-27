@@ -1,10 +1,10 @@
 <?php require 'php/db.php'; ?>
 <?php 
     //delete,G4-4遷移
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $sql = $db -> prepare('delete from Users where user_id = ?');
-        $sql -> execute([$_POST['user_id']]);
-        header( "Location: G4-4.php");
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_flg'])){
+        $sql=$db->prepare('delete from Users where user_id = ?');
+        $sql->execute([$_POST['user_id']]);
+        header("Location: G4-4.php");
         exit;
     }
 ?>
@@ -22,14 +22,16 @@
 <body>
 <?php
     // idの取得
-    $user_id = $_POST[''];
+    // $user_id = $_POST[''];
+    $user_id = 3;//テスト
 ?>
     <div class="contents">    
         <h1 class="title is-3">退会を確定しますか</h1>
             <div class="buttons">
                 <form action="G4-3.php" method="post"><!-- delete -->
                     <?php
-                        echo '<input type="hidden" name="',$user_id,'" value="user_id">';
+                        echo '<input type="hidden" name="delete_flg" value="true">'; 
+                        echo '<input type="hidden" name="user_id" value="' , $user_id ,'">';
                         echo '<button class="button is-danger is-large" type="submit">','退会','</button>';
                     ?>
                 </form>
