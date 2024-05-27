@@ -46,7 +46,7 @@
         </form>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <span><?=$target?></span>
+            <span><?=$date?> <?=$target?></span>
             <button type="submit" form="newing" class="button-base proceed">投稿</button>
         </div>
     </div>
