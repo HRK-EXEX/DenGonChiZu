@@ -3,7 +3,7 @@
     // update処理,G1-1に遷移したい
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $sql=$db->prepare('update Users set user_name=?, mail=?, pass=?, birthday=? where user_id=?');
-        $sql->execute([$_POST['user_name'],$_POST['mail'],$_POST['pass'],$_POST['birth']]);
+        $sql->execute([$_POST['name'],$_POST['mail'],$_POST['pass'],$_POST['birth'],$_POST['user_id']]);
         header("Location: G1-1.php");
         exit;
     }
@@ -38,32 +38,31 @@
     // idの取得
     $user_id = $_POST['user_id'];
     $sql=$db->prepare('select * from Users where user_id=?');
-    // $sql->execute([$_POST['$user_id']]);
     $sql->execute([$user_id]);
     $result = $sql->fetch(PDO::FETCH_ASSOC);
-?>
+    ?>
 
-    <form action="update.php" method="post"><!-- update -->
+    <form action="G4-2.php" method="post"><!-- update -->
         <div class="table-container">
-                    <div class="column is-offset-one-quarter">
-                    <table class="table is-striped is-fullwidth">
+            <div class="column is-offset-one-quarter">
+                <table class="table is-striped is-fullwidth">
                     <?php    
+                    // value="<?php echo htmlspecialchars($result['mail']);XSS対策
                         '<tbody>';
                         echo '<input type="hidden" name="user_id" value="' , $user_id ,'">';
                         echo '<tr>','<th>ユーザー名</th>','<td>','<input type="text" name="name" value="', $result['user_name'] ,'">','</td>','</tr>';
                         echo '<tr>','<th>メールアドレス</th>','<td>','<input type="email"  name="mail" value="', $result['mail'] ,'">','</td>','</tr>';
                         echo '<tr>','<th>パスワード</th>','<td>','<input type="password" name="pass" value="', $result['pass'] ,'">','</td>','</tr>';
                         echo '<tr>','<th>生年月日</th>','<td>','<input type="date" name="birth" value="', $result['birthday'] ,'">','</td>','</tr>';
-                    '</tbody>';
+                        '</tbody>';
                     ?>
-            </table>
+                </table>
+            </div>
         </div>
-    </div>
         <p>
             <input class="button is-info is-large" type = "submit"  value="変更"></button>
         </p>
     </form>
-</div>
-
+    </div>
 </body>
 </html>
