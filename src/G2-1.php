@@ -6,7 +6,7 @@
     $image = $_FILES['post_img'] ?? "";
     $text = $_POST['post_text'] ?? "";
 
-    $date = "";
+    $target = "";
 
     if($posted) {
         $date = date("Y-m-d H:i:s");
