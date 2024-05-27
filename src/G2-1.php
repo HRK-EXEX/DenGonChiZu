@@ -4,7 +4,7 @@
     $posted = $_POST["posted"] ?? false;
 
     $title = $_POST['post_title'] ?? "";
-    $image = $_FILES['post_img']['name'] ?? "";
+    $image = $_FILES['post_img'] ?? "";
     $text = $_POST['post_text'] ?? "";
 
     $target = "";
@@ -13,9 +13,6 @@
         $date = date("Y-m-d H:i:s");
 
         // SQL挿入部
-        if ($image) {
-            $target = $image['name'];
-        }
         // $sql = $db -> query(
         //     "INSERT INTO Posts VALUES
         //     (null, 2147483647, $title, $text, $image, $date, 0)"
@@ -47,7 +44,7 @@
         </form>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <span><?=$date?> <?=$target?></span>
+            <span><?=$date?> <?=print_r($image)?></span>
             <button type="submit" form="newing" class="button-base proceed">投稿</button>
         </div>
     </div>
