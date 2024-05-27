@@ -98,7 +98,7 @@
                 echo '            <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
                 echo '        </a>';
                 // img_pathがnullでない、かつ画像が存在する場合のみ表示
-                if (!empty($post->img_path) && file_exists(__DIR__ . '../img/' . $post->img_path)) {
+                if (!empty($post->img_path) && file_exists(__DIR__ . '/../img/' . $post->img_path)) {
                     echo '        <img src="' . htmlspecialchars($post->img_path) . '" alt="投稿画像">';
                 }
                 echo '    </div>';
