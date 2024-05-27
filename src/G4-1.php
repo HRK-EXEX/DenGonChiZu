@@ -30,7 +30,7 @@
     <!-- selectで情報取得,user_idを送信  -->
 <?php
     // idの取得
-    // $user_id = $_POST[''];
+    // $user_id = ;
     $user_id = 1;//テスト
     $sql=$db->prepare('select * from Users where user_id=?');
     $sql->execute([$user_id]);
@@ -47,7 +47,7 @@
                             echo '<input type="hidden" name="user_id" value="' , $user_id ,'">';
                             echo '<tr>','<th>ユーザー名</th>','<td>',$result['user_name'],'</td>','</tr>';
                             echo '<tr>','<th>メールアドレス</th>','<td>',$result['mail'],'</td>','</tr>';
-                            echo '<tr>','<th>パスワード</th>','<td>',$result['pass'],'</td>','</tr>';
+                            echo '<tr>','<th>パスワード</th>','<td> ******** </td>','</tr>';
                             echo '<tr>','<th>生年月日</th>','<td>',$result['birthday'],'</td>','</tr>';
                         '</tbody>';
                     ?>
