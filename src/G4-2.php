@@ -1,7 +1,7 @@
 <?php require 'php/db.php'; ?>
 <?php
     // update処理,G1-1に遷移したい
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_flg'])){
         $sql=$db->prepare('update Users set user_name=?, mail=?, pass=?, birthday=? where user_id=?');
         $sql->execute([$_POST['name'],$_POST['mail'],$_POST['pass'],$_POST['birth'],$_POST['user_id']]);
         header("Location: G1-1.php");
@@ -49,6 +49,7 @@
                     <?php    
                     // value="<?php echo htmlspecialchars($result['mail']);XSS対策
                         '<tbody>';
+                        echo '<input type="hidden" name="user_flg" value="true">';
                         echo '<input type="hidden" name="user_id" value="' , $user_id ,'">';
                         echo '<tr>','<th>ユーザー名</th>','<td>','<input type="text" name="name" value="', $result['user_name'] ,'">','</td>','</tr>';
                         echo '<tr>','<th>メールアドレス</th>','<td>','<input type="email"  name="mail" value="', $result['mail'] ,'">','</td>','</tr>';

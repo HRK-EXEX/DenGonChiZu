@@ -30,8 +30,8 @@
     <!-- selectで情報取得,user_idを送信  -->
 <?php
     // idの取得
-    $user_id = $_POST[''];
-    // $user_id = 1;//テスト
+    // $user_id = $_POST[''];
+    $user_id = 1;//テスト
     $sql=$db->prepare('select * from Users where user_id=?');
     $sql->execute([$user_id]);
     $result = $sql->fetch(PDO::FETCH_ASSOC);
