@@ -3,15 +3,21 @@
     $posted = $_POST["posted"] ?? false;
 
     $title = $_POST['post_title'] ?? "";
-    $image = $_POST['post_img'] ?? "";
+    $image = $_FILES['post_img'] ?? "";
     $text = $_POST['post_text'] ?? "";
+
+    $date = "";
 
     if($posted) {
         $date = date("Y-m-d H:i:s");
 
+        // SQL挿入部
+        if ($image) {
+            $target = $image['name'];
+        }
         // $sql = $db -> query(
         //     "INSERT INTO Posts VALUES
-        //     (null, null, $title, $text, $image, )"
+        //     (null, 2147483647, $title, $text, $image, $date, 0)"
         // );
         // $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
@@ -40,7 +46,7 @@
         </form>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <span><?=$date?></span>
+            <span><?=$target?></span>
             <button type="submit" form="newing" class="button-base proceed">投稿</button>
         </div>
     </div>
