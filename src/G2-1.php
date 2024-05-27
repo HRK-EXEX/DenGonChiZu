@@ -13,9 +13,6 @@
         $date = date("Y-m-d H:i:s");
 
         // SQL挿入部
-        if ($image) {
-            $target = $image['name'];
-        }
         // $sql = $db -> query(
         //     "INSERT INTO Posts VALUES
         //     (null, 2147483647, $title, $text, $image, $date, 0)"
@@ -36,18 +33,18 @@
 </head>
 <body>
     <div class="parent">
-        <form id="newing" class="main-part" method="POST">
+        <form id="newing" class="main-part" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="posted" value="true">
             <div class="method">新規投稿</div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
             <div class="box-base image-box">
-                <input type="file" name="post_img" accept="image/jpg, image/jpeg, image/png, image/webp" value="<?=$image?>"/>
+                <input type="file" name="post_img" accept="image/*"/>
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..." required><?=$text?></textarea>
         </form>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <span><?=$date?> <?=$target?></span>
+            <span><?=$date?> <?=print_r($image)?></span>
             <button type="submit" form="newing" class="button-base proceed">投稿</button>
         </div>
     </div>
