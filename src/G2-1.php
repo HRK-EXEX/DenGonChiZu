@@ -1,13 +1,13 @@
 <?php
     require 'php/db.php';
-    var_dump($_FILES, $_POST);
+    // var_dump($_FILES, $_POST);
     $posted = $_POST["posted"] ?? false;
 
-    $title = $_POST['post_title'];
-    $image = $_FILES['post_img'] ?? "";
-    $text = $_POST['post_text'];
+    $title = $_POST['post_title'] ?? null;
+    $image = $_FILES['post_img'] ?? null;
+    $text = $_POST['post_text'] ?? null;
 
-    $target = $image['name'] ? $image['name'] : null;
+    $target = $image['name'] ?? null;
 
     if($posted) {
         $date = date("Y-m-d H:i:s");
