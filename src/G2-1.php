@@ -12,8 +12,8 @@
     $mes = "新規投稿";
 
     if($posted) {
-        $mes .= date("Y-m-d H:i:s") + "\n";
-        $mes .= var_dump($_FILES, $_POST) + "\n";
+        $mes .= date("Y-m-d H:i:s") . "\n";
+        $mes .= var_dump($_FILES, $_POST) . "\n";
 
         // SQL挿入部
         // $sql = $db -> query(
