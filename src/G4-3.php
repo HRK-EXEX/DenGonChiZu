@@ -7,6 +7,7 @@
         // $user_id = 3;//テスト
     }else{
         header("Location: G1-6.php");
+        exit;
     }
     //delete,G4-4遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_flg'])){

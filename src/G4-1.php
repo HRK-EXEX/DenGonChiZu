@@ -10,6 +10,7 @@
         $result = $sql->fetch(PDO::FETCH_ASSOC);
     }else{
         header("Location: G1-6.php");
+        exit;
     }
 ?>
 
