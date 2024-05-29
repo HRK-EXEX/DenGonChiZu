@@ -51,29 +51,35 @@
     <link rel="stylesheet" href="css/G2-1.css">
 </head>
 <body>
+    <div class="parent">
     <?php
-    echo
-    '<div class="parent">
-        <form id="modify" class="main-part" method="POST">
-            <input type="hidden" name="posted" value="true">
-            <div class="method">投稿編集</div>
-            <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="'.$title.'">
-            <div class="box-base image-box">';
-                if (isset($res['img_path'])) {
-                    if ($res['img_path']) {;
-                        echo '<img name="post_img" class="image" src="../img/'.$res['img_path'].'.png">';
-                    } else echo '<img name="post_img" class="image" src="../img/NoImage.png">';
-                }
-    echo '
+    if (!$nullified) {
+        echo
+        '
+            <form id="modify" class="main-part" method="POST">
+                <input type="hidden" name="posted" value="true">
+                <div class="method">投稿編集</div>
+                <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="'.$title.'">
+                <div class="box-base image-box">';
+                    if (isset($res['img_path'])) {
+                        if ($res['img_path']) {;
+                            echo '<img name="post_img" class="image" src="../img/'.$res['img_path'].'.png">';
+                        } else echo '<img name="post_img" class="image" src="../img/NoImage.png">';
+                    }
+        echo '
+                </div>
+                <textarea name="post_text" class="box-base content" placeholder="本文を入力...">'.$text.'</textarea>
+            </form>
+            <div class="operation">
+                <button onclick="location.href=\'G2-4.php\'" class="button-base delete">削除</button>
+                <button onclick="location.href=\'G2-2.php\'" class="button-base back">戻る</button>
+                <button type="submit" form="modify" class="button-base proceed">投稿</button>
             </div>
-            <textarea name="post_text" class="box-base content" placeholder="本文を入力...">'.$text.'</textarea>
-        </form>
-        <div class="operation">
-            <button onclick="location.href=\'G2-4.php\'" class="button-base delete">削除</button>
-            <button onclick="location.href=\'G2-2.php\'" class="button-base back">戻る</button>
-            <button type="submit" form="modify" class="button-base proceed">投稿</button>
-        </div>
-    </div>';
+        ';
+    } else {
+        echo '<h3>このポストは利用できません。</h3>';
+    }
     ?>
+    </div>
 </body>
 </html>
