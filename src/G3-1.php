@@ -35,7 +35,7 @@ if ($user_id === 0) {
 
 // フォロー数を取得する関数
 function getFollowCount($pdo, $user_id) {
-    $sql = "SELECT COUNT(*) as follow_count FROM followers WHERE user_id = :user_id";
+    $sql = "SELECT COUNT(*) as follow_count FROM Followers WHERE user_id = :user_id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
@@ -45,7 +45,7 @@ function getFollowCount($pdo, $user_id) {
 
 // フォロワー数を取得する関数
 function getFollowerCount($pdo, $user_id) {
-    $sql = "SELECT COUNT(*) as follower_count FROM followers WHERE followers_user_id = :user_id";
+    $sql = "SELECT COUNT(*) as follower_count FROM Followers WHERE followers_user_id = :user_id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
@@ -70,7 +70,7 @@ $follower_count = getFollowerCount($pdo, $user_id);
     <div class="container">
         <header>
             <div class="profile-pic"></div>
-            <h1><?php echo htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8'); ?></h1>
+            <h1><?php echo htmlspecialchars($_SESSION['user']['user_name'], ENT_QUOTES, 'UTF-8'); ?></h1>
             <button class="follow-btn">フォロー</button>
         </header>
         <main>
