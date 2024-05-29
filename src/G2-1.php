@@ -9,8 +9,11 @@
 
     $target = $image['name'] ?? null;
 
+    $mes = "新規投稿";
+
     if($posted) {
-        $date = date("Y-m-d H:i:s");
+        $mes .= date("Y-m-d H:i:s") + "\n";
+        $mes .= var_dump($_FILES, $_POST) + "\n";
 
         // SQL挿入部
         // $sql = $db -> query(
@@ -37,7 +40,7 @@
     <div class="parent">
         <form id="newing" class="main-part" method="post" enctype="multipart/form-data">
             <input type="hidden" name="posted" value="true">
-            <div class="method">新規投稿</div>
+            <div class="method"><?=$mes?></div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
             <div class="box-base image-box">
                 <input type="file" name="post_img" accept="image/*"/>
