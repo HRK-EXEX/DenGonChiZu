@@ -54,10 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" id="pass" name="pass" required>
             </div>
             <div class="link-container">
-                <a href="G1-3.html">会員登録</a>
+                <a href="G1-3.php">会員登録</a>
             </div>
             <div class="link-container">
-                <a href="G1-1.html">ゲストログイン</a>
+                <a href="G1-1.php">ゲストログイン</a>
             </div>
             <div class="button-container">
                 <button class="button is-medium" type="submit">ログイン</button>
