@@ -35,7 +35,6 @@
     <!-- id受け取り,selectで情報表示 -->
 
     <?php
-    // idの取得
     $user_id = $_POST['user_id'];
     $sql=$db->prepare('select * from Users where user_id=?');
     $sql->execute([$user_id]);
