@@ -70,7 +70,7 @@ $follower_count = getFollowerCount($pdo, $user_id);
     <div class="container">
         <header>
             <div class="profile-pic"></div>
-            <h1><?php echo htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8'); ?></h1>
+            <h1><?php echo htmlspecialchars($_SESSION['user']['user_name'], ENT_QUOTES, 'UTF-8'); ?></h1>
             <button class="follow-btn">フォロー</button>
         </header>
         <main>
