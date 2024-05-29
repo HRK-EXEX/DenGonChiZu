@@ -1,10 +1,11 @@
 body {
-    margin-left: 0px;
+    margin: 0px;
     padding: 0px;
 }
 
 .parent {
-    margin: calc(3vh + 100px) 5vw;
+    margin: 3vh 5vw 3vh calc(5vw + 100px);
+    transform: translateY(10vh);
 }
 
 .main-part {
