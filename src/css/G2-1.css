@@ -1,10 +1,10 @@
 body {
-    margin: 0px;
+    margin-left: 0px;
     padding: 0px;
 }
 
 .parent {
-    margin: 3vh 5vw;
+    margin: calc(3vh + 100px) 5vw;
 }
 
 .main-part {
