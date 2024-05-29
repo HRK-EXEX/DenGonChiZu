@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<!-- サイドバー実装は↓2行をコピーして。side.cssも読み込んで -->
     <div id="sidebar-container"></div>
     <?php include 'side.php'; ?>
 
