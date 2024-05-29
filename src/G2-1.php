@@ -13,8 +13,8 @@
 
     if($posted) {
         $mes = date("Y-m-d H:i:s") . "\n";
-        $mes .= print_r($_FILES) . "\n";
-        $mes .= print_r($_POST) . "\n";
+        $mes .= print_r($_FILES, true) . "\n";
+        $mes .= print_r($_POST, true) . "\n";
 
         // SQL挿入部
         // $sql = $db -> query(
