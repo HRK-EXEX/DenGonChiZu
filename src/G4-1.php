@@ -1,5 +1,17 @@
 <?php session_start(); ?>
-<?php require 'php/db.php'; ?>
+<?php 
+    require 'php/db.php'; 
+    if(isset($_SESSION['user'])){
+        // idの取得
+        $user_id = $user['user_id'];
+        // $user_id = 1;//テスト
+        $sql=$db->prepare('select * from Users where user_id=?');
+        $sql->execute([$user_id]);
+        $result = $sql->fetch(PDO::FETCH_ASSOC);
+    }else{
+        header("Location: G1-6.php");
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -30,15 +42,6 @@
     <hr  color="black">
 
     <!-- selectで情報取得,user_idを送信  -->
-<?php
-    // idの取得
-    $user_id = $_SESSION['user_id'];
-    // $user_id = 1;//テスト
-    $sql=$db->prepare('select * from Users where user_id=?');
-    $sql->execute([$user_id]);
-    $result = $sql->fetch(PDO::FETCH_ASSOC);
-?>
-
     <form action="G4-2.php" method="post">
         <div class="container">
             <div class="columns is-centered">
