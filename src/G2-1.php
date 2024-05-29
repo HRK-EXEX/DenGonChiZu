@@ -1,29 +1,34 @@
 <?php
     require 'php/db.php';
     // var_dump($_FILES, $_POST);
-    $posted = $_POST["posted"] ?? false;
 
+    // 変数代入
+    $posted = $_POST["posted"] ?? false;
     $title = $_POST['post_title'] ?? null;
     $image = $_FILES['post_img'] ?? null;
     $text = $_POST['post_text'] ?? null;
-
     $target = $image['name'] ?? null;
-
     $mes = "新規投稿";
 
+    // 投稿ボタンが押されたかの確認＆投稿処理
     if($posted) {
-        $mes = date("Y-m-d H:i:s") . "\n";
-        $mes .= print_r($_FILES, true) . "\n";
-        $mes .= print_r($_POST, true) . "\n";
+        $date = date("Y-m-d H:i:s");
+        // $mes = $date . "\n";
+        // $mes .= print_r($_FILES, true) . "\n";
+        // $mes .= print_r($_POST, true) . "\n";
 
         // SQL挿入部
-        // $sql = $db -> query(
-        //     "INSERT INTO Posts VALUES
-        //     (null, 2147483647, $title, $text, $target, $date, 0)"
-        // );
-        // $res = $sql -> fetch(PDO::FETCH_ASSOC);
+        session_start();
+        $userId = $_SESSION['user']['user_id'];
+        $sql = $db -> query(
+            "INSERT INTO Posts VALUES
+            (null, $userId, $title, $text, $target, $date, 0)"
+        );
+        $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-        // header("Location: G1-1.php");
+        // リダイレクト
+        if (isset($res))
+            header("Location: G1-1.php");
     }
 ?>
 
