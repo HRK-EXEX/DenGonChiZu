@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="sidebar">
-        <img src="../img/home.png" alt="画像1" onclick="window.location.reload();">
+        <img src="../img/home.png" alt="画像1" onclick="window.location.href='G1-1.php';">
         <img src="../img/icon.png" alt="画像2" onclick="window.location.href='G3-1.php';">
         <img src="../img/haguruma.png" alt="画像3" onclick="window.location.href='G4-1.php';">
         <img src="../img/login.png" alt="画像4" onclick="window.location.href='G1-7.php';">
