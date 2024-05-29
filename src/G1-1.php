@@ -75,7 +75,7 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
-        //投稿ごとに距離を確保して表示範囲中心から出力する
+        //投稿ごとに距離を確保して表示範囲中心から出力する（もしかしたら表示方法変更するかも）
         public function calculatePosition($index, $totalPosts) {
             $centerX = 5000; // 10000px の中央
             $centerY = 5000; // 10000px の中央
