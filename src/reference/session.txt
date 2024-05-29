@@ -1,0 +1,28 @@
+入ってるデータ（サンプル例）
+    $_SESSION['user'] = [
+        'id' => 1,
+        'name' => 'John Doe',
+        'mail' => 'john.doe@example.com',
+        'password_hash' => '$2y$10$eImiTXuWVxfM37uY4JANjQ==',
+        'created_at' => '2023-05-28 12:34:56'
+    ];
+
+sessionのデータをまとめて入れるとき
+    $mail = 'john.doe@example.com';  // ユーザーのメールアドレス
+    $stmt = $dbh->prepare("SELECT * FROM Users WHERE mail = :mail");
+    $stmt->bindParam(':mail', $mail);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+ユーザ情報を取り出したいとき（連想配列です）
+    if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+        
+        
+        $userId = $user['id'];
+        $userName = $user['name'];
+        $userMail = $user['mail'];
+        $userPasswordHash = $user['password_hash'];
+        $userCreatedAt = $user['created_at'];
+    }
