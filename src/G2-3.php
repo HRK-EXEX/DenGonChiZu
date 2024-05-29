@@ -1,21 +1,42 @@
 <?php
     require 'php/db.php';
-    $pid = $_GET["post_id"];
+    $postId = $_GET["post_id"];
+    $userId = $_GET["user_id"];
     $posted = $_POST["posted"] ?? false;
 
     try {
-        $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $pid");
+        $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
         $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-        $title = $_POST['post_title'] ?? $sql['post_title'];
-        $image = $_POST['post_img'] ?? $sql['post_img'];
-        $text = $_POST['post_text'] ?? $sql['post_text'];
+        $title = $_POST['post_title'] ?? $res['post_title'];
+        $image = $_POST['post_img'] ?? $res['post_img'];
+        $text = $_POST['post_text'] ?? $res['post_text'];
     } catch (PDOException $e) {
         $title = $image = $text = "exception occured";
     }
 
     if($posted) {
-        
+        if($posted) {
+            $date = date("Y-m-d H:i:s");
+            // $mes = $date . "\n";
+            // $mes .= print_r($_FILES, true) . "\n";
+            // $mes .= print_r($_POST, true) . "\n";
+    
+            // SQL挿入部
+            $sql = $db -> query(
+                "UPDATE Posts SET
+                    title = $title,
+                    content = $text,
+                    img_path = $target,
+                    'date' = $date
+                WHERE post_id = $postId AND user_id = $userId"
+            );
+            $res = $sql -> fetch(PDO::FETCH_ASSOC);
+    
+            // リダイレクト
+            if (isset($res))
+                header("Location: G1-1.php");
+        }
     }
 ?>
 
