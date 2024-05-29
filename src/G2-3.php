@@ -8,35 +8,33 @@
         $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
         $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-        $title = $_POST['post_title'] ?? $res['title'];
-        $image = $_POST['post_img'] ?? $res['img_path'];
-        $text = $_POST['post_text'] ?? $res['content'];
+        $title = $_POST['post_title'] ?? $res['title'] ?? null;
+        $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
+        $text = $_POST['post_text'] ?? $res['content'] ?? null;
     } catch (PDOException $e) {
-        $title = $image = $text = "exception occured";
+        $title = $text = "exception occured";
     }
 
     if($posted) {
-        if($posted) {
-            $date = date("Y-m-d H:i:s");
-            // $mes = $date . "\n";
-            // $mes .= print_r($_FILES, true) . "\n";
-            // $mes .= print_r($_POST, true) . "\n";
-    
-            // SQL挿入部
-            $sql = $db -> query(
-                "UPDATE Posts SET
-                    title = $title,
-                    content = $text,
-                    img_path = $target,
-                    'date' = $date
-                WHERE post_id = $postId AND user_id = $userId"
-            );
-            $res = $sql -> fetch(PDO::FETCH_ASSOC);
-    
-            // リダイレクト
-            if (isset($res))
-                header("Location: G1-1.php");
-        }
+        $date = date("Y-m-d H:i:s");
+        // $mes = $date . "\n";
+        // $mes .= print_r($_FILES, true) . "\n";
+        // $mes .= print_r($_POST, true) . "\n";
+
+        // SQL挿入部
+        $sql = $db -> query(
+            "UPDATE Posts SET
+                title = $title,
+                content = $text,
+                img_path = $target,
+                'date' = $date
+            WHERE post_id = $postId AND user_id = $userId"
+        );
+        $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
+        // リダイレクト
+        if (isset($res))
+            header("Location: G1-1.php");
     }
 ?>
 
@@ -56,7 +54,15 @@
             <input type="hidden" name="posted" value="true">
             <div class="method">投稿編集</div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
-            <div class="box-base image-box"><img name="post_img" class="image" src="../img/NoImage.png" value="<?=$image?>"></div>
+            <div class="box-base image-box">
+                <?php
+                    if (isset($res['img_path'])) {
+                        if ($res['img_path']) {
+                            echo '<img name="post_img" class="image" src="../img/'.$res['img_path'].'.png">';
+                        } else echo '<img name="post_img" class="image" src="../img/NoImage.png">';
+                    }
+                ?>
+            </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </form>
         <div class="operation">
