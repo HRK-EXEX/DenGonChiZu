@@ -1,9 +1,11 @@
+<?php session_start(); ?>
 <?php require 'php/db.php'; ?>
 <?php 
     //delete,G4-4遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_flg'])){
         $sql=$db->prepare('delete from Users where user_id = ?');
         $sql->execute([$_POST['user_id']]);
+        session_destroy();
         header("Location: G4-4.php");
         exit;
     }
@@ -22,8 +24,8 @@
 <body>
 <?php
     // idの取得
-    // $user_id = $_POST[''];
-    $user_id = 3;//テスト
+    $user_id = $_SESSION['user_id'];
+    // $user_id = 3;//テスト
 ?>
     <div class="contents">    
         <h1 class="title is-3">退会を確定しますか</h1>
