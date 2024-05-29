@@ -8,9 +8,9 @@
         $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
         $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-        $title = $_POST['post_title'] ?? $res['post_title'];
-        $image = $_POST['post_img'] ?? $res['post_img'];
-        $text = $_POST['post_text'] ?? $res['post_text'];
+        $title = $_POST['post_title'] ?? $res['title'];
+        $image = $_POST['post_img'] ?? $res['img_path'];
+        $text = $_POST['post_text'] ?? $res['content'];
     } catch (PDOException $e) {
         $title = $image = $text = "exception occured";
     }
