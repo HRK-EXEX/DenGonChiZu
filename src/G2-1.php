@@ -23,6 +23,8 @@
     }
 ?>
 
+<?php include 'side.php'; ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
