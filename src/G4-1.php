@@ -1,17 +1,16 @@
 <?php session_start(); ?>
 <?php 
     require 'php/db.php'; 
-    if(isset($_SESSION['user'])){
-        // idの取得
-        $user_id = $user['user_id'];
-        // $user_id = 1;//テスト
-        $sql=$db->prepare('select * from Users where user_id=?');
-        $sql->execute([$user_id]);
-        $result = $sql->fetch(PDO::FETCH_ASSOC);
-    }else{
+    if(!isset($_SESSION['user'])){
         header("Location: G1-6.php");
         exit;
     }
+    // idの取得
+    $user_id = $user['user_id'];
+    // $user_id = 1;//テスト
+    $sql=$db->prepare('select * from Users where user_id=?');
+    $sql->execute([$user_id]);
+    $result = $sql->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>

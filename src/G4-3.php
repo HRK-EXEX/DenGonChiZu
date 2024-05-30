@@ -2,13 +2,14 @@
 <?php 
     require 'php/db.php';
     if(isset($_SESSION['user'])){
-        // idの取得
-        $user_id = $user['user_id'];
-        // $user_id = 3;//テスト
-    }else{
         header("Location: G1-6.php");
         exit;
     }
+
+    // idの取得
+    $user_id = $user['user_id'];
+    // $user_id = 3;//テスト
+    
     //delete,G4-4遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_flg'])){
         $sql=$db->prepare('delete from Users where user_id = ?');
