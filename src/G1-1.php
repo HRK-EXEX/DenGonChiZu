@@ -94,7 +94,10 @@
                 $position = $this->calculatePosition($index, $totalPosts);
                 echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
                 echo '    <div class="user-info">';
-                echo '        <img src="../img/user_icon.jpg" alt="ユーザのアイコン">'; // テーブルにないから追加？
+                echo '        <a href="G3-1.php?user_id=' . htmlspecialchars($post->user_id) . '">';
+                echo '            <img src="../img/user_icon.jpg" alt="ユーザのアイコン">';
+                echo '        </a>';
+
                 echo '        <span class="username">' . htmlspecialchars($post->user_name) . '</span>';
                 echo '    </div>';
                 echo '    <div class="post-content">';
