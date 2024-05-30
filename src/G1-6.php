@@ -2,6 +2,7 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     $dsn = 'mysql:host=mysql305.phy.lolipop.lan;dbname=LAA1517436-linedwork;charset=utf8';
     $user = 'LAA1517436';
     $password = 'hyperBassData627';
@@ -44,11 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="form-container">
         <form action="G1-6.php" method="POST">
-
         <?php if(isset($error_message)): ?>
             <div class="error-message"><?php echo $error_message; ?></div>
             <?php endif; ?>
-
             <div class="input-group">
                 <label for="mail">メールアドレス</label><br>
                 <input type="email" id="mail" name="mail" required>
