@@ -22,9 +22,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
 }
 $my_user_id = $_SESSION['user']['user_id'];
 
-// 表示するユーザーID（後で変更）
-$user_id = 1;
-
 // 相手のユーザーIDを取得（URLのクエリパラメータから取得）
 $user_id = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
 
