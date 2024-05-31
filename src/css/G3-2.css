@@ -20,6 +20,16 @@ header {
     border-bottom: 1px solid #ccc;
 }
 
+#user_info{
+    display: none;
+    padding-left: 20px;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
+
 header h1 {
     margin: 0;
     font-size: 24px;
@@ -100,3 +110,4 @@ footer {
 .back-btn:hover {
     background-color: #45a049;
 }
+
