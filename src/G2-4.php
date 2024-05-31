@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>伝言地図 - 投稿削除</title>
     <link rel="stylesheet" href="css/G2-1.css">
+    <link rel="stylesheet" href="css/side.css">
 </head>
 <body>
+    <div id="sidebar-container"></div>
+    <?php include 'side.php'; ?>
+    
     <div class="parent">
         <div class="main-part">
             <div class="method">以下の投稿を削除しようとしています。<br>本当に実行しますか？</div>

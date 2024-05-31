@@ -29,7 +29,6 @@ if ($user_id === 0) {
     die("ユーザーIDが指定されていません。");
 }
 
-
 // フォロー数を取得する関数
 function getFollowCount($pdo, $user_id) {
     $sql = "SELECT COUNT(*) as follow_count FROM Followers WHERE user_id = :user_id";
@@ -71,8 +70,8 @@ $follower_count = getFollowerCount($pdo, $user_id);
             <button class="follow-btn">フォロー</button>
         </header>
         <main>
-            <a href="G3-2.html" class="link"><?php echo $follow_count; ?> フォロー</a>
-            <a href="G3-2.html" class="link"><?php echo $follower_count; ?> フォロワー</a>
+            <a href="G3-2.php?action=follow&user_id=<?php echo $user_id; ?>" class="link"><?php echo $follow_count; ?> フォロー</a>
+            <a href="G3-2.php?action=followers&user_id=<?php echo $user_id; ?>" class="link"><?php echo $follower_count; ?> フォロワー</a>
         </main>
         <footer>
             <button onclick="location.href='G1-1.php'" class="btn back-btn">戻る</button>
