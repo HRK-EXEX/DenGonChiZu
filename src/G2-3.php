@@ -40,8 +40,6 @@
     } else $nullified = true;
 ?>
 
-<?php include 'side.php'; ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -49,8 +47,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>伝言地図 - 投稿編集</title>
     <link rel="stylesheet" href="css/G2-1.css">
+    <link rel="stylesheet" href="css/side.css">
 </head>
 <body>
+    <div id="sidebar-container"></div>
+    <?php include 'side.php'; ?>
+
     <div class="parent">
     <?php
     if (!$nullified) {
