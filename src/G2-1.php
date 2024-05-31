@@ -1,5 +1,6 @@
 <?php
     require 'php/db.php';
+    session_start();
     // var_dump($_FILES, $_POST);
 
     // 変数代入
@@ -19,7 +20,6 @@
         $mes .= print_r($_SESSION, true) . "\n";
 
         // SQL挿入部
-        session_start();
         $userId = $_SESSION['user']['user_id'];
         /*
         $sql = $db -> query(
