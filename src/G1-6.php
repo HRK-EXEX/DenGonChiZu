@@ -17,10 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $dbh->prepare("SELECT user_id, pass FROM Users WHERE mail = :mail");
         $stmt->bindParam(':mail', $mail);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result && password_verify($pass, $result['pass']) == true) {
-            $_SESSION['user_id'] = $result['user_id'];
+        if ($user && password_verify($pass, $user['pass']) == true) {
+            $_SESSION['user_id'] = $user['user_id'];
             header("Location: G1-1.php");
             exit();
         } else {
