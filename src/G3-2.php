@@ -72,6 +72,8 @@ if ($action === 'follow') {
 <body>
     <div class="container">
         <header>
+            <!-- アイコン画像は後でDBから取得式に変更予定 -->
+            <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
             <h1><?php echo htmlspecialchars($_SESSION['user']['user_name'], ENT_QUOTES, 'UTF-8'); ?></h1>
             <h2><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h2>
         </header>
@@ -79,7 +81,7 @@ if ($action === 'follow') {
             <div class="user-list">
                 <?php foreach ($list as $user): ?>
                     <div class="user-item">
-                        <div class="user-icon" style="background-color: yellow;"></div> <!-- プロフィール画像の取得方法に応じて変更 -->
+                        <div class="user-icon" style="background-color: yellow;"></div> 
                         <span class="user-name"><?php echo htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8'); ?></span>
                         <button class="unfollow-btn">解除</button>
                     </div>
