@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result && password_verify($pass, $result['pass'])) {
+        if ($result && password_verify($pass, $result['pass']) == true) {
             $_SESSION['user_id'] = $result['user_id'];
             header("Location: G1-1.php");
             exit();
