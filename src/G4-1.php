@@ -37,7 +37,7 @@
             <h4>会員情報</h4>
         </div>
         <div class="right-column">
-            <button class="button is-danger is-large" onclick="location.href='G4-3.html'">退会</button>
+            <button class="button is-danger is-large" onclick="location.href='G4-3.php'">退会</button>
         </div>
     </div>
     <hr  color="black">
