@@ -14,19 +14,19 @@
     // 投稿ボタンが押されたかの確認＆投稿処理
     if($posted) {
         $date = date("Y-m-d H:i:s");
-        $mes = $date . "\n";
-        $mes .= print_r($_FILES, true) . "\n";
-        $mes .= print_r($_POST, true) . "\n";
-        $mes .= print_r($_SESSION, true) . "\n";
+        // $mes = $date . "\n";
+        // $mes .= print_r($_FILES, true) . "\n";
+        // $mes .= print_r($_POST, true) . "\n";
+        // $mes .= print_r($_SESSION, true) . "\n";
 
         // SQL挿入部
         $userId = $_SESSION['user']['user_id'];
-        /*
+        
         $sql = $db -> query(
             "INSERT INTO Posts VALUES
             (null, $userId, $title, $text, $target, $date, 0)"
         );
-        $res = $sql -> fetch(PDO::FETCH_ASSOC);*/
+        $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
         // リダイレクト
         if (isset($res))
