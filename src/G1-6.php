@@ -19,6 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        $_SESSION['user'] = $user;
+
         if ($user && password_verify($pass, $user['pass']) == true) {
             $_SESSION['user_id'] = $user['user_id'];
             header("Location: G1-1.php");
