@@ -24,7 +24,7 @@
         
         $sql = $db -> query(
             "INSERT INTO Posts VALUES
-            (null, $userId, $title, $text, $target, $date, 0)"
+            (null, $userId, $title, $text, $target, '$date', 0)"
         );
         $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
