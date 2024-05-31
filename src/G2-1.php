@@ -32,8 +32,6 @@
     }
 ?>
 
-<?php include 'side.php'; ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -41,8 +39,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>伝言地図 - 新規投稿</title>
     <link rel="stylesheet" href="css/G2-1.css">
+    <link rel="stylesheet" href="css/side.css">
 </head>
 <body>
+    <div id="sidebar-container"></div>
+    <?php include 'side.php'; ?>
+
     <div class="parent">
         <form id="newing" class="main-part" method="post" enctype="multipart/form-data">
             <input type="hidden" name="posted" value="true">
