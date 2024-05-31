@@ -1,6 +1,6 @@
-<?php session_start(); ?>
-<?php 
-    require 'php/db.php'; 
+<?php session_start();?>
+<?php
+    require 'php/db.php';
     if(!isset($_SESSION['user'])){
         header("Location: G1-6.php");
         exit;
