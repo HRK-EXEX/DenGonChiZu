@@ -2,109 +2,101 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
 }
 
 .container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #fff;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 80px);
-    box-sizing: border-box;
-    overflow-y: auto;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
 }
 
 header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
 }
 
-.profile-pic {
-    width: 70px;
-    height: 70px;
-    background-color: #ccc;
-    border-radius: 50%;
-    margin-right: 20px;
-}
-
-h1 {
-    font-size: 2em;
+header h1 {
     margin: 0;
+    font-size: 24px;
+}
+
+header h2 {
+    margin: 10px 0 0;
+    font-size: 18px;
 }
 
 main {
-    flex-grow: 1;
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
-h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
+.user-list {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.follower-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.follower-item {
+.user-item {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    padding: 10px;
+    background-color: #fff;
     border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
 }
 
-.follower-pic {
+.user-icon {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-right: 20px;
+    background-color: #eee;
+    margin-right: 10px;
 }
 
-.follower-item span {
-    flex-grow: 1;
-    font-size: 1.2em;
+.user-name {
+    flex: 1;
+    font-size: 16px;
 }
 
 .unfollow-btn {
-    padding: 10px 20px;
-    font-size: 1em;
-    color: white;
-    background-color: #007bff;
+    padding: 5px 10px;
     border: none;
+    background-color: #ff6666;
+    color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .unfollow-btn:hover {
-    background-color: #0056b3;
+    background-color: #ff3333;
 }
 
 footer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    background-color: #f1f1f1;
 }
 
 .back-btn {
     padding: 10px 20px;
-    font-size: 1em;
-    color: black;
-    background-color: #ccc;
     border: none;
+    background-color: #4CAF50;
+    color: white;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.back-btn:hover {
+    background-color: #45a049;
 }
