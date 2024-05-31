@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php 
     require 'php/db.php';
-    if(isset($_SESSION['user'])){
+    if(!isset($_SESSION['user'])){
         header("Location: G1-6.php");
         exit;
     }
@@ -14,7 +14,7 @@
     //delete,G4-4遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_flg'])){
         $sql=$db->prepare('delete from Users where user_id = ?');
-        $sql->execute([$_POST['user_id']]);
+        $sql->execute([$user_id]);
         session_destroy();
         header("Location: G4-4.php");
         exit;
