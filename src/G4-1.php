@@ -6,6 +6,7 @@
         exit;
     }
     // idの取得
+    $user = $_SESSION['user'];
     $user_id = $user['user_id'];
     // $user_id = 1;//テスト
     $sql=$db->prepare('select * from Users where user_id=?');
