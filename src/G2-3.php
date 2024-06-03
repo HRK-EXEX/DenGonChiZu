@@ -15,7 +15,7 @@
             $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
             $text = $_POST['post_text'] ?? $res['content'] ?? null;
         } catch (PDOException $e) {
-            $title = $text = "exception occured";
+            $title = $text = 'exception occured: '.$e->getMessage();
         }
 
         // 投稿ボタンが押されたかの確認＆投稿処理
@@ -27,15 +27,19 @@
             // $mes .= print_r($_SESSION, true) . "\n";
 
             // SQL挿入部
-            $sql = $db -> query(
-                "UPDATE Posts SET
-                    title = $title,
-                    content = $text,
-                    img_path = $target,
-                    'date' = $date
-                WHERE post_id = $postId AND user_id = $userId"
-            );
-            $res = $sql -> fetch(PDO::FETCH_ASSOC);
+            try {
+                $sql = $db -> query(
+                    "UPDATE Posts SET
+                        title = $title,
+                        content = $text,
+                        img_path = $target,
+                        'date' = $date
+                    WHERE post_id = $postId AND user_id = $userId"
+                );
+                $res = $sql -> fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                $title = $text = 'exception occured: '.$e->getMessage();
+            }
 
             // リダイレクト
             if (isset($res))
