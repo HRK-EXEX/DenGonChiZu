@@ -18,3 +18,13 @@
         $userPasswordHash = $user['password_hash'];
         $birthday = $user['birthday'];
     }
+
+ゲスト用データ
+
+    $_SESSION['user'] = [
+        'user_id' => 100,
+        'user_name' => 'ゲスト',
+        'mail' => 'null',
+        'pass' => 'null',
+        'birthday' => 'null'
+    ];
