@@ -49,10 +49,10 @@
                         '<tbody>';
                         echo '<input type="hidden" name="user_flg" value="true">';
                         echo '<input type="hidden" name="user_id" value="' , $user_id ,'">';
-                        echo '<tr>','<th>ユーザー名</th>','<td>','<input type="text" name="name" value="', htmlspecialchars($result['user_name']) ,'">','</td>','</tr>';
-                        echo '<tr>','<th>メールアドレス</th>','<td>','<input type="email"  name="mail" value="', htmlspecialchars($result['mail']) ,'">','</td>','</tr>';
+                        echo '<tr>','<th>ユーザー名</th>','<td>','<input type="text" name="name" value="', htmlspecialchars($result['user_name']) ,'required">','</td>','</tr>';
+                        echo '<tr>','<th>メールアドレス</th>','<td>','<input type="email"  name="mail" value="', htmlspecialchars($result['mail']) ,'required">','</td>','</tr>';
                         echo '<tr>','<th>パスワード</th>','<td>','<input type="password" name="pass" required>','</td>','</tr>';
-                        echo '<tr>','<th>生年月日</th>','<td>','<input type="date" name="birth" value="', htmlspecialchars($result['birthday']) ,'">','</td>','</tr>';
+                        echo '<tr>','<th>生年月日</th>','<td>','<input type="date" name="birth" value="', htmlspecialchars($result['birthday']) ,'required">','</td>','</tr>';
                         '</tbody>';
                     ?>
                 </table>
