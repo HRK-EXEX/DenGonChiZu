@@ -20,13 +20,17 @@
         // $mes .= print_r($_SESSION, true) . "\n";
 
         // SQL挿入部
-        $userId = $_SESSION['user']['user_id'];
-        
-        $sql = $db -> query(
-            "INSERT INTO Posts VALUE
-            (null, $userId, $title, $text, $target, '$date', 0)"
-        );
-        $res = $sql -> fetch(PDO::FETCH_ASSOC);
+        try {
+            $userId = $_SESSION['user']['user_id'];
+            
+            $sql = $db -> query(
+                "INSERT INTO Posts VALUE
+                (null, $userId, $title, $text, $target, '$date', 0)"
+            );
+            $res = $sql -> fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $title = $text = "exception occured: $e";
+        }
 
         // リダイレクト
         if (isset($res))
@@ -59,11 +63,6 @@
         </form>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <span>
-                <?php
-
-                ?>
-            </span>
             <button type="submit" form="newing" class="button-base proceed">投稿</button>
         </div>
     </div>
