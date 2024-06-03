@@ -15,7 +15,7 @@
             $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
             $text = $_POST['post_text'] ?? $res['content'] ?? null;
         } catch (PDOException $e) {
-            $title = $text = "exception occured: $e";
+            $title = $text = 'exception occured: '.$e->getMessage();
         }
 
         // 削除ボタンが押されたかの確認＆投稿処理
@@ -34,7 +34,7 @@
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
-                $title = $text = "exception occured: $e";
+                $title = $text = 'exception occured: '.$e->getMessage();
             }
 
             // リダイレクト
