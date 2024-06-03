@@ -4,7 +4,7 @@
     // var_dump($_FILES, $_POST);
 
     // 変数代入
-    $posted = $_POST["posted"] ?? false;
+    $posted = $_POST['posted'] ?? false;
     $title = $_POST['post_title'] ?? null;
     $image = $_FILES['post_img'] ?? null;
     $text = $_POST['post_text'] ?? null;
@@ -12,7 +12,7 @@
     $mes = "新規投稿";
 
     // 投稿ボタンが押されたかの確認＆投稿処理
-    if($posted) {
+    if ($posted) {
         $date = date("Y-m-d H:i:s");
         // $mes = $date . "\n";
         // $mes .= print_r($_FILES, true) . "\n";
@@ -23,7 +23,7 @@
         $userId = $_SESSION['user']['user_id'];
         
         $sql = $db -> query(
-            "INSERT INTO Posts VALUES
+            "INSERT INTO Posts VALUE
             (null, $userId, $title, $text, $target, '$date', 0)"
         );
         $res = $sql -> fetch(PDO::FETCH_ASSOC);
