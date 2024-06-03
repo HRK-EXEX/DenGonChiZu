@@ -15,7 +15,7 @@
             $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
             $text = $_POST['post_text'] ?? $res['content'] ?? null;
         } catch (PDOException $e) {
-            $title = $text = "exception occured";
+            $title = $text = "exception occured: $e";
         }
 
         // 削除ボタンが押されたかの確認＆投稿処理
