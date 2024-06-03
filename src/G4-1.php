@@ -74,6 +74,5 @@
     </form>
 
 </div>
-<?php session_unset(); ?>
 </body>
 </html>

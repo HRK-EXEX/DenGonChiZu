@@ -1,5 +1,6 @@
 <?php
     require 'php/db.php';
+    session_start();
     // var_dump($_FILES, $_POST);
 
     // 変数代入
@@ -16,13 +17,14 @@
         // $mes = $date . "\n";
         // $mes .= print_r($_FILES, true) . "\n";
         // $mes .= print_r($_POST, true) . "\n";
+        // $mes .= print_r($_SESSION, true) . "\n";
 
         // SQL挿入部
-        session_start();
         $userId = $_SESSION['user']['user_id'];
+        
         $sql = $db -> query(
             "INSERT INTO Posts VALUES
-            (null, $userId, $title, $text, $target, $date, 0)"
+            (null, $userId, $title, $text, $target, '$date', 0)"
         );
         $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
