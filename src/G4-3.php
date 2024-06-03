@@ -9,7 +9,7 @@
      // idの取得
     $user = $_SESSION['user'];
     $user_id = $user['user_id'];
-    // $user_id = 3;//テスト
+    // $user_id = 3;
     
     //delete,G4-4遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_flg'])){
