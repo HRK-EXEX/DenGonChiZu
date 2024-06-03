@@ -40,6 +40,17 @@ if (!$user) {
     die("指定されたユーザーが見つかりません。");
 }
 
+// フォロー状態を確認する関数
+function isFollowing($pdo, $my_user_id, $user_id) {
+    $sql = "SELECT COUNT(*) as count FROM Followers WHERE user_id = :my_user_id AND followers_user_id = :user_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':my_user_id', $my_user_id, PDO::PARAM_INT);
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['count'] > 0;
+}
+
 // フォロー数を取得する関数
 function getFollowCount($pdo, $user_id) {
     $sql = "SELECT COUNT(*) as follow_count FROM Followers WHERE user_id = :user_id";
@@ -61,13 +72,22 @@ function getFollowerCount($pdo, $user_id) {
 }
 
 // フォロー処理
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['follow'])) {
-    // フォローデータを挿入
-    $sql = "INSERT INTO Followers (user_id, followers_user_id) VALUES (:user_id, :followers_user_id)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':user_id', $my_user_id, PDO::PARAM_INT);
-    $stmt->bindParam(':followers_user_id', $user_id, PDO::PARAM_INT);
-    $stmt->execute();
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'follow') {
+        // フォローデータを挿入
+        $sql = "INSERT INTO Followers (user_id, followers_user_id) VALUES (:my_user_id, :user_id)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':my_user_id', $my_user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+    } elseif ($_GET['action'] == 'unfollow') {
+        // フォローデータを削除
+        $sql = "DELETE FROM Followers WHERE user_id = :my_user_id AND followers_user_id = :user_id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':my_user_id', $my_user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
     // フォロー数を更新
     header("Location: ".$_SERVER['PHP_SELF']."?user_id=".$user_id);
     exit;
@@ -77,6 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['follow'])) {
 $user_name = $user['user_name'];
 $follow_count = getFollowCount($pdo, $user_id);
 $follower_count = getFollowerCount($pdo, $user_id);
+
+// フォロー状態を確認
+$is_following = isFollowing($pdo, $my_user_id, $user_id);
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +115,11 @@ $follower_count = getFollowerCount($pdo, $user_id);
         <header>
             <div class="profile-pic"></div>
             <h1><?php echo htmlspecialchars($user_name, ENT_QUOTES, 'UTF-8'); ?></h1>
-            <button class="follow-btn">フォロー</button>
+            <?php if ($is_following): ?>
+                <a href="?user_id=<?php echo $user_id; ?>&action=unfollow" class="follow-btn">フォロー解除</a>
+            <?php else: ?>
+                <a href="?user_id=<?php echo $user_id; ?>&action=follow" class="follow-btn">フォロー</a>
+            <?php endif; ?>
         </header>
         <main>
             <a href="G3-2.php?action=follow&user_id=<?php echo $user_id; ?>" class="link"><?php echo $follow_count; ?> フォロー</a>
