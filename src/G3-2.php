@@ -71,14 +71,12 @@ if ($action === 'follow') {
 </head>
 <body>
     <div class="container">
-        <header>
-            <div id="user_info">
+        <div id="user_info">
                 <!-- アイコン画像は後でDBから取得式に変更予定 -->
                 <img src="../img/user_icon.jpg" alt="ユーザのアイコン">
                 <h1><?php echo htmlspecialchars($_SESSION['user']['user_name'], ENT_QUOTES, 'UTF-8'); ?></h1>
             </div>
             <h2><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h2>
-        </header>
         <main>
             <div class="user-list">
                 <?php foreach ($list as $user): ?>
