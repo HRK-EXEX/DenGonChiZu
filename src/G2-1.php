@@ -29,7 +29,7 @@
             );
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $title = $text = "exception occured: $e";
+            $title = $text = 'exception occured: '.$e->getMessage();
         }
 
         // リダイレクト
