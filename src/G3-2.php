@@ -52,6 +52,24 @@ function getFollowerList($pdo, $user_id) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// フォロー解除を処理する関数
+function unfollowUser($pdo, $my_user_id, $unfollow_user_id) {
+    $sql = "DELETE FROM Followers WHERE user_id = :user_id AND followers_user_id = :followers_user_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':user_id', $my_user_id, PDO::PARAM_INT);
+    $stmt->bindParam(':followers_user_id', $unfollow_user_id, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+// フォロー解除アクション
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unfollow_user_id'])) {
+    $unfollow_user_id = (int)$_POST['unfollow_user_id'];
+    unfollowUser($pdo, $my_user_id, $unfollow_user_id);
+    // ページをリフレッシュしてリストを更新
+    header("Location: ".$_SERVER['PHP_SELF']."?action=".$action."&user_id=".$user_id);
+    exit;
+}
+
 // 表示するリストを取得
 if ($action === 'follow') {
     $list = getFollowList($pdo, $user_id);
@@ -85,7 +103,10 @@ if ($action === 'follow') {
                     <div class="user-item">
                         <div class="user-icon" style="background-color: yellow;"></div> 
                         <span class="user-name"><?php echo htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8'); ?></span>
+                        <form method="POST" action="">
+                         <input type="hidden" name="unfollow_user_id" value="<?php echo htmlspecialchars($user['user_id'], ENT_QUOTES, 'UTF-8'); ?>">
                         <button class="unfollow-btn">解除</button>
+                        </form>
                     </div>
                 <?php endforeach; ?>
             </div>
