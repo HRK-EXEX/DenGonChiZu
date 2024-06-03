@@ -1,6 +1,6 @@
 <?php require 'php/db.php'; ?>
 <?php
-    // update処理,G1-1に遷移したい
+    // update処理,G1-1に遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_flg'])){
         $sql=$db->prepare('update Users set user_name=?, mail=?, pass=?, birthday=? where user_id=?');
         $sql->execute([$_POST['name'],$_POST['mail'],password_hash($_POST['pass'], PASSWORD_DEFAULT),$_POST['birth'],$_POST['user_id']]);
@@ -51,7 +51,7 @@
                         echo '<input type="hidden" name="user_id" value="' , $user_id ,'">';
                         echo '<tr>','<th>ユーザー名</th>','<td>','<input type="text" name="name" value="', htmlspecialchars($result['user_name']) ,'">','</td>','</tr>';
                         echo '<tr>','<th>メールアドレス</th>','<td>','<input type="email"  name="mail" value="', htmlspecialchars($result['mail']) ,'">','</td>','</tr>';
-                        echo '<tr>','<th>パスワード</th>','<td>','<input type="password" name="pass">','</td>','</tr>';
+                        echo '<tr>','<th>パスワード</th>','<td>','<input type="password" name="pass" required>','</td>','</tr>';
                         echo '<tr>','<th>生年月日</th>','<td>','<input type="date" name="birth" value="', htmlspecialchars($result['birthday']) ,'">','</td>','</tr>';
                         '</tbody>';
                     ?>
