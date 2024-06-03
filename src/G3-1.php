@@ -21,23 +21,27 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
     die("ログイン情報が見つかりません。");
 }
 $my_user_id = $_SESSION['user']['user_id'];
+$my_user_name = $_SESSION['user']['user_name'];
 
 // 相手のユーザーIDを取得（URLのクエリパラメータから取得）
 $user_id = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
+$my_follow = isset($_GET['myFollow']);
 
-if ($user_id === 0) {
+if ($user_id === 0 && !$my_follow) {
     die("ユーザーIDが指定されていません。");
 }
 
 // 相手のユーザー名を取得
-$sql = "SELECT user_name FROM Users WHERE user_id = :user_id";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-$stmt->execute();
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$my_follow) {
+    $sql = "SELECT user_name FROM Users WHERE user_id = :user_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$user) {
-    die("指定されたユーザーが見つかりません。");
+    if (!$user) {
+        die("指定されたユーザーが見つかりません。");
+    }
 }
 
 // フォロー状態を確認する関数
@@ -94,12 +98,17 @@ if (isset($_GET['action'])) {
 }
 
 // ユーザー名、フォロー数、フォロワー数を取得
-$user_name = $user['user_name'];
+if ($my_follow) {
+    $user_name = $my_user_name;
+    $user_id = $my_user_id;
+} else {
+    $user_name = $user['user_name'];
+}
 $follow_count = getFollowCount($pdo, $user_id);
 $follower_count = getFollowerCount($pdo, $user_id);
 
 // フォロー状態を確認
-$is_following = isFollowing($pdo, $my_user_id, $user_id);
+$is_following = !$my_follow && isFollowing($pdo, $my_user_id, $user_id);
 ?>
 
 <!DOCTYPE html>
@@ -115,10 +124,12 @@ $is_following = isFollowing($pdo, $my_user_id, $user_id);
         <header>
             <div class="profile-pic"></div>
             <h1><?php echo htmlspecialchars($user_name, ENT_QUOTES, 'UTF-8'); ?></h1>
-            <?php if ($is_following): ?>
-                <a href="?user_id=<?php echo $user_id; ?>&action=unfollow" class="follow-btn">フォロー解除</a>
-            <?php else: ?>
-                <a href="?user_id=<?php echo $user_id; ?>&action=follow" class="follow-btn">フォロー</a>
+            <?php if (!$my_follow): ?>
+                <?php if ($is_following): ?>
+                    <a href="?user_id=<?php echo $user_id; ?>&action=unfollow" class="follow-btn">フォロー解除</a>
+                <?php else: ?>
+                    <a href="?user_id=<?php echo $user_id; ?>&action=follow" class="follow-btn">フォロー</a>
+                <?php endif; ?>
             <?php endif; ?>
         </header>
         <main>
