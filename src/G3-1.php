@@ -60,6 +60,19 @@ function getFollowerCount($pdo, $user_id) {
     return $result['follower_count'];
 }
 
+// フォロー処理
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['follow'])) {
+    // フォローデータを挿入
+    $sql = "INSERT INTO Followers (user_id, followers_user_id) VALUES (:user_id, :followers_user_id)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':user_id', $my_user_id, PDO::PARAM_INT);
+    $stmt->bindParam(':followers_user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    // フォロー数を更新
+    header("Location: ".$_SERVER['PHP_SELF']."?user_id=".$user_id);
+    exit;
+}
+
 // ユーザー名、フォロー数、フォロワー数を取得
 $user_name = $user['user_name'];
 $follow_count = getFollowCount($pdo, $user_id);
