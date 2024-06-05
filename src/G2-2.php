@@ -1,50 +1,32 @@
 <?php
 require 'php/db.php';
 
-session_start();
+// postId を GET パラメータとして受け取る
+$postId = isset($_GET['postId']) ? $_GET['postId'] : null;
 
 // セッションからユーザーIDを取得
+session_start();
 if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
     die("ログイン情報が見つかりません。");
 }
 $userId = $_SESSION['user']['user_id'];
 
-// postId を GET パラメータとして受け取る
-$postId = isset($_GET['postId']) ? $_GET['postId'] : null;
+// 投稿情報を取得してフォームの初期値とする
+$title = '';
+$image = '';
+$text = '';
 
-// POST されたデータを処理
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // 必要なデータを取得
-    $title = $_POST['post_title'] ?? null;
-    $image = $_POST['post_img'] ?? null;
-    $text = $_POST['post_text'] ?? null;
-
-    // データベースに追加する関数を呼び出す
-    addPostToDatabase($userId, $title, $image, $text);
-}
-
-function addPostToDatabase($userId, $title, $image, $text) {
-    // データベースに接続
-    global $db;
-
+if (isset($postId)) {
     try {
-        // SQL 文を準備
-        $sql = $db->prepare("INSERT INTO Posts (user_id, title, img_path, content) VALUES (:user_id, :title, :image, :text)");
-        
-        // パラメータをバインド
-        $sql->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $sql->bindParam(':title', $title, PDO::PARAM_STR);
-        $sql->bindParam(':image', $image, PDO::PARAM_STR);
-        $sql->bindParam(':text', $text, PDO::PARAM_STR);
-        
-        // SQL 文を実行
-        $sql->execute();
+        $sql = $db->query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+        $res = $sql->fetch(PDO::FETCH_ASSOC);
 
-        // 成功メッセージを表示
-        echo "投稿が追加されました。";
+        $title = $res['title'] ?? null;
+        $image = $res['img_path'] ?? null;
+        $text = $res['content'] ?? null;
+
     } catch (PDOException $e) {
-        // エラーが発生した場合の処理
-        echo "エラー: " . $e->getMessage();
+        die("エラー: " . $e->getMessage());
     }
 }
 ?>
@@ -67,25 +49,23 @@ function addPostToDatabase($userId, $title, $image, $text) {
 
         <div class="show-part">
             <div class="details-part">    
-                <div class="box-base title">"<?=$title?>"</div><br>
-                <div class="title-base content">"<?=$text?>"</div>
+                <div class="box-base title"><?= htmlspecialchars($title) ?></div><br>
+                <div class="title-base content"><?= htmlspecialchars($text) ?></div>
                 <div class="box-base image-box">      
-                    <img class="image" src="<?=$image?>">
+                    <img class="image" src="<?= htmlspecialchars($image) ?>">
                 </div><br>    
             </div>
             <div class="box-base comments">
-                <?php
-                // コメント表示部分は修正が必要ないため変更しない
-                ?>
+                <!-- コメント表示部分 -->
+                <!-- ここにコメントが表示される予定 -->
             </div>
         </div>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <!-- フォームを追加 -->
-            <form method="post" action="">
-                <input type="text" name="post_title" placeholder="タイトル">
-                <input type="text" name="post_img" placeholder="画像URL">
-                <textarea name="post_text" placeholder="投稿内容"></textarea>
+            <!-- コメントを入力するフォーム -->
+            <form method="POST" action="comment.php">
+                <input type="hidden" name="postId" value="<?= htmlspecialchars($postId) ?>">
+                <input type="text" name="comment" placeholder="コメントを入力...">
                 <input type="submit" value="送信" class="button-base send">
             </form>
         </div>
