@@ -2,6 +2,18 @@
 <?php
 require 'php/db.php';
 
+// postId を GET パラメータとして受け取る
+$postId = isset($_GET['postId']) ? $_GET['postId'] : null;
+
+// セッションからユーザーIDを取得
+session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
+    die("ログイン情報が見つかりません。");
+}
+
+$userId = $_SESSION['user']['user_id'];
+
+
 if(isset($postId)) {
     try {
         $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
