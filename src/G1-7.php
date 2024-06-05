@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+$_SESSION = array();
+
+session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,7 +17,7 @@
 <body>
     <div class="container">
         <div class="message">ログアウトしました</div>
-        <button onclick="location.href='G1-1.php'">TOP画面に戻る</button>
+        <button onclick="location.href='index.html'">TOP画面に戻る</button>
     </div>
 </body>
 </html>

@@ -16,7 +16,7 @@ body {
 
 .message {
     font-size: 2em;
-    margin-bottom: 40px; /* 間隔を広げる */
+    margin-bottom: 150px; /* 間隔を広げる */
 }
 
 button {
