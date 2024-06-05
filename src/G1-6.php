@@ -20,10 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($pass, $user['pass']) == true) {
-            // ユーザー情報をセッションに連想配列として追加
-            foreach ($user as $key => $value) {
-                $_SESSION[$key] = $value;
-            }
+            // セッションにユーザー情報を保存
+            $_SESSION['user'] = $user;
+
             header("Location: G1-1.php");
             exit();
         } else {
