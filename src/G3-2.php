@@ -103,7 +103,7 @@ if ($action === 'follow') {
                     <div class="user-item">
                         <div class="user-icon" style="background-color: yellow;"></div> 
                         <span class="user-name"><?php echo htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8'); ?></span>
-                        <form method="POST" action="#">
+                        <form method="POST" action="">
                             <input type="hidden" name="unfollow_user_id" value="<?php echo $user['user_id']; ?>">
                             <button class="unfollow-btn">解除</button>
                         </form>
