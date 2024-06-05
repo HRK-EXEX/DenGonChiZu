@@ -10,23 +10,24 @@
 </head>
 <body>
     <?php 
-
         require 'php/db.php';
 
+        //セッションスタート追加
+
         // postId を GET パラメータとして受け取る
-        $postId = isset($_GET['postId']) ? $_GET['postId'] : null;
+        $postId = isset($_GET['post_id']) ? $_GET['post_id'] : null;
 
         // セッションからユーザーIDを取得
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
             die("ログイン情報が見つかりません。");
         }
 
-        $userId = $_SESSION['user']['user_id'];
+        $my_userId = $_SESSION['user']['user_id'];
 
 
         if(isset($postId)) {
             try {
-                $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+                $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $my_userId");
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
                 $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
