@@ -1,53 +1,3 @@
-<?php
-require 'php/db.php';
-
-session_start();
-
-// セッションからユーザーIDを取得
-if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
-    die("ログイン情報が見つかりません。");
-}
-$userId = $_SESSION['user']['user_id'];
-
-// postId を GET パラメータとして受け取る
-$postId = isset($_GET['postId']) ? $_GET['postId'] : null;
-
-// POST されたデータを処理
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // 必要なデータを取得
-    $title = $_POST['post_title'] ?? null;
-    $image = $_POST['post_img'] ?? null;
-    $text = $_POST['post_text'] ?? null;
-
-    // データベースに追加する関数を呼び出す
-    addPostToDatabase($userId, $title, $image, $text);
-}
-
-function addPostToDatabase($userId, $title, $image, $text) {
-    // データベースに接続
-    global $db;
-
-    try {
-        // SQL 文を準備
-        $sql = $db->prepare("INSERT INTO Posts (user_id, title, img_path, content) VALUES (:user_id, :title, :image, :text)");
-        
-        // パラメータをバインド
-        $sql->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $sql->bindParam(':title', $title, PDO::PARAM_STR);
-        $sql->bindParam(':image', $image, PDO::PARAM_STR);
-        $sql->bindParam(':text', $text, PDO::PARAM_STR);
-        
-        // SQL 文を実行
-        $sql->execute();
-
-        // 成功メッセージを表示
-        echo "投稿が追加されました。";
-    } catch (PDOException $e) {
-        // エラーが発生した場合の処理
-        echo "エラー: " . $e->getMessage();
-    }
-}
-?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -59,6 +9,37 @@ function addPostToDatabase($userId, $title, $image, $text) {
     <link rel="stylesheet" href="css/G2-2.css">
 </head>
 <body>
+    <?php 
+
+        require 'php/db.php';
+
+        // postId を GET パラメータとして受け取る
+        $postId = isset($_GET['postId']) ? $_GET['postId'] : null;
+
+        // セッションからユーザーIDを取得
+        session_start();
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
+            die("ログイン情報が見つかりません。");
+        }
+
+        $userId = $_SESSION['user']['user_id'];
+
+
+        if(isset($postId)) {
+            try {
+                $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+                $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
+                $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
+                $image = $_POST['post_img'] ?? $res['img_path'] ?? "情報が未入力です";
+                $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
+            } catch (Exception $e) {
+                // エラーの処理を行う
+                echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
+            }
+        }
+    
+    ?>
     <div class="parent">
         
         <div class="edit">
@@ -75,19 +56,26 @@ function addPostToDatabase($userId, $title, $image, $text) {
             </div>
             <div class="box-base comments">
                 <?php
-                // コメント表示部分は修正が必要ないため変更しない
+                for($i=0;$i<0;$i++) {
+                    echo '<div class="comment-info">
+                    <div class="user">    
+                        <img class="icon-image" src="../img/NoImage.png">
+                        <span class="username"></span>
+                    </div>
+                    <p>サイコーです。</p>
+                    <hr>
+                </div>';
+                }
                 ?>
+                <!-- こめんと -->
             </div>
         </div>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <!-- フォームを追加 -->
-            <form method="post" action="">
-                <input type="text" name="post_title" placeholder="タイトル">
-                <input type="text" name="post_img" placeholder="画像URL">
-                <textarea name="post_text" placeholder="投稿内容"></textarea>
-                <input type="submit" value="送信" class="button-base send">
-            </form>
+            <input class="comment-area" placeholder="コメントを入力...">
+            <button onclick="location.href='G1-1.php'" class="button-base send">送信</button>
+            <?php
+            ?>
         </div>
     </div>
 </body>
