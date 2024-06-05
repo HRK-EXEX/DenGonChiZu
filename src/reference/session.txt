@@ -8,17 +8,6 @@
     ];
 
 
-ユーザ情報を取り出したいとき（連想配列です）
-    if (isset($_SESSION['user'])) {
-        $user = $_SESSION['user'];
-
-        $userId = $user['user_id'];
-        $userName = $user['user_name'];
-        $userMail = $user['mail'];
-        $userPasswordHash = $user['password_hash'];
-        $birthday = $user['birthday'];
-    }
-
 ゲスト用データ
 
     $_SESSION['user'] = [
