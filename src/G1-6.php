@@ -14,15 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dbh = new PDO($dsn, $user, $password);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $dbh->prepare("SELECT user_id, pass FROM Users WHERE mail = :mail");
+        $stmt = $dbh->prepare("SELECT * FROM Users WHERE mail = :mail");
         $stmt->bindParam(':mail', $mail);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $_SESSION['user'] = $user;
-
         if ($user && password_verify($pass, $user['pass']) == true) {
-            $_SESSION['user_id'] = $user['user_id'];
+            // ユーザー情報をセッションに連想配列として追加
+            foreach ($user as $key => $value) {
+                $_SESSION[$key] = $value;
+            }
             header("Location: G1-1.php");
             exit();
         } else {
@@ -49,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="G1-6.php" method="POST">
         <?php if(isset($error_message)): ?>
             <div class="error-message"><?php echo $error_message; ?></div>
-            <?php endif; ?>
+        <?php endif; ?>
             <div class="input-group">
                 <label for="mail">メールアドレス</label><br>
                 <input type="email" id="mail" name="mail" required>
