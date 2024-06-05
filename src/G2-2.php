@@ -1,35 +1,22 @@
 <?php
 require 'php/db.php';
-
-// postId を GET パラメータとして受け取る
-$postId = isset($_GET['postId']) ? $_GET['postId'] : null;
-
-// セッションからユーザーIDを取得
-session_start();
-if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
-    die("ログイン情報が見つかりません。");
-}
-$userId = $_SESSION['user']['user_id'];
-
-// 投稿情報を取得してフォームの初期値とする
-$title = '';
-$image = '';
-$text = '';
-
-if (isset($postId)) {
+?>
+<?php
+ if(isset($postId)) {
     try {
-        $sql = $db->query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
-        $res = $sql->fetch(PDO::FETCH_ASSOC);
+        $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+        $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-        $title = $res['title'] ?? null;
-        $image = $res['img_path'] ?? null;
-        $text = $res['content'] ?? null;
+        $title = $_POST['post_title'] ?? $res['title'] ?? null;
+            $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
+            $text = $_POST['post_text'] ?? $res['content'] ?? null;
 
-    } catch (PDOException $e) {
-        die("エラー: " . $e->getMessage());
+
     }
 }
-?>
+
+        ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -49,25 +36,34 @@ if (isset($postId)) {
 
         <div class="show-part">
             <div class="details-part">    
-                <div class="box-base title"><?= htmlspecialchars($title) ?></div><br>
-                <div class="title-base content"><?= htmlspecialchars($text) ?></div>
+                <div class="box-base title">"<?=$title?>"</div><br>
+                <div class="title-base content">"<?=$text?>"</div>
                 <div class="box-base image-box">      
-                    <img class="image" src="<?= htmlspecialchars($image) ?>">
+                    <img class="image" src="<?=$image?>">
                 </div><br>    
             </div>
             <div class="box-base comments">
-                <!-- コメント表示部分 -->
-                <!-- ここにコメントが表示される予定 -->
+                <?php
+                for($i=0;$i<0;$i++) {
+                    echo '<div class="comment-info">
+                    <div class="user">    
+                        <img class="icon-image" src="../img/NoImage.png">
+                        <span class="username"></span>
+                    </div>
+                    <p>サイコーです。</p>
+                    <hr>
+                </div>';
+                }
+                ?>
+                <!-- こめんと -->
             </div>
         </div>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <!-- コメントを入力するフォーム -->
-            <form method="POST" action="comment.php">
-                <input type="hidden" name="postId" value="<?= htmlspecialchars($postId) ?>">
-                <input type="text" name="comment" placeholder="コメントを入力...">
-                <input type="submit" value="送信" class="button-base send">
-            </form>
+            <input class="comment-area" placeholder="コメントを入力...">
+            <button onclick="location.href='G1-1.php'" class="button-base send">送信</button>
+            <?php
+            ?>
         </div>
     </div>
 </body>
