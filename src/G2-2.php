@@ -1,36 +1,4 @@
 
-<?php
-require 'php/db.php';
-
-// postId を GET パラメータとして受け取る
-$postId = isset($_GET['postId']) ? $_GET['postId'] : null;
-
-// セッションからユーザーIDを取得
-session_start();
-if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
-    die("ログイン情報が見つかりません。");
-}
-
-$userId = $_SESSION['user']['user_id'];
-
-
-if(isset($postId)) {
-    try {
-        $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
-        $res = $sql -> fetch(PDO::FETCH_ASSOC);
-
-        $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
-        $image = $_POST['post_img'] ?? $res['img_path'] ?? "情報が未入力です";
-        $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
-    } catch (Exception $e) {
-        // エラーの処理を行う
-        echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
-    }
-}
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -41,6 +9,37 @@ if(isset($postId)) {
     <link rel="stylesheet" href="css/G2-2.css">
 </head>
 <body>
+    <?php 
+
+        require 'php/db.php';
+
+        // postId を GET パラメータとして受け取る
+        $postId = isset($_GET['postId']) ? $_GET['postId'] : null;
+
+        // セッションからユーザーIDを取得
+        session_start();
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
+            die("ログイン情報が見つかりません。");
+        }
+
+        $userId = $_SESSION['user']['user_id'];
+
+
+        if(isset($postId)) {
+            try {
+                $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+                $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
+                $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
+                $image = $_POST['post_img'] ?? $res['img_path'] ?? "情報が未入力です";
+                $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
+            } catch (Exception $e) {
+                // エラーの処理を行う
+                echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
+            }
+        }
+    
+    ?>
     <div class="parent">
         
         <div class="edit">
