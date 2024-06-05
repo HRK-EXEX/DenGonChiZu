@@ -7,9 +7,9 @@ if(isset($postId)) {
         $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
         $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-        $title = $_POST['post_title'] ?? $res['title'] ?? null;
-        $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
-        $text = $_POST['post_text'] ?? $res['content'] ?? null;
+        $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
+        $image = $_POST['post_img'] ?? $res['img_path'] ?? "情報が未入力です";
+        $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
     } catch (Exception $e) {
         // エラーの処理を行う
         echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
