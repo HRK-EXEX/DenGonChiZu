@@ -2,20 +2,23 @@
 require 'php/db.php';
 ?>
 <?php
- if(isset($postId)) {
+require 'php/db.php';
+
+if(isset($postId)) {
     try {
         $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
         $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
         $title = $_POST['post_title'] ?? $res['title'] ?? null;
-            $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
-            $text = $_POST['post_text'] ?? $res['content'] ?? null;
-
-
+        $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
+        $text = $_POST['post_text'] ?? $res['content'] ?? null;
+    } catch (Exception $e) {
+        // エラーの処理を行う
+        echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
     }
 }
+?>
 
-        ?>
 
 
 <!DOCTYPE html>
