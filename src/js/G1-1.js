@@ -52,10 +52,8 @@ addCommentButton.addEventListener("click", function(event) {
     var relativeY = mouseY - contentTop;
 
     // 座標情報をURLのクエリパラメータに追加して画面遷移
-    // var url = `newPage.html?x=${relativeX}&y=${relativeY}`;
-    // window.location.href = url;
+    var url = `G2-1.php?x=${relativeX}&y=${relativeY}`;
+    window.location.href = url;
 
-    //確認用
-    alert(`Relative X: ${relativeX}px`);
-    alert(`Relative Y: ${relativeY}px`);
+
 });
