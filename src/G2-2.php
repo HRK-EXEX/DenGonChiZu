@@ -17,7 +17,6 @@
         $postId = isset($_GET['postId']) ? $_GET['postId'] : null;
 
         // セッションからユーザーIDを取得
-        session_start();
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
             die("ログイン情報が見つかりません。");
         }
