@@ -2,10 +2,15 @@
 require 'php/db.php';
 ?>
 <?php
+
+// postIdがGETで送られてくるから受け取る
+
+
  if(isset($postId)) {
     try {
         $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
         $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
 
         $title = $_POST['post_title'] ?? $res['title'] ?? null;
             $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
@@ -55,7 +60,6 @@ require 'php/db.php';
                 </div>';
                 }
                 ?>
-                <!-- こめんと -->
             </div>
         </div>
         <div class="operation">
