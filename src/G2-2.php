@@ -1,3 +1,23 @@
+<?php
+require 'php/db.php';
+?>
+<?php
+ if(isset($postId)) {
+    try {
+        $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+        $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
+        $title = $_POST['post_title'] ?? $res['title'] ?? null;
+            $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
+            $text = $_POST['post_text'] ?? $res['content'] ?? null;
+
+
+    }
+}
+
+        ?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,35 +36,34 @@
 
         <div class="show-part">
             <div class="details-part">    
-                <div class="box-base title">投稿タイトル</div><br>
-                <div class="title-base content">くぁｗせｄｒｆｔｇｙふじこｌｐくぁｗせｄｒｆｔｇｙふじこｌｐくぁｗせｄｒｆｔｇｙふじこｌｐ</div>
+                <div class="box-base title">"<?=$title?>"</div><br>
+                <div class="title-base content">"<?=$text?>"</div>
                 <div class="box-base image-box">      
-                    <img class="image" src="../img/NoImage.png">
+                    <img class="image" src="<?=$image?>">
                 </div><br>    
             </div>
             <div class="box-base comments">
-                <div class="comment-info">
+                <?php
+                for($i=0;$i<0;$i++) {
+                    echo '<div class="comment-info">
                     <div class="user">    
                         <img class="icon-image" src="../img/NoImage.png">
-                        <span class="username">垢消し太郎家</span>
+                        <span class="username"></span>
                     </div>
                     <p>サイコーです。</p>
                     <hr>
-                </div>
-                <div class="comment-info">
-                    <div class="user">    
-                        <img class="icon-image" src="../img/NoImage.png">
-                        <span class="username">垢消し太郎家</span>
-                    </div>
-                    <p>サイコーです。</p>
-                    <hr>
-                </div>
+                </div>';
+                }
+                ?>
+                <!-- こめんと -->
             </div>
         </div>
         <div class="operation">
-            <button onclick="location.href='G1-1.html'" class="button-base back">戻る</button>
+            <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
             <input class="comment-area" placeholder="コメントを入力...">
-            <button onclick="location.href='G1-1.html'" class="button-base send">送信</button>
+            <button onclick="location.href='G1-1.php'" class="button-base send">送信</button>
+            <?php
+            ?>
         </div>
     </div>
 </body>

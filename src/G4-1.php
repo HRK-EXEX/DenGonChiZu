@@ -8,7 +8,6 @@
     // idの取得
     $user = $_SESSION['user'];
     $user_id = $user['user_id'];
-    // $user_id = 1;//テスト
     $sql=$db->prepare('select * from Users where user_id=?');
     $sql->execute([$user_id]);
     $result = $sql->fetch(PDO::FETCH_ASSOC);
@@ -26,7 +25,7 @@
 </head>
 <body>
 
-    <div class="main">
+<div class="main">
 
     <header>
     <!-- サイドバー読み込み位置  -->
@@ -74,6 +73,5 @@
     </form>
 
 </div>
-<?php session_unset(); ?>
 </body>
 </html>
