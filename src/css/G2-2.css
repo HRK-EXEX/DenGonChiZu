@@ -94,6 +94,7 @@
 }
 
 .parent {
+    background-color: aqua;
     position: relative; /* 親要素を相対位置指定 */
 }
 
