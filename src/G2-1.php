@@ -9,6 +9,9 @@
     $image = $_FILES['post_img'] ?? null;
     $text = $_POST['post_text'] ?? null;
     $target = $image['name'] ?? null;
+
+    if (empty($target)) $target = 'null';
+
     $mes = "新規投稿";
 
     // 投稿ボタンが押されたかの確認＆投稿処理
@@ -22,21 +25,12 @@
         // SQL挿入部
         try {
             $userId = $_SESSION['user']['user_id'];
-            $str = "INSERT INTO
-                Posts
-            VALUE
-                (null,
-                $userId,
-                '$title',
-                '$text',
-                $target, 
-                '$date',
-                0)";
+            $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', $target, '$date', 0)";
             
             $sql = $db -> query($str);
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $title = $text = 'exception occured: '.$e->getMessage().'\n'.$str;
+            $title = $text = 'exception occured: '.$e->getMessage().'<br>'.$str;
         }
 
         // リダイレクト
