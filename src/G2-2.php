@@ -12,7 +12,10 @@
     <?php 
         require 'php/db.php';
 
-        //セッションスタート追加
+        // 自己遷移がなので、セッション重複回避処理
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
         // postId を GET パラメータとして受け取る
         $postId = isset($_GET['post_id']) ? $_GET['post_id'] : null;
