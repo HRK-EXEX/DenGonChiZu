@@ -50,12 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // コメントを取得
 $comment_text = '';
-$stmt = $db->prepare("SELECT content FROM Comments WHERE comment_ID = ?");
+$stmt = $conn->prepare("SELECT content FROM Comments WHERE comment_ID = ?");
 $stmt->execute([$comment_ID]);
-$stmt->fetch();
-$stmt->close();
-
-$conn->close();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($row) {
+    $comment_text = $row['content'];
+}
 ?>
 
 <!DOCTYPE html>
