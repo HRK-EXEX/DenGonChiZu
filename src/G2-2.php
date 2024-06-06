@@ -58,7 +58,7 @@
                     <img class="image" src="<?=$image?>">
                 </div><br>    
             </div>
-            <div class="comments_area">
+            <div class="box-base comments">
                 <?php
                     for($i=0;$i<0;$i++) {
                         echo '<div class="comment-info">
@@ -75,7 +75,7 @@
         </div>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <input class="comment-input" placeholder="コメントを入力...">
+            <input class="comment-area" placeholder="コメントを入力...">
             <button onclick="location.href='G1-1.php'" class="button-base send">送信</button>
             <?php
             ?>
