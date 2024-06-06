@@ -79,8 +79,12 @@
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </form>
+        <form id="delete" action="G2-4.php" method="GET">
+            <input type="hidden" name="postId" value="<?=$postId?>">
+            <input type="hidden" name="userId" value="<?=$userId?>">
+        </form>
         <div class="operation">
-            <button onclick="location.href='G2-4.php'" class="button-base delete">削除</button>
+            <button type="submit" class="button-base delete">削除</button>
             <button onclick="location.href='G2-2.php'" class="button-base back">戻る</button>
             <button type="submit" form="modify" class="button-base proceed">投稿</button>
         </div>
