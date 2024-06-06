@@ -1,3 +1,7 @@
+html,body{
+    overflow: hidden;
+}
+
 .show-part {
     width: 72%;
     margin: 0 auto;
@@ -69,7 +73,17 @@
     border-radius: 100%;
 }
 
-.comment-area {
+.comment-input {
     font-size: x-large;
     width: 63vw;
+}
+
+.comments_area{
+    width: max-content;
+    height: 400px;
+    background-color: orange;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
 }
