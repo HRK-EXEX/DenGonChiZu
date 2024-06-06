@@ -11,17 +11,17 @@
     overflow-y: auto;
     flex-direction: column;
     justify-content: left;
-    
     height: 52vh;
 }
 
-.comments {
+.comments_area {
     border: 1px solid black;
     overflow-y: auto;
+    height: 30vh;
 }
 
 .title-base {
-    padding: 0px;
+    padding: 0;
     margin: 2px;
     height: 30vh;
 }
@@ -30,10 +30,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    border: 1px black solid;
-    
-    font-size: xx-large;
+    border: 1px solid black;
+    font-size: 2em;
     font-weight: bold;
     height: 20vh;
 }
@@ -51,6 +49,7 @@
 
 .comment-info {
     padding: 16px;
+    border-bottom: 1px solid #ddd;
 }
 
 .user {
@@ -60,16 +59,43 @@
 
 .username {
     margin-left: 8px;
+    flex-grow: 1;
+}
+
+.ellipsis {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
 }
 
 .icon-image {
     width: 64px;
     height: 64px;
     border: 1px solid black;
-    border-radius: 100%;
+    border-radius: 50%;
+}
+
+.comment-box {
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin-top: 8px;
 }
 
 .comment-area {
-    font-size: x-large;
+    font-size: 1.5em;
     width: 63vw;
+}
+
+@media (max-width: 768px) {
+    .show-part {
+        width: 90%;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+    .comment-area {
+        width: 90%;
+        font-size: 1.2em;
+    }
 }
