@@ -1,18 +1,10 @@
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>伝言地図 - 投稿内容</title>
-    <link rel="stylesheet" href="css/G2-1.css">
-    <link rel="stylesheet" href="css/G2-2.css">
-</head>
-<body>
-    <?php 
+<?php 
         require 'php/db.php';
 
-        //セッションスタート追加
+        // 自己遷移がなので、セッション重複回避処理
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
         // postId を GET パラメータとして受け取る
         $postId = isset($_GET['post_id']) ? $_GET['post_id'] : null;
@@ -40,6 +32,17 @@
         }
     
     ?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伝言地図 - 投稿内容</title>
+    <link rel="stylesheet" href="css/G2-1.css">
+    <link rel="stylesheet" href="css/G2-2.css">
+</head>
+<body>
+
     <div class="parent">
         
         <div class="edit">
