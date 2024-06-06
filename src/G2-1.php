@@ -22,22 +22,21 @@
         // SQL挿入部
         try {
             $userId = $_SESSION['user']['user_id'];
+            $str = "INSERT INTO
+                Posts
+            VALUE
+                (null,
+                $userId,
+                '$title',
+                '$text',
+                $target, 
+                '$date',
+                0)";
             
-            $sql = $db -> query(
-                "INSERT INTO
-                    Posts
-                VALUE
-                    (null,
-                    $userId,
-                    '$title',
-                    '$text',
-                    $target, 
-                    '$date',
-                    0)"
-            );
+            $sql = $db -> query($str);
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $title = $text = 'exception occured: '.$e->getMessage();
+            $title = $text = 'exception occured: '.$e->getMessage().'\n'.$str;
         }
 
         // リダイレクト
