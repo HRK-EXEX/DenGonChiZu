@@ -52,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $comment_text = '';
 $stmt = $db->prepare("SELECT content FROM Comments WHERE comment_ID = ?");
 $stmt->execute([$comment_ID]);
-$stmt->bind_result($comment_text);
 $stmt->fetch();
 $stmt->close();
 
