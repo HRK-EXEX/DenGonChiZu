@@ -23,7 +23,7 @@
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
                 $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
-                $image = $_POST['post_img'] ?? $res['img_path'] ?? "情報が未入力です";
+                $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
                 $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
             } catch (Exception $e) {
                 // エラーの処理を行う
@@ -53,29 +53,29 @@
             <div class="details-part">    
                 <div class="box-base title">"<?=$title?>"</div><br>
                 <div class="title-base content">"<?=$text?>"</div>
+                <!-- 画像がない場合は非表示にする -->
                 <div class="box-base image-box">      
                     <img class="image" src="<?=$image?>">
                 </div><br>    
             </div>
-            <div class="box-base comments">
+            <div class="comments_area">
                 <?php
-                for($i=0;$i<0;$i++) {
-                    echo '<div class="comment-info">
-                    <div class="user">    
-                        <img class="icon-image" src="../img/NoImage.png">
-                        <span class="username"></span>
-                    </div>
-                    <p>サイコーです。</p>
-                    <hr>
-                </div>';
-                }
+                    for($i=0;$i<0;$i++) {
+                        echo '<div class="comment-info">
+                        <div class="user">    
+                            <img class="icon-image" src="../img/NoImage.png">
+                            <span class="username"></span>
+                        </div>
+                        <p>サイコーです。</p>
+                        <hr>
+                    </div>';
+                    }
                 ?>
-                <!-- こめんと -->
             </div>
         </div>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <input class="comment-area" placeholder="コメントを入力...">
+            <input class="comment-input" placeholder="コメントを入力...">
             <button onclick="location.href='G1-1.php'" class="button-base send">送信</button>
             <?php
             ?>
