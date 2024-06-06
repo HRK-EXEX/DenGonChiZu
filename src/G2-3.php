@@ -80,8 +80,8 @@
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </form>
         <form id="delete" action="G2-4.php" method="GET">
-            <input type="hidden" name="postId" value="<?=$postId?>">
-            <input type="hidden" name="userId" value="<?=$userId?>">
+            <input type="hidden" name="post_id" value="<?=$postId?>">
+            <input type="hidden" name="user_id" value="<?=$userId?>">
         </form>
         <div class="operation">
             <button type="submit" form="delete" class="button-base delete">削除</button>
