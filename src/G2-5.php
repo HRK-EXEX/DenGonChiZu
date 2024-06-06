@@ -50,10 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // コメントを取得
 $comment_text = '';
-$stmt = $conn->prepare("SELECT content FROM Comments WHERE comment_ID = ?");
-$stmt->bind_param("i", $comment_ID);
-$stmt->execute();
-$stmt->bind_result($comment_text);
+$stmt = $db->prepare("SELECT content FROM Comments WHERE comment_ID = ?");
+$stmt->execute([$comment_ID]);
 $stmt->fetch();
 $stmt->close();
 
