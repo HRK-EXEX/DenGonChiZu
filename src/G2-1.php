@@ -24,8 +24,7 @@
             $userId = $_SESSION['user']['user_id'];
             
             $sql = $db -> query(
-                "INSERT INTO Posts VALUE
-                (null, $userId, $title, $text, $target, '$date', 0)"
+                "INSERT INTO Posts VALUE (null, $userId, $title, $text, $target, '$date', 0)"
             );
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
