@@ -29,8 +29,8 @@
                 VALUE
                     (null,
                     $userId,
-                    $title,
-                    $text,
+                    '$title',
+                    '$text',
                     $target, 
                     '$date',
                     0)"
