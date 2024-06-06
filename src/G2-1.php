@@ -8,7 +8,7 @@
     $title = $_POST['post_title'] ?? null;
     $image = $_FILES['post_img'] ?? null;
     $text = $_POST['post_text'] ?? null;
-    $target = $image['name'] ?? 'null';
+    $target = $image['name'] ?? "null";
     $mes = "新規投稿";
 
     // 投稿ボタンが押されたかの確認＆投稿処理
