@@ -99,8 +99,8 @@
 
 .proceed {
     position: absolute; /* ボタンを絶対位置指定 */
-    top: 0;
-    right: 0;
+    bottom: 30px;
+    left: 50px;
 }
 
 
