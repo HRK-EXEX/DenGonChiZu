@@ -1,3 +1,32 @@
+<?php 
+    require 'php/db.php';
+
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    $postId = isset($_GET['post_id']) ? intval($_GET['post_id']) : null;
+
+    if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
+        die("ログイン情報が見つかりません。");
+    }
+
+    $my_userId = $_SESSION['user']['user_id'];
+
+    if(isset($postId)) {
+        try {
+            $stmt = $db->prepare("SELECT * FROM Posts WHERE post_id = :postId ");
+            $stmt->execute(['postId' => $postId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
+            $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
+            $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
+        } catch (Exception $e) {
+            echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,28 +43,29 @@
         </div>
         <div class="show-part">
             <div class="details-part">
-                <div class="box-base title"><?= htmlspecialchars($title) ?></div>
-                <div class="title-base content"><?= htmlspecialchars($text) ?></div>
+                <div class="box-base title"><?=htmlspecialchars($title)?></div><br>
                 <?php if ($image): ?>
-                    <div class="box-base image-box">
-                        <img class="image" src="<?= htmlspecialchars($image) ?>">
-                    </div>
+                <div class="box-base image-box">      
+                    <img class="image" src="<?=htmlspecialchars($image)?>">
+                </div><br>
                 <?php endif; ?>
-                <div class="comments">
-                    <!-- コメントの表示ロジックを追加 -->
-                    <?php for ($i = 0; $i < 5; $i++): ?>
-                        <div class="comment-info">
+                <div class="title-base content"><?=htmlspecialchars($text)?></div>
+            </div>
+            <div class="comments_area">
+                <?php
+                    for($i=0; $i<5; $i++) {
+                        echo '<div class="comment-info">
                             <div class="user">
-                                <img class="icon-image" src="../img/NoImage.png" alt="ユーザーアイコン">
+                                <img class="icon-image" src="../img/NoImage.png">
                                 <span class="username">ユーザー名</span>
-                                <button class="options-button">…</button>
+                                <button class="ellipsis">...</button>
                             </div>
                             <div class="comment-box">
-                                <p>サイコーです。</p>
+                                <p>コメントの内容がここに入ります。</p>
                             </div>
-                        </div>
-                    <?php endfor; ?>
-                </div>
+                        </div>';
+                    }
+                ?>
             </div>
         </div>
         <div class="operation">

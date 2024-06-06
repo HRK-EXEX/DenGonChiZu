@@ -14,16 +14,16 @@
     height: 52vh;
 }
 
-.comments {
+.comments_area {
     border: 1px solid black;
     overflow-y: auto;
-    height: 30vh; /* スクロール可能にするための高さ設定 */
+    height: 30vh;
 }
 
 .title-base {
     padding: 0;
     margin: 2px;
-    height: auto;
+    height: 30vh;
 }
 
 .title {
@@ -31,15 +31,13 @@
     align-items: center;
     justify-content: center;
     border: 1px solid black;
-    font-size: xx-large;
+    font-size: 2em;
     font-weight: bold;
     height: 20vh;
 }
 
 .content {
-    border: 1px solid black;
-    height: 20vh;
-    padding: 10px;
+    height: auto;
 }
 
 .edit {
@@ -51,7 +49,7 @@
 
 .comment-info {
     padding: 16px;
-    border-bottom: 1px solid #ccc; /* 各コメントの下に境界線を追加 */
+    border-bottom: 1px solid #ddd;
 }
 
 .user {
@@ -61,13 +59,14 @@
 
 .username {
     margin-left: 8px;
+    flex-grow: 1;
 }
 
-.options-button {
+.ellipsis {
     background: none;
     border: none;
-    font-size: large;
-    margin-left: auto; /* 名前の右側に配置 */
+    font-size: 1.5em;
+    cursor: pointer;
 }
 
 .icon-image {
@@ -78,17 +77,16 @@
 }
 
 .comment-box {
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     padding: 8px;
     margin-top: 8px;
 }
 
 .comment-area {
-    font-size: x-large;
+    font-size: 1.5em;
     width: 63vw;
 }
 
-/* メディアクエリを追加してレスポンシブデザインを強化 */
 @media (max-width: 768px) {
     .show-part {
         width: 90%;
