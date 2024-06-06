@@ -2,13 +2,18 @@
 <?php
     // update処理,G1-1に遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_flg'])){
+        $user_id = $_POST['user_id'];
+        $name = $_POST['name'];
+        $mail = $_POST['mail'];
+        $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+        $birth = $_POST['birth'];
         $sql = 'update Users set user_name=:name, mail=:mail, pass=:pass, birthday=:birth where user_id=:user_id';
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':name', $_POST['name'], PDO::PARAM_STR);
-        $stmt->bindParam(':mail', $_POST['mail'], PDO::PARAM_STR);
-        $stmt->bindParam(':pass', password_hash($_POST['pass'], PASSWORD_DEFAULT), PDO::PARAM_STR);
-        $stmt->bindParam(':birth', $_POST['birth'], PDO::PARAM_INT);
-        $stmt->bindParam(':user_id', $$_POST['user_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':name',$name );
+        $stmt->bindParam(':mail', $mail);
+        $stmt->bindParam(':pass', $pass);
+        $stmt->bindParam(':birth', $birth);
+        $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         header("Location: G1-1.php");
         exit;
@@ -60,7 +65,7 @@
                         echo '<tr>','<th>ユーザー名</th>','<td>','<input type="text" name="name" value="', htmlspecialchars($result['user_name']) ,'" "required">','</td>','</tr>';
                         echo '<tr>','<th>メールアドレス</th>','<td>','<input type="email"  name="mail" value="', htmlspecialchars($result['mail']) ,'" "required" >','</td>','</tr>';
                         echo '<tr>','<th>パスワード</th>','<td>','<input type="password" name="pass" required>','</td>','</tr>';
-                        echo '<tr>','<th>生年月日</th>','<td>','<input type="date" name="birth" value="', htmlspecialchars($result['birthday']) ,'required">','</td>','</tr>';
+                        echo '<tr>','<th>生年月日</th>','<td>','<input type="date" name="birth" value="', htmlspecialchars($result['birthday']) ,'" "required">','</td>','</tr>';
                         '</tbody>';
                     ?>
                 </table>
