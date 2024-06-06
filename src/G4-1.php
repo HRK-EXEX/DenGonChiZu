@@ -8,9 +8,11 @@
     // idの取得
     $user = $_SESSION['user'];
     $user_id = $user['user_id'];
-    $sql=$db->prepare('select * from Users where user_id=?');
-    $sql->execute([$user_id]);
-    $result = $sql->fetch(PDO::FETCH_ASSOC);
+    $sql='select * from Users where user_id = :user_id';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>

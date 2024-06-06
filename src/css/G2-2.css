@@ -37,7 +37,13 @@
 }
 
 .content {
-    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    font-size: 2em;
+    font-weight: bold;
+    height: 20vh;
 }
 
 .edit {

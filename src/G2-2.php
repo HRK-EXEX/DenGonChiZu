@@ -15,8 +15,8 @@
 
     if(isset($postId)) {
         try {
-            $stmt = $db->prepare("SELECT * FROM Posts WHERE post_id = :postId AND user_id = :userId");
-            $stmt->execute(['postId' => $postId, 'userId' => $my_userId]);
+            $stmt = $db->prepare("SELECT * FROM Posts WHERE post_id = :postId ");
+            $stmt->execute(['postId' => $postId]);
             $res = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
