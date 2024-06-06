@@ -41,7 +41,7 @@
             if (isset($res))
                 header("Location: G1-1.php");
         }
-    } else $nullified = true;
+    } else die('<h3>このポストは利用できません。</h3>');
 ?>
 
 <!DOCTYPE html>
@@ -55,31 +55,29 @@
 </head>
 <body>
     <div id="sidebar-container"></div>
-    <?php
-        include 'side.php';
+    <?php include 'side.php'; ?>
 
-        if (!$nullified) {
-            echo '
-                <div class="parent">
-                    <form id="modify" class="main-part" method="POST">
-                        <div class="method">以下の投稿を削除しようとしています。<br>本当に実行しますか？</div>
-                        <div class="box-base title">'.$title.'</div>
-                        <div class="box-base image-box">';
-                        if (isset($res['img_path'])) {
-                            if ($res['img_path']) {;
-                                echo '<img name="post_img" class="image" src="../img/'.$image.'.png">';
-                            } else echo '<img name="post_img" class="image" src="../img/NoImage.png">';
-                        }
-                    echo '</div>
-                        <div class="box-base content">'.$text.'</div>
-                    </form>
-                    <div class="operation">
-                        <button onclick="location.href=\'G2-2.php\'" class="button-base back">戻る</button>
-                        <button type="submit" form="modify" class="button-base delete">削除</button>
-                    </div>
-                </div>
-            ';
-        } else echo '<h3>このポストは利用できません。</h3>';
-    ?>
+    <div class="parent">
+        <form id="modify" class="main-part" method="POST">
+            <div class="method">以下の投稿を削除しようとしています。<br>本当に実行しますか？</div>
+            <div class="box-base title"><?=$title?></div>
+            <div class="box-base image-box">
+            <img name="post_img" class="image" src="../img/
+            <?php
+                if (isset($res['img_path'])) {
+                    if ($res['img_path']) {;
+                        echo $image.'.png">';
+                    } else echo '../img/NoImage.png';
+                }
+            ?>
+            ">
+            </div>
+            <div class="box-base content"><?=$text?></div>
+        </form>
+        <div class="operation">
+            <button onclick="location.href=\'G2-2.php\'" class="button-base back">戻る</button>
+            <button type="submit" form="modify" class="button-base delete">削除</button>
+        </div>
+    </div>
 </body>
 </html>

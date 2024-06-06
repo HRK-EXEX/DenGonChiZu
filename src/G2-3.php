@@ -45,7 +45,7 @@
             if (isset($res))
                 header("Location: G1-1.php");
         }
-    } else $nullified = true;
+    } else die('<h3>このポストは利用できません。</h3>');
 ?>
 
 <!DOCTYPE html>
@@ -62,34 +62,28 @@
     <?php include 'side.php'; ?>
 
     <div class="parent">
-    <?php
-    if (!$nullified) {
-        echo
-        '
-            <form id="modify" class="main-part" method="POST">
-                <input type="hidden" name="posted" value="true">
-                <div class="method">'.$mes.'</div>
-                <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="'.$title.'">
-                <div class="box-base image-box">';
-                    if (isset($res['img_path'])) {
-                        if ($res['img_path']) {;
-                            echo '<img name="post_img" class="image" src="../img/'.$image.'.png">';
-                        } else echo '<img name="post_img" class="image" src="../img/NoImage.png">';
-                    }
-                echo '
-                </div>
-                <textarea name="post_text" class="box-base content" placeholder="本文を入力...">'.$text.'</textarea>
-            </form>
-            <div class="operation">
-                <button onclick="location.href=\'G2-4.php\'" class="button-base delete">削除</button>
-                <button onclick="location.href=\'G2-2.php\'" class="button-base back">戻る</button>
-                <button type="submit" form="modify" class="button-base proceed">投稿</button>
+        <form id="modify" class="main-part" method="POST">
+            <input type="hidden" name="posted" value="true">
+            <div class="method"><?=$mes?></div>
+            <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
+            <div class="box-base image-box">
+            <img name="post_img" class="image" src="../img/
+            <?php
+                if (isset($res['img_path'])) {
+                    if ($res['img_path']) {;
+                        echo $image.'.png">';
+                    } else echo '../img/NoImage.png';
+                }
+            ?>
+            ">
             </div>
-        ';
-    } else {
-        echo '<h3>このポストは利用できません。</h3>';
-    }
-    ?>
+            <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
+        </form>
+        <div class="operation">
+            <button onclick="location.href=\'G2-4.php\'" class="button-base delete">削除</button>
+            <button onclick="location.href=\'G2-2.php\'" class="button-base back">戻る</button>
+            <button type="submit" form="modify" class="button-base proceed">投稿</button>
+        </div>
     </div>
 </body>
 </html>
