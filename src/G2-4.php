@@ -19,7 +19,7 @@
         }
 
         // 削除ボタンが押されたかの確認＆投稿処理
-        if ($posted) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $date = date("Y-m-d H:i:s");
             // $mes = $date . "\n";
             // $mes .= print_r($_FILES, true) . "\n";

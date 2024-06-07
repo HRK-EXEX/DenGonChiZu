@@ -9,33 +9,52 @@
     $image = $_FILES['post_img'] ?? null;
     $text = $_POST['post_text'] ?? null;
     $target = $image['name'] ?? null;
+    $error = null;
 
     if (empty($target)) $target = 'null';
 
     $mes = "新規投稿";
 
     // 投稿ボタンが押されたかの確認＆投稿処理
-    if ($posted) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $date = date("Y-m-d H:i:s");
         // $mes = $date . "\n";
         // $mes .= print_r($_FILES, true) . "\n";
         // $mes .= print_r($_POST, true) . "\n";
         // $mes .= print_r($_SESSION, true) . "\n";
 
-        // SQL挿入部
         try {
+            // ファイルが既に存在するかチェック
+            if (file_exists($target)) {
+                $error = "アップロードされたファイルは既に存在します。";
+            }
+
+            // SQL挿入部
             $userId = $_SESSION['user']['user_id'];
-            $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', $target, '$date', 0)";
+
+            $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', '', '$date', 0)";
             
             $sql = $db -> query($str);
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+
+            $uploadPath = isset($target) ? 'img/posts/'.$res['post_id'].'-'.$target : null;
+            $res2 = $db -> query("UPDATE Posts SET img_path = $uploadPath WHERE post_id = ".$res['post_id']) -> fetch(PDO::FETCH_ASSOC);
+
+            // 画像送信部
+            if (isset($uploadPath)) {
+                if (!move_uploaded_file($_FILES['post_img']['tmp_name'], $uploadPath)) {
+                    $error = "ファイルのアップロードに失敗しました。";
+                }
+            }
+
+            // リダイレクト
+            if (isset($res2))
+                header("Location: G1-1.php");
+        } catch (Exception $e) {
             $title = $text = 'exception occured: '.$e->getMessage().'<br>'.$str;
         }
 
-        // リダイレクト
-        if (isset($res))
-            header("Location: G1-1.php");
+        if ($error) $title = $text = 'error occured: '.$error.'<br>';
     }
 ?>
 
@@ -54,7 +73,6 @@
 
     <div class="parent">
         <form id="newing" class="main-part" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="posted" value="true">
             <div class="method"><?=$mes?></div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
             <div class="box-base image-box">

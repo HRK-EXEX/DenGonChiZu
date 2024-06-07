@@ -19,7 +19,7 @@
         }
 
         // 投稿ボタンが押されたかの確認＆投稿処理
-        if ($posted) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $date = date("Y-m-d H:i:s");
             // $mes = $date . "\n";
             // $mes .= print_r($_FILES, true) . "\n";
@@ -63,7 +63,6 @@
 
     <div class="parent">
         <form id="modify" class="main-part" method="POST">
-            <input type="hidden" name="posted" value="true">
             <div class="method"><?=$mes?></div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
