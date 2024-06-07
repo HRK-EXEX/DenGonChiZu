@@ -41,7 +41,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid black;
-    font-size: 2em;
+    font-size: 1em;
     font-weight: bold;
     height: 20vh;
 }
@@ -119,4 +119,18 @@
         width: 90%;
         font-size: 1.2em;
     }
+}
+
+
+/* 余裕あれば下との余白を作りたい */
+.back{
+    bottom:10px;
+}
+
+.comment-input{
+    bottom: 10px;
+}
+
+.send{
+    bottom: 10px;
 }
