@@ -65,7 +65,7 @@
         <div class="columns is-centered">
             <div class="buttons-container">
                 <div class="column is-narrow">
-                    <button class="button has-background-grey-light is-large" onclick="location.href='./G1-1.php'">戻る</button>
+                    <button type="button" class="button has-background-grey-light is-large" onclick="location.href='G1-1.php'">戻る</button>
                 </div>
                 <div class="column is-narrow">
                     <input class="button is-info is-large" type="submit" value="変更">

@@ -7,6 +7,7 @@
         $mail = $_POST['mail'];
         $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
         $birth = $_POST['birth'];
+        
         $sql = 'update Users set user_name=:name, mail=:mail, pass=:pass, birthday=:birth where user_id=:user_id';
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':name',$name );
