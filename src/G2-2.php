@@ -19,9 +19,14 @@
             $stmt->execute(['postId' => $postId]);
             $res = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            if ($res === false) {
+                die("投稿が見つかりません。");
+            }
+
             $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
             $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
             $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
+            $postUserId = $res['user_id'];
 
             // 投稿画像がない場合は非表示にするチェック
             $imageExists = $image && trim($image) !== '' && file_exists("../img/". $image);
@@ -33,11 +38,11 @@
     // 投稿に対するコメントを取得する関数
     function getCommentsByPostId($db, $postId) {
         try {
-            $stmt = $db->prepare("SELECT c.content, c.date, u.username, u.icon_image 
+            $stmt = $db->prepare("SELECT c.content, c.date, u.user_name
                                     FROM Comments c 
                                     JOIN Users u ON c.user_id = u.user_id 
                                     WHERE c.post_id = :postId 
-                                    ORDER BY c.date DESC");
+                                    ORDER BY c.date ASC");
             $stmt->execute(['postId' => $postId]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
@@ -60,9 +65,11 @@
 </head>
 <body>
     <div class="parent">
+        <?php if ($my_userId === $postUserId): ?>
         <div class="edit">
             <button onclick="location.href='G2-3.html'" class="button-base proceed">編集</button>  
         </div>
+        <?php endif; ?>
         <div class="show-part">
             <div class="details-part">
                 <div class="box-base title"><?=htmlspecialchars($title)?></div><br>
@@ -78,8 +85,9 @@
                     <?php foreach ($comments as $comment): ?>
                         <div class="comment-info">
                             <div class="user">
-                                <img class="icon-image" src="<?=htmlspecialchars($comment['icon_image']) ?? '../img/NoImage.png'?>">
-                                <span class="username"><?=htmlspecialchars($comment['username'])?></span>
+                                <!-- SQLは画像取得対応しているからできればimg取得方式に変えたい -->
+                                <img class="icon-image" src="../img/user_icon.jpg">
+                                <span class="username"><?=htmlspecialchars($comment['user_name'])?></span>
                                 <button class="ellipsis">...</button>
                             </div>
                             <div class="comment-box">
