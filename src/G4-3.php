@@ -13,8 +13,10 @@
     
     //delete,G4-4遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_flg'])){
-        $sql=$db->prepare('delete from Users where user_id = ?');
-        $sql->execute([$user_id]);
+        $sql='delete from Users where user_id = :user_id';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
         session_destroy();
         header("Location: G4-4.php");
         exit;
