@@ -51,6 +51,37 @@
         }
     }
 
+    // コメントを追加する関数
+    function addComment($db, $userId, $postId, $content) {
+        try {
+            $stmt = $db->prepare("INSERT INTO Comments (user_id, post_id, content) VALUES (:userId, :postId, :content)");
+            return "コメントが追加されました。";
+        } catch (Exception $e) {
+            return 'エラーが発生しました: ' . $e->getMessage();
+        }
+    }
+
+    // コメントの送信処理
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment-input'])) {
+        $commentContent = $_POST['comment-input'];
+
+        // コメントが空でないか確認する
+        if (!empty($commentContent)) {
+            // コメントを追加する
+            $result = addComment($db, $my_userId, $postId, $commentContent);
+            echo $result;
+            
+            // ページをリロードして最新のコメントを表示
+            header("Refresh:0");
+            exit; // 追加処理後にスクリプトを終了
+        } else {
+            echo "コメントを入力してください。";
+        }
+    }
+
+
+    //
+
     $comments = getCommentsByPostId($db, $postId);
 ?>
 
@@ -103,8 +134,11 @@
         </div>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <input class="comment-input" placeholder="コメントを入力...">
-            <button onclick="location.href='G1-1.php'" class="button-base send">送信</button>
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                <input class="comment-input" name="comment-input" placeholder="コメントを入力...">
+                <button type="submit" class="button-base send">送信</button>
+            </form>
+
         </div>
     </div>
 </body>

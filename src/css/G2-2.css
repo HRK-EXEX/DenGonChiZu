@@ -121,6 +121,16 @@
     }
 }
 
+.operation {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.operation .button-base {
+    width: 50px;
+}
+
 
 /* 余裕あれば下との余白を作りたい */
 .back{
@@ -128,7 +138,7 @@
 }
 
 .comment-input{
-    bottom: 10px;
+    width: 100%;
 }
 
 .send{
