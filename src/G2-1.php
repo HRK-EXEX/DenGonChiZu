@@ -37,7 +37,7 @@
             $sql = $db -> query($str);
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-            $uploadPath = isset($target) ? 'img/posts/'.$res['post_id'].'-'.$target : null;
+            $uploadPath = isset($target) ? 'img/posts/'.$sql['post_id'].'-'.$target : null;
 
             // 画像送信部
             if (isset($uploadPath)) {
