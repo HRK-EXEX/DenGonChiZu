@@ -13,7 +13,7 @@
 
     $my_userId = $_SESSION['user']['user_id'];
 
-    if(isset($postId)) {
+    if (isset($postId)) {
         try {
             $stmt = $db->prepare("SELECT * FROM Posts WHERE post_id = :postId ");
             $stmt->execute(['postId' => $postId]);
@@ -22,11 +22,33 @@
             $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
             $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
             $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
+
+            // 投稿画像がない場合は非表示にするチェック
+            $imageExists = $image && trim($image) !== '' && file_exists("../img/". $image);
         } catch (Exception $e) {
             echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
         }
     }
+
+    // 投稿に対するコメントを取得する関数
+    function getCommentsByPostId($db, $postId) {
+        try {
+            $stmt = $db->prepare("SELECT c.content, c.date, u.username, u.icon_image 
+                                    FROM Comments c 
+                                    JOIN Users u ON c.user_id = u.user_id 
+                                    WHERE c.post_id = :postId 
+                                    ORDER BY c.date DESC");
+            $stmt->execute(['postId' => $postId]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
+            return [];
+        }
+    }
+
+    $comments = getCommentsByPostId($db, $postId);
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -44,28 +66,31 @@
         <div class="show-part">
             <div class="details-part">
                 <div class="box-base title"><?=htmlspecialchars($title)?></div><br>
-                <?php if ($image): ?>
+                <?php if ($imageExists): ?>
                 <div class="box-base image-box">      
-                    <img class="image" src="<?=htmlspecialchars($image)?>">
+                    <img class="image" src="<?=htmlspecialchars('../img/' . $image)?>">
                 </div><br>
                 <?php endif; ?>
                 <div class="title-base content"><?=htmlspecialchars($text)?></div>
             </div>
             <div class="comments_area">
-                <?php
-                    for($i=0; $i<5; $i++) {
-                        echo '<div class="comment-info">
+                <?php if (!empty($comments)): ?>
+                    <?php foreach ($comments as $comment): ?>
+                        <div class="comment-info">
                             <div class="user">
-                                <img class="icon-image" src="../img/NoImage.png">
-                                <span class="username">ユーザー名</span>
+                                <img class="icon-image" src="<?=htmlspecialchars($comment['icon_image']) ?? '../img/NoImage.png'?>">
+                                <span class="username"><?=htmlspecialchars($comment['username'])?></span>
                                 <button class="ellipsis">...</button>
                             </div>
                             <div class="comment-box">
-                                <p>コメントの内容がここに入ります。</p>
+                                <p><?=htmlspecialchars($comment['content'])?></p>
+                                <small><?=htmlspecialchars($comment['date'])?></small>
                             </div>
-                        </div>';
-                    }
-                ?>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>コメントがありません。</p>
+                <?php endif; ?>
             </div>
         </div>
         <div class="operation">

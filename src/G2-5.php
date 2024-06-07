@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($action == 'confirm' && !empty($comment)) {
         // コメントを更新
-        $stmt = $conn->prepare("UPDATE Comments SET content = ? WHERE comment_ID = ?");
+        $stmt = $db->prepare("UPDATE Comments SET content = ? WHERE comment_ID = ?");
         $stmt->bind_param("si", $comment, $comment_ID);
 
         if ($stmt->execute()) {
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location:G2-2.php");
     } elseif ($action == 'delete') {
         // コメントをデータベースから削除
-        $stmt = $conn->prepare("DELETE FROM Comments WHERE comment_ID = ?");
+        $stmt = $db->prepare("DELETE FROM Comments WHERE comment_ID = ?");
         $stmt->bind_param("i", $comment_ID);
 
         if ($stmt->execute()) {
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // コメントを取得
 $comment_text = '';
-$stmt = $conn->prepare("SELECT content FROM Comments WHERE comment_ID = ?");
+$stmt = $db->prepare("SELECT content FROM Comments WHERE comment_ID = ?");
 $stmt->execute([$comment_ID]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($row) {
