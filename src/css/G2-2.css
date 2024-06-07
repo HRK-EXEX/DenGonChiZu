@@ -94,14 +94,17 @@
 }
 
 .parent {
-    background-color: aqua;
     position: relative; /* 親要素を相対位置指定 */
 }
 
 .proceed {
     position: absolute; /* ボタンを絶対位置指定 */
     top: 0;
-    right: 0;
+    left: 98%;
+}
+
+.comment-input{
+    width: 100%;
 }
 
 
