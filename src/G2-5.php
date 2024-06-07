@@ -1,6 +1,6 @@
 <?php require 'php/db.php'; ?>
-<?php
 
+<?php
 // コメントIDの取得
 $comment_ID = 1; // デフォルトのコメントID
 if (isset($_GET['id'])) {
@@ -15,34 +15,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($action == 'confirm' && !empty($comment)) {
         // コメントを更新
         $stmt = $db->prepare("UPDATE Comments SET content = ? WHERE comment_ID = ?");
-        $stmt->bind_param("si", $comment, $comment_ID);
+        $stmt->execute([$comment, $comment_ID]);
 
-        if ($stmt->execute()) {
+        if ($stmt->rowCount() > 0) {
             echo "<h1>コメントが更新されました</h1>";
             echo "<p>コメント: " . htmlspecialchars($comment) . "</p>";
         } else {
-            echo "エラー: " . $stmt->error;
+            echo "エラー: コメントの更新に失敗しました。";
         }
 
-        $res = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $stmt->close();
-        if(isset($res))
-        header("Location:G2-2.php");
+        header("Location: G2-2.php");
+        exit();
     } elseif ($action == 'delete') {
         // コメントをデータベースから削除
         $stmt = $db->prepare("DELETE FROM Comments WHERE comment_ID = ?");
-        $stmt->bind_param("i", $comment_ID);
+        $stmt->execute([$comment_ID]);
 
-        if ($stmt->execute()) {
+        if ($stmt->rowCount() > 0) {
             echo "<h1>コメントが削除されました</h1>";
         } else {
-            echo "エラー: " . $stmt->error;
+            echo "エラー: コメントの削除に失敗しました。";
         }
-        $res = $stmt->fetch(PDO::FETCH_ASSOC);
-        $stmt->close();
-        if(isset($res))
-        header("Location:G2-2.php");
+
+        header("Location: G2-2.php");
+        exit();
     } else {
         echo "<h1>不明なアクションです</h1>";
     }
@@ -66,7 +62,6 @@ if ($row) {
     <title>コメント編集</title>
     <link rel="stylesheet" href="css/G2-5.css">
     <link rel="stylesheet" href="css/side.css">
-    
 </head>
 <body>
     <div class="main-content">
