@@ -32,16 +32,16 @@
             // SQL挿入部
             $userId = $_SESSION['user']['user_id'];
 
-            $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', '', '$date', 0)";
+            $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', null, '$date', 0)";
             
             $sql = $db -> query($str);
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
             $uploadPath = isset($target) ? 'img/posts/'.$res['post_id'].'-'.$target : null;
-            $res2 = $db -> query("UPDATE Posts SET img_path = $uploadPath WHERE post_id = ".$res['post_id']) -> fetch(PDO::FETCH_ASSOC);
 
             // 画像送信部
             if (isset($uploadPath)) {
+                $res2 = $db -> query("UPDATE Posts SET img_path = $uploadPath WHERE post_id = ".$res['post_id']) -> fetch(PDO::FETCH_ASSOC);
                 if (!move_uploaded_file($_FILES['post_img']['tmp_name'], $uploadPath)) {
                     $error = "ファイルのアップロードに失敗しました。";
                 }
