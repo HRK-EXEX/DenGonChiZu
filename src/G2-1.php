@@ -31,12 +31,13 @@
 
             // SQL挿入部
             $userId = $_SESSION['user']['user_id'];
-            $uploadPath = isset($image) ? 'img/posts/'.$postId.'-'.$target : null;
 
             $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', $uploadPath, '$date', 0)";
             
             $sql = $db -> query($str);
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
+
+            $uploadPath = isset($image) ? 'img/posts/'.$res['post_id'].'-'.$target : null;
 
             // 画像送信部
             if (isset($uploadPath)) {
