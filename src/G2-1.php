@@ -32,12 +32,13 @@
             // SQL挿入部
             $userId = $_SESSION['user']['user_id'];
 
-            $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', $uploadPath, '$date', 0)";
+            $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', '', '$date', 0)";
             
             $sql = $db -> query($str);
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
             $uploadPath = isset($image) ? 'img/posts/'.$res['post_id'].'-'.$target : null;
+            $res2 = $db -> query("UPDATE Posts SET img_path = $uploadPath WHERE post_id = ".$res['post_id']) -> fetch(PDO::FETCH_ASSOC);
 
             // 画像送信部
             if (isset($uploadPath)) {
@@ -47,7 +48,7 @@
             }
 
             // リダイレクト
-            if (isset($res))
+            if (isset($res2))
                 header("Location: G1-1.php");
         } catch (Exception $e) {
             $title = $text = 'exception occured: '.$e->getMessage().'<br>'.$str;
