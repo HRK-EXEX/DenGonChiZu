@@ -25,7 +25,7 @@
 
         try {
             // ファイルが既に存在するかチェック
-            if (file_exists($target_file)) {
+            if (file_exists($target)) {
                 $error = "アップロードされたファイルは既に存在します。";
             }
 
@@ -42,7 +42,7 @@
             if (isset($uploadPath)) {
                 if (!move_uploaded_file($_FILES['post_img']['tmp_name'], $uploadPath)) {
                     $error = "ファイルのアップロードに失敗しました。";
-                };
+                }
             }
 
             // リダイレクト
