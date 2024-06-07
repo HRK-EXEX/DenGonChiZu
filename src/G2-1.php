@@ -37,7 +37,7 @@
             $sql = $db -> query($str);
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-            $uploadPath = isset($image['name']) ? 'img/posts/'.$res['post_id'].'-'.$target : null;
+            $uploadPath = isset($target) ? 'img/posts/'.$res['post_id'].'-'.$target : null;
             $res2 = $db -> query("UPDATE Posts SET img_path = $uploadPath WHERE post_id = ".$res['post_id']) -> fetch(PDO::FETCH_ASSOC);
 
             // 画像送信部
