@@ -36,12 +36,13 @@
             
             $sql = $db -> query($str);
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
+            $postId = $res['post_id'];
 
-            $uploadPath = isset($target) ? 'img/posts/'.$res['post_id'].'-'.$target : null;
+            $uploadPath = isset($target) ? 'img/posts/'.$postId.'-'.$target : null;
 
             // 画像送信部
             if (isset($uploadPath)) {
-                $res2 = $db -> query("UPDATE Posts SET img_path = $uploadPath WHERE post_id = ".$res['post_id']) -> fetch(PDO::FETCH_ASSOC);
+                $res2 = $db -> query("UPDATE Posts SET img_path = $uploadPath WHERE post_id = ".$postId) -> fetch(PDO::FETCH_ASSOC);
                 if (!move_uploaded_file($_FILES['post_img']['tmp_name'], $uploadPath)) {
                     $error = "ファイルのアップロードに失敗しました。";
                 }
@@ -50,7 +51,7 @@
             // リダイレクト
             if (isset($res2))
                 header("Location: G1-1.php");
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $title = $text = 'exception occured: '.$e->getMessage().'<br>'.$str;
         }
 
