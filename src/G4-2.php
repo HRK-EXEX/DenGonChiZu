@@ -1,5 +1,9 @@
 <?php require 'php/db.php'; ?>
 <?php
+    //初期化
+    $error = false;
+    $errorMessage = '';
+
     // update処理,G1-1に遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_flg'])){
         $user_id = $_POST['user_id'];
@@ -7,17 +11,22 @@
         $mail = $_POST['mail'];
         $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
         $birth = $_POST['birth'];
-        
-        $sql = 'update Users set user_name=:name, mail=:mail, pass=:pass, birthday=:birth where user_id=:user_id';
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':name',$name );
-        $stmt->bindParam(':mail', $mail);
-        $stmt->bindParam(':pass', $pass);
-        $stmt->bindParam(':birth', $birth);
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->execute();
-        header("Location: G1-1.php");
-        exit;
+
+        try{
+            $sql = 'update Users set user_name=:name, mail=:mail, pass=:pass, birthday=:birth where user_id=:user_id';
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':name',$name );
+            $stmt->bindParam(':mail', $mail);
+            $stmt->bindParam(':pass', $pass);
+            $stmt->bindParam(':birth', $birth);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+            header("Location: G1-1.php");
+            exit;
+        }catch(PDOException $e){
+            $error = true;
+            $errorMessage = "エラーが発生しました: " . $e->getMessage();
+        }
     }
 ?>
 
@@ -47,13 +56,25 @@
     <!-- id受け取り,selectで情報表示 -->
 
     <?php
-    $user_id = $_POST['user_id'];
-    $sql='select * from Users where user_id = :user_id';
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user_id = $_POST['user_id'];
+        try{
+            $sql='select * from Users where user_id = :user_id';
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            $error = true;
+            $errorMessage = "エラーが発生しました: " . $e->getMessage();
+        }
     ?>
+
+        <?php if ($error): ?>
+            <p><?php echo $errorMessage; 
+                header("Location: G1-1.php");
+                exit;            
+            ?></p>
+        <?php else: ?>
 
     <form action="G4-2.php" method="post"><!-- update -->
         <div class="table-container">
@@ -76,6 +97,7 @@
             <input class="button is-info is-large" type = "submit"  value="変更"></button>
         </p>
     </form>
+    <?php endif; ?>
     </div>
 </body>
 </html>

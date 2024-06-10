@@ -19,13 +19,16 @@
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
     }catch(PDOException $e){
         $error = true;
         $errorMessage = "エラーが発生しました: " . $e->getMessage();
     }
     if ($error) {
         echo "<p>" . $errorMessage . "</p>";
+        header("Location: G1-1.php");
+        exit;
+
     }
 ?>
 

@@ -9,17 +9,26 @@
      // idの取得
     $user = $_SESSION['user'];
     $user_id = $user['user_id'];
-    // $user_id = 3;
+
+    //初期化
+    $error = false;
+    $errorMessage = '';
     
     //delete,G4-4遷移
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_flg'])){
-        $sql='delete from Users where user_id = :user_id';
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->execute();
-        session_destroy();
-        header("Location: G4-4.php");
-        exit;
+        try {
+            $sql='delete from Users where user_id = :user_id';
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            session_destroy();
+            header("Location: G4-4.php");
+            exit;
+        } catch (PDOException $e) {
+            $error = true;
+            $errorMessage = "エラーが発生しました: " . $e->getMessage();
+        }
+        
     }
 ?>
 
@@ -34,8 +43,14 @@
     <link rel="stylesheet" href="css/G4-3.css">
 </head>
 <body>
-    <div class="main">   
-    <div class="has-text-centered"> 
+    <div class="main">
+    <div class="has-text-centered">
+    <?php if ($error): ?>
+        <p><?php echo $errorMessage; 
+            header("Location: G1-1.php");
+            exit;            
+        ?></p>
+    <?php else: ?>
         <h1 class="title is-3">退会を確定しますか</h1>
             <div class="buttons">
                 <form action="G4-3.php" method="post"><!-- delete -->
@@ -47,7 +62,8 @@
                 </form>
                     <button class="button has-background-grey-light is-large" type="button" onclick="history.back()">戻る</button>
             </div>
-        </div>
+    <?php endif; ?>
+    </div>
     </div>  
 </body>
 </html>
