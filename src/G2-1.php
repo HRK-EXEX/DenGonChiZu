@@ -37,6 +37,9 @@
                 $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', null, '$date', 0)";
                 
                 $sql = $db -> query($str);
+
+                // 自動採番の値を返す
+                $sql = $db -> query("SELECT LAST_INSERT_ID()");
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
                 print_r($res);
