@@ -54,10 +54,10 @@
                     header("Location: G1-1.php");
             } else $error = "この操作を行うにはログインが必要です。";
         } catch (Throwable $e) {
-            $title = $text = 'exception occured: '.$e->getMessage().'<br>'.$str;
+            $title = $text = ''.$e->getMessage()."\n".$str;
         }
 
-        if ($error) $title = $text = 'error occured: '.$error.'<br>';
+        if ($error) $title = $text = ''.$error."\n";
     }
 ?>
 
