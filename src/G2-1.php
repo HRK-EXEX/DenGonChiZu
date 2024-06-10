@@ -42,7 +42,8 @@
                 $sql = $db -> query("SELECT LAST_INSERT_ID()");
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-                print_r($res);
+                // print_r($res);
+                $postId = $res['LAST_INSERT_ID()'];
 
                 $uploadPath = isset($target) ? 'img/posts/'.$postId.'-'.$target : null;
 
