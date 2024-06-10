@@ -47,18 +47,18 @@
 
                 $target = basename($img_name);
 
-                $uploadPath = isset($target) ? '/img/posts/'.$postId.'-'.$target : null;
+                $uploadPath = isset($target) ? '/linedWork/img/posts/'.$postId.'-'.$target : null;
 
                 $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
 
                 // 画像送信部
                 if (isset($uploadPath)) {
                     $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
-                    if ($_FILES['post_img']['error'] !== UPLOAD_ERR_OK) {
-                        if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
-                            $error = "ファイルのアップロードに失敗しました。";
-                        }
-                    } else $error = "ファイルのアップロードに失敗しました。\nエラーコード: ".$_FILES['post_img']['error'];
+                    // if ($_FILES['post_img']['error'] !== 0) {
+                    if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
+                        $error = "ファイルのアップロードに失敗しました。";
+                    }
+                    // } else $error = "ファイルのアップロードに失敗しました。\nエラーコード: ".$_FILES['post_img']['error'];
                 }
 
                 // リダイレクト
