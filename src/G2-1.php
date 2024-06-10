@@ -47,7 +47,7 @@
 
                 $target = basename($img_name);
 
-                $uploadPath = isset($target) ? '/web/linedWork/img/posts/'.$postId.'-'.$target : null;
+                $uploadPath = isset($target) ? '../img/posts/'.$postId.'-'.$target : null;
 
                 $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
 
