@@ -5,14 +5,28 @@
         header("Location: G1-6.php");
         exit;
     }
-    // idの取得
-    $user = $_SESSION['user'];
-    $user_id = $user['user_id'];
-    $sql='select * from Users where user_id = :user_id';
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // 初期化
+    $error = false; 
+    $errorMessage = ""; 
+
+    try{
+        // idの取得
+        $user = $_SESSION['user'];
+        $user_id = $user['user_id'];
+        $sql='select * from Users where user_id = :user_id';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+    }catch(PDOException $e){
+        $error = true;
+        $errorMessage = "エラーが発生しました: " . $e->getMessage();
+    }
+    if ($error) {
+        echo "<p>" . $errorMessage . "</p>";
+    }
 ?>
 
 <!DOCTYPE html>

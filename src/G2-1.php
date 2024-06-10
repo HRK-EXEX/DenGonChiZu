@@ -8,7 +8,8 @@
     $title = $_POST['post_title'] ?? null;
     $image = $_FILES['post_img'] ?? null;
     $text = $_POST['post_text'] ?? null;
-    $target = $image['name'] ?? null;
+    $img_name = $image['name'] ?? null;
+    $img_name_tmp = $image['tmp_name'] ?? null;
     $error = null;
 
     if (empty($target)) $target = 'null';
@@ -30,32 +31,45 @@
             }
 
             // SQL挿入部
-            $userId = $_SESSION['user']['user_id'];
+            $userId = $_SESSION['user']['user_id'] ?? null;
 
-            $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', null, '$date', 0)";
-            
-            $sql = $db -> query($str);
-            $res = $sql -> fetch(PDO::FETCH_ASSOC);
-            $postId = $res['post_id'];
+            if (isset($userId)) {
+                // まずは画像が空のデータを挿入
+                $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', null, '$date', 0)";
+                $sql = $db -> query($str);
 
-            $uploadPath = isset($target) ? 'img/posts/'.$postId.'-'.$target : null;
+                // 自動採番の値を返す
+                $sql = $db -> query("SELECT LAST_INSERT_ID()");
+                $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-            // 画像送信部
-            if (isset($uploadPath)) {
-                $res2 = $db -> query("UPDATE Posts SET img_path = $uploadPath WHERE post_id = ".$postId) -> fetch(PDO::FETCH_ASSOC);
-                if (!move_uploaded_file($_FILES['post_img']['tmp_name'], $uploadPath)) {
-                    $error = "ファイルのアップロードに失敗しました。";
+                // print_r($res);
+                $postId = $res['LAST_INSERT_ID()'];
+
+                $target = basename($img_name);
+
+                $uploadPath = isset($target) ? '/img/posts/'.$postId.'-'.$target : null;
+
+                $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
+
+                // 画像送信部
+                if (isset($uploadPath)) {
+                    $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
+                    if ($_FILES['post_img']['error'] !== UPLOAD_ERR_OK) {
+                        if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
+                            $error = "ファイルのアップロードに失敗しました。";
+                        }
+                    } else $error = "ファイルのアップロードに失敗しました。\nエラーコード: ".$_FILES['post_img']['error'];
                 }
-            }
 
-            // リダイレクト
-            if (isset($res2))
-                header("Location: G1-1.php");
+                // リダイレクト
+                if (isset($res2) && !$error)
+                    header("Location: G1-1.php");
+            } else $error = "この操作を行うにはログインが必要です。";
         } catch (Throwable $e) {
-            $title = $text = 'exception occured: '.$e->getMessage().'<br>'.$str;
+            $title = $text = ''.$e->getMessage()."\n".$post_id.$str;
         }
 
-        if ($error) $title = $text = 'error occured: '.$error.'<br>';
+        if ($error) $title = $text = ''.$error."\n";
     }
 ?>
 
