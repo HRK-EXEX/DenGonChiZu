@@ -8,7 +8,8 @@
     $title = $_POST['post_title'] ?? null;
     $image = $_FILES['post_img'] ?? null;
     $text = $_POST['post_text'] ?? null;
-    $target = $image['name'] ?? null;
+    $img_name = $image['name'] ?? null;
+    $img_name_tmp = $image['tmp_name'] ?? null;
     $error = null;
 
     if (empty($target)) $target = 'null';
@@ -44,6 +45,8 @@
 
                 // print_r($res);
                 $postId = $res['LAST_INSERT_ID()'];
+
+                $target = basename($img_name);
 
                 $uploadPath = isset($target) ? '/img/posts/'.$postId.'-'.$target : null;
 
