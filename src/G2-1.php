@@ -36,7 +36,6 @@
             if (isset($userId)) {
                 // まずは画像が空のデータを挿入
                 $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', null, '$date', 0)";
-                
                 $sql = $db -> query($str);
 
                 // 自動採番の値を返す
@@ -55,9 +54,11 @@
                 // 画像送信部
                 if (isset($uploadPath)) {
                     $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
-                    if (!move_uploaded_file($_FILES['post_img']['tmp_name'], $uploadPath)) {
-                        $error = "ファイルのアップロードに失敗しました。";
-                    }
+                    if ($_FILES['post_img']['error'] !== UPLOAD_ERR_OK) {
+                        if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
+                            $error = "ファイルのアップロードに失敗しました。";
+                        }
+                    } else $error = "ファイルのアップロードに失敗しました。\nエラーコード: ".$_FILES['post_img']['error'];
                 }
 
                 // リダイレクト
