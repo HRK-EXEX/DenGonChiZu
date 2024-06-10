@@ -1,88 +1,86 @@
 <?php 
-    require 'php/db.php';
+require 'php/db.php';
 
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-    $postId = isset($_GET['post_id']) ? intval($_GET['post_id']) : null;
+$postId = isset($_GET['post_id']) ? intval($_GET['post_id']) : null;
+$userId = isset($_GET['user_id']) ? intval($_GET['user_id']) : null;
 
-    if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
-        die("ログイン情報が見つかりません。");
-    }
+if (!isset($_SESSION['user']) || !isset($_SESSION['user']['user_id'])) {
+    die("ログイン情報が見つかりません。");
+}
 
-    $my_userId = $_SESSION['user']['user_id'];
+$my_userId = $_SESSION['user']['user_id'];
 
-    if (isset($postId)) {
-        try {
-            $stmt = $db->prepare("SELECT * FROM Posts WHERE post_id = :postId ");
-            $stmt->execute(['postId' => $postId]);
-            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+if (isset($postId)) {
+    try {
+        $stmt = $db->prepare("SELECT * FROM Posts WHERE post_id = :postId ");
+        $stmt->execute(['postId' => $postId]);
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($res === false) {
-                die("投稿が見つかりません。");
-            }
-
-            $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
-            $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
-            $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
-            $postUserId = $res['user_id'];
-
-            // 投稿画像がない場合は非表示にするチェック
-            $imageExists = $image && trim($image) !== '' && file_exists("../img/". $image);
-        } catch (Exception $e) {
-            echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
+        if ($res === false) {
+            die("投稿が見つかりません。");
         }
+
+        $title = $_POST['post_title'] ?? $res['title'] ?? "情報が未入力です";
+        $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
+        $text = $_POST['post_text'] ?? $res['content'] ?? "情報が未入力です";
+        $postUserId = $res['user_id'];
+
+        // 投稿画像がない場合は非表示にするチェック
+        $imageExists = $image && trim($image) !== '' && file_exists("../img/". $image);
+    } catch (Exception $e) {
+        echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
     }
+}
 
-    // 投稿に対するコメントを取得する関数
-    function getCommentsByPostId($db, $postId) {
-        try {
-            $stmt = $db->prepare("SELECT c.content, c.date, u.user_name
-                                    FROM Comments c 
-                                    JOIN Users u ON c.user_id = u.user_id 
-                                    WHERE c.post_id = :postId 
-                                    ORDER BY c.date ASC");
-            $stmt->execute(['postId' => $postId]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
-            return [];
-        }
+// 投稿に対するコメントを取得する関数
+function getCommentsByPostId($db, $postId) {
+    try {
+        $stmt = $db->prepare("SELECT c.content, c.date, u.user_name
+                                FROM Comments c 
+                                JOIN Users u ON c.user_id = u.user_id 
+                                WHERE c.post_id = :postId 
+                                ORDER BY c.date ASC");
+        $stmt->execute(['postId' => $postId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        echo 'エラーが発生しました: ',  $e->getMessage(), "\n";
+        return [];
     }
+}
 
-    // コメントを追加する関数
-    function addComment($db, $userId, $postId, $content) {
-        try {
-            $stmt = $db->prepare("INSERT INTO Comments (user_id, post_id, content) VALUES (:userId, :postId, :content)");
-            return "コメントが追加されました。";
-        } catch (Exception $e) {
-            return 'エラーが発生しました: ' . $e->getMessage();
-        }
+// コメントを追加する関数
+function addComment($db, $userId, $postId, $content) {
+    try {
+        $stmt = $db->prepare("INSERT INTO Comments (user_id, post_id, content) VALUES (:userId, :postId, :content)");
+        $stmt->execute(['userId' => $userId, 'postId' => $postId, 'content' => $content]);
+        return "コメントが追加されました。";
+    } catch (Exception $e) {
+        return 'エラーが発生しました: ' . $e->getMessage();
     }
+}
 
-    // コメントの送信処理
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment-input'])) {
-        $commentContent = $_POST['comment-input'];
+// コメントの送信処理
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment-input'])) {
+    $commentContent = $_POST['comment-input'];
 
-        // コメントが空でないか確認する
-        if (!empty($commentContent)) {
-            // コメントを追加する
-            $result = addComment($db, $my_userId, $postId, $commentContent);
-            echo $result;
-            
-            // ページをリロードして最新のコメントを表示
-            header("Refresh:0");
-            exit; // 追加処理後にスクリプトを終了
-        } else {
-            echo "コメントを入力してください。";
-        }
+    // コメントが空でないか確認する
+    if (!empty($commentContent)) {
+        // コメントを追加する
+        $result = addComment($db, $my_userId, $postId, $commentContent);
+        
+        // ページをリロードして最新のコメントを表示
+        header("Location: " . $_SERVER['PHP_SELF'] . "?post_id=" . $postId . "&user_id=" . $my_userId);
+        exit; // 追加処理後にスクリプトを終了
+    } else {
+        echo "コメントを入力してください。";
     }
+}
 
-
-    //
-
-    $comments = getCommentsByPostId($db, $postId);
+$comments = getCommentsByPostId($db, $postId);
 ?>
 
 <!DOCTYPE html>
@@ -133,11 +131,10 @@
         </div>
         <div class="operation">
             <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?post_id=' . $postId . '&user_id=' . $my_userId; ?>">
                 <input class="comment-input" name="comment-input" placeholder="コメントを入力...">
                 <button type="submit" class="button-base send">送信</button>
             </form>
-
         </div>
     </div>
 </body>
