@@ -49,7 +49,7 @@
             }
 
             // リダイレクト
-            if (isset($res2))
+            if (isset($res2) && !$error)
                 header("Location: G1-1.php");
         } catch (Throwable $e) {
             $title = $text = 'exception occured: '.$e->getMessage().'<br>'.$str;
