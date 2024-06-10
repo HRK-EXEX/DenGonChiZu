@@ -33,15 +33,17 @@
             $userId = $_SESSION['user']['user_id'] ?? null;
 
             if (isset($userId)) {
+                // まずは画像が空のデータを挿入
                 $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', null, '$date', 0)";
                 
                 $sql = $db -> query($str);
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
-                $postId = $res['post_id'];
+
+                print_r($res);
 
                 $uploadPath = isset($target) ? 'img/posts/'.$postId.'-'.$target : null;
 
-                $str = "UPDATE Posts SET img_path = $uploadPath WHERE post_id = ".$postId;
+                $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
 
                 // 画像送信部
                 if (isset($uploadPath)) {
@@ -56,7 +58,7 @@
                     header("Location: G1-1.php");
             } else $error = "この操作を行うにはログインが必要です。";
         } catch (Throwable $e) {
-            $title = $text = ''.$e->getMessage()."\n".$str;
+            $title = $text = ''.$e->getMessage()."\n".$post_id.$str;
         }
 
         if ($error) $title = $text = ''.$error."\n";
