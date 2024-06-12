@@ -81,11 +81,18 @@
             $centerY = 5000; // 10000px の中央
             $angle = (2 * M_PI / $totalPosts) * $index; // 円周上の等間隔の角度
             $radius = 1000; // 中心からの距離(調整予定)
-            $x = $centerX + $radius * cos($angle);
-            $y = $centerY + $radius * sin($angle);
+        
+            // ランダムなオフセットを生成
+            $randomOffsetX = rand(0, 500);
+            $randomOffsetY = rand(0, 500);
+        
+            // 円周上の座標を計算し、ランダムオフセットを追加
+            $x = $centerX + $radius * cos($angle) + $randomOffsetX;
+            $y = $centerY + $radius * sin($angle) + $randomOffsetY;
+        
             return ['x' => $x, 'y' => $y];
         }
-
+        
         //取得した情報を使って投稿を表示する
         public function displayPosts() {
             $posts = $this->fetchPosts(); 
