@@ -2,7 +2,9 @@
     require 'php/db.php';
     $postId = $_GET["post_id"] ?? null;
     $userId = $_GET["user_id"] ?? null;
-    $posted = $_POST["posted"] ?? false;
+    $change = $_POST["change"] ?? false;
+
+    $imageData = null;
     $mes = "投稿編集";
 
     // 投稿の存在確認
@@ -14,25 +16,36 @@
             $title = $_POST['post_title'] ?? $res['title'] ?? null;
             $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
             $text = $_POST['post_text'] ?? $res['content'] ?? null;
+
+            if ($res['img_path']) {
+                $imageData = file_get_contents($res['img_path']);
+            }
         } catch (PDOException $e) {
-            $title = $text = 'exception occured: '.$e->getMessage();
+            echo '<link rel="stylesheet" href="css/side.css">';
+            include 'side.php';
+            die('<h3>この投稿は利用できません。</h3>');
         }
 
         // 投稿ボタンが押されたかの確認＆投稿処理
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && $change) {
             $date = date("Y-m-d H:i:s");
             // $mes = $date . "\n";
             // $mes .= print_r($_FILES, true) . "\n";
             // $mes .= print_r($_POST, true) . "\n";
             // $mes .= print_r($_SESSION, true) . "\n";
 
-            // SQL挿入部
+            // SQL変更部
             try {
+                // まずは画像ファイルの確認をし、ファイル名を確定
+                $target = basename($img_name);
+                $uploadPath = isset($target) ? '../img/posts/'.$postId.'-'.$target : null;
+
+                // 内容を更新
                 $sql = $db -> query(
                     "UPDATE Posts SET
                         title = $title,
                         content = $text,
-                        img_path = $target,
+                        img_path = $uploadPath,
                         'date' = $date
                     WHERE post_id = $postId AND user_id = $userId"
                 );
@@ -41,11 +54,25 @@
                 $title = $text = 'exception occured: '.$e->getMessage();
             }
 
+            // 画像送信部
+            if (isset($uploadPath)) {
+                $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
+                // if ($_FILES['post_img']['error'] !== 0) {
+                if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
+                    $error = "ファイルのアップロードに失敗しました。";
+                }
+                // } else $error = "ファイルのアップロードに失敗しました。\nエラーコード: ".$_FILES['post_img']['error'];
+            }
+
             // リダイレクト
-            if (isset($res))
+            if (isset($res2) || !$error)
                 header("Location: G1-1.php");
         }
-    } else die('<h3>このポストは利用できません。</h3>');
+    } else {
+        echo '<link rel="stylesheet" href="css/side.css">';
+        include 'side.php';
+        die('<h3>投稿IDが指定されていません。</h3>');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +91,7 @@
     <div class="parent">
         <form id="modify" class="main-part" method="POST">
             <div class="method"><?=$mes?></div>
+            <input name="change" value="true">
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
             <img name="post_img" class="image" src="../img/
