@@ -46,7 +46,6 @@
                 $postId = $res['LAST_INSERT_ID()'];
 
                 $target = basename($img_name);
-
                 $uploadPath = isset($target) ? '../img/posts/'.$postId.'-'.$target : null;
 
                 $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
@@ -62,7 +61,7 @@
                 }
 
                 // リダイレクト
-                if (isset($res2) && !$error)
+                if (isset($res2) || !$error)
                     header("Location: G1-1.php");
             } else $error = "この操作を行うにはログインが必要です。";
         } catch (Throwable $e) {
