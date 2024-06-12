@@ -128,7 +128,7 @@
                 echo '    </div>';
                 echo '    <div class="post-content">';
                 echo '        <a href="G2-2.php?post_id=' . htmlspecialchars($post->post_id) . '&user_id=' . htmlspecialchars($post->user_id) . '">';
-                echo '            <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
+                echo '            <p>' . nl2br(htmlspecialchars($post->title)) . '</p>';
                 echo '        </a>';
                 // img_pathがnullでない、かつ画像が存在する場合のみ表示
                 if (!empty($post->img_path) && file_exists(__DIR__ . '/../img/' . $post->img_path)) {
