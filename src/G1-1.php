@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,7 +17,6 @@
     <div id="content">
 
     <?php
-    session_start();
 
     
     class Database {
@@ -114,7 +114,8 @@
             $posts = $this->fetchPosts(); 
             $totalPosts = count($posts); // 合計値から配置間隔の割り出しをする用
             foreach ($posts as $index => $post) {
-                $position = $this->calculatePosition($index, $totalPosts);
+                $positions = $this->calculatePosition($totalPosts); // すべての投稿の位置を一度に取得
+                $position = $positions[$index]; // 各投稿の位置を取得
                 echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
                 echo '    <div class="user-info">';
                 echo '        <a href="G3-1.php?user_id=' . htmlspecialchars($post->user_id) . '">';
