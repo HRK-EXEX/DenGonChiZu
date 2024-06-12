@@ -95,7 +95,7 @@ $comments = getCommentsByPostId($db, $postId);
     <div class="parent">
         <?php if ($my_userId === $postUserId): ?>
         <div class="edit">
-            <button onclick="location.href='G2-3.html'" class="button-base proceed">編集</button>  
+            <button onclick="location.href='G2-3.php'" class="button-base proceed">編集</button>  
         </div>
         <?php endif; ?>
         <div class="show-part">
