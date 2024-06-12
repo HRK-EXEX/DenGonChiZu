@@ -80,7 +80,7 @@
             $centerX = 5000; // 10000px の中央
             $centerY = 5000; // 10000px の中央
             $angle = (2 * M_PI / $totalPosts) * $index; // 円周上の等間隔の角度
-            $radius = 500; // 中心からの距離(調整予定)
+            $radius = 1000; // 中心からの距離(調整予定)
             $x = $centerX + $radius * cos($angle);
             $y = $centerY + $radius * sin($angle);
             return ['x' => $x, 'y' => $y];
