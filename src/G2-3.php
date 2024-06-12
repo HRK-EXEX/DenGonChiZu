@@ -94,15 +94,15 @@
             <input type="hidden" name="change" value="true">
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
-            <img name="post_img" class="image" src="../img/
             <?php
+                $str = '<img name="post_img" class="image" src="../img/';
                 if (isset($res['img_path'])) {
                     if ($res['img_path']) {;
-                        echo $image.'.png">';
-                    } else echo '../img/NoImage.png';
-                }
+                        $str .= $image.'.png">';
+                    } else $str .= '../img/NoImage.png';
+                } $str .= '">';
+                echo $str;
             ?>
-            ">
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </form>
