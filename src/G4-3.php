@@ -57,10 +57,10 @@
                     <?php
                         echo '<input type="hidden" name="delete_flg" value="true">'; 
                         echo '<input type="hidden" name="user_id" value="' , $user_id ,'">';
+                        echo '<button class="button has-background-grey-light is-large" type="button" onclick="history.back()">戻る</button>';
                         echo '<button class="button is-danger is-large" type="submit">','退会','</button>';
                     ?>
                 </form>
-                    <button class="button has-background-grey-light is-large" type="button" onclick="history.back()">戻る</button>
             </div>
     <?php endif; ?>
     </div>
