@@ -74,6 +74,15 @@
     font-size: 1.5em;
     cursor: pointer;
 }
+.image-box{
+	width:auto;
+	text-align:center;
+}
+.image{
+	text-align:center;
+    width: 500px;
+    height: 250px;
+}
 
 .icon-image {
     width: 64px;
