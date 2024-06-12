@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,7 +17,6 @@
     <div id="content">
 
     <?php
-    session_start();
 
     
     class Database {
@@ -79,19 +79,43 @@
         public function calculatePosition($index, $totalPosts) {
             $centerX = 5000; // 10000px の中央
             $centerY = 5000; // 10000px の中央
-            $angle = (2 * M_PI / $totalPosts) * $index; // 円周上の等間隔の角度
-            $radius = 500; // 中心からの距離(調整予定)
-            $x = $centerX + $radius * cos($angle);
-            $y = $centerY + $radius * sin($angle);
-            return ['x' => $x, 'y' => $y];
+            $radius = 1000; // 中心からの距離(調整予定)
+            $minDistance = 300; // 最低距離
+            $positions = [];
+        
+            for ($i = 0; $i < $totalPosts; $i++) {
+                do {
+                    $angle = rand(0, 360) * (M_PI / 180); // ランダムな角度を生成
+                    $distance = $radius + rand(0, 4000); // 中心からのランダムな距離
+                    $x = $centerX + $distance * cos($angle);
+                    $y = $centerY + $distance * sin($angle);
+                    $valid = true;
+        
+                    // 既存の投稿と距離をチェック
+                    foreach ($positions as $position) {
+                        $dx = $x - $position['x'];
+                        $dy = $y - $position['y'];
+                        if (sqrt($dx * $dx + $dy * $dy) < $minDistance) {
+                            $valid = false;
+                            break;
+                        }
+                    }
+                } while (!$valid);
+        
+                $positions[] = ['x' => $x, 'y' => $y];
+            }
+        
+            return $positions;
         }
-
+        
+        
         //取得した情報を使って投稿を表示する
         public function displayPosts() {
             $posts = $this->fetchPosts(); 
             $totalPosts = count($posts); // 合計値から配置間隔の割り出しをする用
             foreach ($posts as $index => $post) {
-                $position = $this->calculatePosition($index, $totalPosts);
+                $positions = $this->calculatePosition($totalPosts); // すべての投稿の位置を一度に取得
+                $position = $positions[$index]; // 各投稿の位置を取得
                 echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
                 echo '    <div class="user-info">';
                 echo '        <a href="G3-1.php?user_id=' . htmlspecialchars($post->user_id) . '">';
