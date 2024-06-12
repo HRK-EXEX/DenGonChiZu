@@ -113,21 +113,21 @@
         public function displayPosts() {
             $posts = $this->fetchPosts(); 
             $totalPosts = count($posts); // 合計値から配置間隔の割り出しをする用
-            $positions = $this->calculatePositions($totalPosts); // すべてのポジションを一度に取得
-        
             foreach ($posts as $index => $post) {
-                $position = $positions[$index]; // 各投稿の位置を取得
-                echo '<div class="post-container" style="position: absolute; top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
+                $position = $this->calculatePosition($index, $totalPosts);
+                echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
                 echo '    <div class="user-info">';
                 echo '        <a href="G3-1.php?user_id=' . htmlspecialchars($post->user_id) . '">';
                 echo '            <img src="../img/user_icon.jpg" alt="ユーザのアイコン">';
                 echo '        </a>';
+
                 echo '        <span class="username">' . htmlspecialchars($post->user_name) . '</span>';
                 echo '    </div>';
                 echo '    <div class="post-content">';
                 echo '        <a href="G2-2.php?post_id=' . htmlspecialchars($post->post_id) . '&user_id=' . htmlspecialchars($post->user_id) . '">';
                 echo '            <p>' . nl2br(htmlspecialchars($post->content)) . '</p>';
                 echo '        </a>';
+                // img_pathがnullでない、かつ画像が存在する場合のみ表示
                 if (!empty($post->img_path) && file_exists(__DIR__ . '/../img/' . $post->img_path)) {
                     echo '        <img src="' . htmlspecialchars($post->img_path) . '" alt="投稿画像">';
                 }
@@ -141,7 +141,6 @@
                 echo '</div>';
             }
         }
-        
     }
 
     $post = new Post();
