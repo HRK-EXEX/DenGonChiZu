@@ -79,19 +79,35 @@
         public function calculatePosition($index, $totalPosts) {
             $centerX = 5000; // 10000px の中央
             $centerY = 5000; // 10000px の中央
-            $angle = (2 * M_PI / $totalPosts) * $index; // 円周上の等間隔の角度
             $radius = 1000; // 中心からの距離(調整予定)
+            $minDistance = 300; // 最低距離
+            $positions = [];
         
-            // ランダムなオフセットを生成
-            $randomOffsetX = rand(0, 500);
-            $randomOffsetY = rand(0, 500);
+            for ($i = 0; $i < $totalPosts; $i++) {
+                do {
+                    $angle = rand(0, 360) * (M_PI / 180); // ランダムな角度を生成
+                    $distance = $radius + rand(0, 4000); // 中心からのランダムな距離
+                    $x = $centerX + $distance * cos($angle);
+                    $y = $centerY + $distance * sin($angle);
+                    $valid = true;
         
-            // 円周上の座標を計算し、ランダムオフセットを追加
-            $x = $centerX + $radius * cos($angle) + $randomOffsetX;
-            $y = $centerY + $radius * sin($angle) + $randomOffsetY;
+                    // 既存の投稿と距離をチェック
+                    foreach ($positions as $position) {
+                        $dx = $x - $position['x'];
+                        $dy = $y - $position['y'];
+                        if (sqrt($dx * $dx + $dy * $dy) < $minDistance) {
+                            $valid = false;
+                            break;
+                        }
+                    }
+                } while (!$valid);
         
-            return ['x' => $x, 'y' => $y];
+                $positions[] = ['x' => $x, 'y' => $y];
+            }
+        
+            return $positions;
         }
+        
         
         //取得した情報を使って投稿を表示する
         public function displayPosts() {
