@@ -95,7 +95,7 @@
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
                 <input type="file" name="post_img" accept="image/*"><br>
-                <span id="showImage">何も指定せずに送信すると、<br>現在の状態が保持されます。</span>
+                <input type="checkbox" id="showImage">画像を削除する場合はクリックしてください。</span>
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </form>
