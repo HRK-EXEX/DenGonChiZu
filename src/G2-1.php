@@ -46,7 +46,7 @@
                 $postId = $res['LAST_INSERT_ID()'];
 
                 $target = basename($img_name);
-                $uploadPath = isset($target) ? '../img/posts/'.$postId.'-'.$target : null;
+                $uploadPath = $target ? '../img/posts/'.$postId.'-'.$target : null;
 
                 $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
 
@@ -90,7 +90,8 @@
             <div class="method"><?=$mes?></div>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
             <div class="box-base image-box">
-                <input type="file" name="post_img" accept="image/*"/>
+                <input type="file" name="post_img" accept="image/*"/><br>
+                <span id="showImage"></span>
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..." required><?=$text?></textarea>
         </form>

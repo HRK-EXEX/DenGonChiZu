@@ -38,7 +38,7 @@
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
                 $target = basename($img_name);
-                $uploadPath = isset($target) ? '../img/posts/'.$postId.'-'.$target : null;
+                $uploadPath = $target ? '../img/posts/'.$postId.'-'.$target : null;
 
                 // 内容を更新
                 $sql = $db -> query(
@@ -94,15 +94,11 @@
             <input type="hidden" name="change" value="true">
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
-            <?php
-                $str = '<img name="post_img" class="image" src="../img/';
-                if (isset($res['img_path'])) {
-                    if ($res['img_path']) {;
-                        $str .= $image.'.png">';
-                    } else $str .= '../img/NoImage.png';
-                } $str .= '">';
-                echo $str;
-            ?>
+                <input type="file" name="post_img" accept="image/*"><br>
+                <div>
+                    <input type="checkbox" id="deleteImg">
+                    <label for="deleteImg">画像を削除する</label>
+                </div>
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </form>
