@@ -42,7 +42,7 @@
             // SQL変更部
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
-                $target = basename($img_name);
+                $target = $img_name ? basename($img_name) : null;
                 $uploadPath = $target && !$deleteImg ? '../img/posts/'.$postId.'-'.$target : null;
 
                 // 内容を更新
