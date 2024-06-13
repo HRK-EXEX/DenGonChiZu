@@ -38,7 +38,7 @@
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
                 $target = basename($img_name);
-                $uploadPath = $target ? '../img/posts/'.$postId.'-'.$target : null;
+                $uploadPath = $target && !$deleteImg ? '../img/posts/'.$postId.'-'.$target : null;
 
                 // 内容を更新
                 $sql = $db -> query(
@@ -56,12 +56,21 @@
 
             // 画像送信部
             if (isset($uploadPath)) {
-                $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
-                // if ($_FILES['post_img']['error'] !== 0) {
-                if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
-                    $error = "ファイルのアップロードに失敗しました。";
+                $deleteImg = $_POST['deleteImg'];
+
+                $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
+                $res2 = $db -> query($str) -> fetch(PDO::FETCH_OBJ);
+                
+                unlink($res2);
+
+                if (!$deleteImg) {
+                    $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
+                    $res3 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
+
+                    if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
+                        $error = "ファイルのアップロードに失敗しました。";
+                    }
                 }
-                // } else $error = "ファイルのアップロードに失敗しました。\nエラーコード: ".$_FILES['post_img']['error'];
             }
 
             // リダイレクト
