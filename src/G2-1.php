@@ -46,7 +46,7 @@
                 $postId = $res['LAST_INSERT_ID()'];
 
                 $target = basename($img_name);
-                $uploadPath = isset($target) ? '../img/posts/'.$postId.'-'.$target : null;
+                $uploadPath = $target ? '../img/posts/'.$postId.'-'.$target : null;
 
                 $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
 

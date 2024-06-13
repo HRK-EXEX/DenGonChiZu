@@ -96,9 +96,10 @@
             <div class="box-base image-box">
             <?php
                 $str = '<img name="post_img" class="image" src="../img/';
-                if (isset($res['img_path'])) {
-                    if ($res['img_path']) {;
-                        $str .= $image.'.png">';
+                $imagePath = $res['img_path'];
+                if (isset($imagePath)) {
+                    if ($imagePath) {
+                        $str .= $image.'.png';
                     } else $str .= '../img/NoImage.png';
                 } $str .= '">';
                 echo $str;
