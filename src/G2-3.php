@@ -95,8 +95,10 @@
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
                 <input type="file" name="post_img" accept="image/*"><br>
-                <input type="checkbox" id="deleteImg">
-                <label for="deleteImg">画像を削除する場合はクリックしてください。</label>
+                <div style="display: block;">
+                    <input type="checkbox" id="deleteImg">
+                    <label for="deleteImg">画像を削除する</label>
+                </div>
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </form>
