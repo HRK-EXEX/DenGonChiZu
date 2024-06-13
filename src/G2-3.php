@@ -46,10 +46,10 @@
                 // 内容を更新
                 $sql = $db -> query(
                     "UPDATE Posts SET
-                        title = $title,
-                        content = $text,
-                        img_path = $uploadPath,
-                        'date' = $date
+                        title = '$title',
+                        content = '$text',
+                        img_path = '$uploadPath',
+                        'date' = '$date'
                     WHERE post_id = $postId AND user_id = $userId"
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
