@@ -1,10 +1,17 @@
 <?php
     require 'php/db.php';
-    $postId = $_GET["post_id"] ?? null;
-    $userId = $_GET["user_id"] ?? null;
-    $change = $_POST["change"] ?? false;
+    session_start();
+    // var_dump($_FILES, $_POST);
 
-    $imageData = null;
+    // 変数代入
+    $posted = $_POST['posted'] ?? false;
+    $title = $_POST['post_title'] ?? null;
+    $image = $_FILES['post_img'] ?? null;
+    $text = $_POST['post_text'] ?? null;
+    $img_name = $image['name'] ?? null;
+    $img_name_tmp = $image['tmp_name'] ?? null;
+    $error = null;
+
     $mes = "投稿編集";
 
     // 投稿の存在確認
@@ -16,10 +23,6 @@
             $title = $_POST['post_title'] ?? $res['title'] ?? null;
             $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
             $text = $_POST['post_text'] ?? $res['content'] ?? null;
-
-            if ($res['img_path']) {
-                $imageData = file_get_contents($res['img_path']);
-            }
         } catch (PDOException $e) {
             echo '<link rel="stylesheet" href="css/side.css">';
             include 'side.php';
