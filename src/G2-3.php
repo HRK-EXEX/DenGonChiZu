@@ -95,7 +95,7 @@
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
             <?php
-                $str = '<img name="post_img" class="image" src="';
+                $str = '<input type="file" class="image" name="post_img" accept="image/*" src="';
                 $imagePath = $res['img_path'];
                 if (isset($imagePath)) {
                     if ($imagePath) {
