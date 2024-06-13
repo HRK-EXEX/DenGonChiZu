@@ -44,6 +44,14 @@ button {
 
 }
 
+.button.has-background-grey-light.is-large {
+  right: 50px;
+}
+
+.button.is-danger.is-large {
+  left: 50px;
+}
+
 .has-text-centered {
   display: flex;
   flex-direction: column;
