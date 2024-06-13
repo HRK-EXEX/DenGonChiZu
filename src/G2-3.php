@@ -95,11 +95,11 @@
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
             <?php
-                $str = '<img name="post_img" class="image" src="../img/';
+                $str = '<img name="post_img" class="image" src="';
                 $imagePath = $res['img_path'];
                 if (isset($imagePath)) {
                     if ($imagePath) {
-                        $str .= $image.'.png';
+                        $str .= $image;
                     } else $str .= '../img/NoImage.png';
                 } $str .= '">';
                 echo $str;
