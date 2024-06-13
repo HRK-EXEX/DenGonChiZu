@@ -4,7 +4,9 @@
     // var_dump($_FILES, $_POST);
 
     // 変数代入
-    $posted = $_POST['posted'] ?? false;
+    $postId = $_GET["post_id"] ?? null;
+    $userId = $_GET["user_id"] ?? null;
+    $change = $_POST["change"] ?? false;
     $title = $_POST['post_title'] ?? null;
     $image = $_FILES['post_img'] ?? null;
     $text = $_POST['post_text'] ?? null;
