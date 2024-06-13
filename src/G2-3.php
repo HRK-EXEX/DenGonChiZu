@@ -38,7 +38,7 @@
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
                 $target = basename($img_name);
-                $uploadPath = isset($target) ? '../img/posts/'.$postId.'-'.$target : null;
+                $uploadPath = $target ? '../img/posts/'.$postId.'-'.$target : null;
 
                 // 内容を更新
                 $sql = $db -> query(
@@ -94,16 +94,8 @@
             <input type="hidden" name="change" value="true">
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
-            <?php
-                $str = '<input type="file" class="image" name="post_img" accept="image/*" src="';
-                $imagePath = $res['img_path'];
-                if (isset($imagePath)) {
-                    if ($imagePath) {
-                        $str .= $image;
-                    } else $str .= '../img/NoImage.png';
-                } $str .= '">';
-                echo $str;
-            ?>
+                <input type="file" class="image" name="post_img" accept="image/*">
+                <span id="showImage">何も指定せずに送信すると現在の状態が保持されます。</span>
             </div>
             <textarea name="post_text" class="box-base content" placeholder="本文を入力..."><?=$text?></textarea>
         </form>
