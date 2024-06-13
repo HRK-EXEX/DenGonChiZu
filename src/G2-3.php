@@ -1,10 +1,19 @@
 <?php
     require 'php/db.php';
+    session_start();
+    // var_dump($_FILES, $_POST);
+
+    // 変数代入
     $postId = $_GET["post_id"] ?? null;
     $userId = $_GET["user_id"] ?? null;
     $change = $_POST["change"] ?? false;
+    $title = $_POST['post_title'] ?? null;
+    $image = $_FILES['post_img'] ?? null;
+    $text = $_POST['post_text'] ?? null;
+    $img_name = $image['name'] ?? null;
+    $img_name_tmp = $image['tmp_name'] ?? null;
+    $error = null;
 
-    $imageData = null;
     $mes = "投稿編集";
 
     // 投稿の存在確認
@@ -16,10 +25,6 @@
             $title = $_POST['post_title'] ?? $res['title'] ?? null;
             $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
             $text = $_POST['post_text'] ?? $res['content'] ?? null;
-
-            if ($res['img_path']) {
-                $imageData = file_get_contents($res['img_path']);
-            }
         } catch (PDOException $e) {
             echo '<link rel="stylesheet" href="css/side.css">';
             include 'side.php';
@@ -37,16 +42,16 @@
             // SQL変更部
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
-                $target = basename($img_name);
-                $uploadPath = $target ? '../img/posts/'.$postId.'-'.$target : null;
+                $target = $img_name ? basename($img_name) : null;
+                $uploadPath = $target && !$deleteImg ? '../img/posts/'.$postId.'-'.$target : null;
 
                 // 内容を更新
                 $sql = $db -> query(
                     "UPDATE Posts SET
-                        title = $title,
-                        content = $text,
-                        img_path = $uploadPath,
-                        'date' = $date
+                        title = '$title',
+                        content = '$text',
+                        img_path = '$uploadPath',
+                        'date' = '$date'
                     WHERE post_id = $postId AND user_id = $userId"
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
@@ -56,12 +61,21 @@
 
             // 画像送信部
             if (isset($uploadPath)) {
-                $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
-                // if ($_FILES['post_img']['error'] !== 0) {
-                if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
-                    $error = "ファイルのアップロードに失敗しました。";
+                $deleteImg = $_POST['deleteImg'];
+
+                $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
+                $res2 = $db -> query($str) -> fetch(PDO::FETCH_OBJ);
+                
+                unlink($res2);
+
+                if (!$deleteImg) {
+                    $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
+                    $res3 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
+
+                    if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
+                        $error = "ファイルのアップロードに失敗しました。";
+                    }
                 }
-                // } else $error = "ファイルのアップロードに失敗しました。\nエラーコード: ".$_FILES['post_img']['error'];
             }
 
             // リダイレクト
