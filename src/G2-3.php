@@ -68,7 +68,7 @@
                 $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
                 $res2 = $db -> query($str) -> fetch(PDO::FETCH_OBJ);
                 
-                unlink($res2);
+                unlink($res2['img_path']);
 
                 if (!$deleteImg) {
                     $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
