@@ -19,7 +19,7 @@ body{
  .title {
   display: flex;
   align-items: center;
-  /* margin-left: 2cm; */
+  margin-top: -50px;
 }
 
 .add-button {
