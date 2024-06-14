@@ -18,6 +18,7 @@
 
     // 投稿の存在確認
     if(isset($postId)) {
+        $res = $res2 = $res3 = $target = $uploadPath = null;
         try {
             $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
@@ -39,21 +40,20 @@
             // $mes .= print_r($_POST, true) . "\n";
             // $mes .= print_r($_SESSION, true) . "\n";
 
-            $target = $uploadPath = null;
             if (is_null($img_name)) $img_name = $res['img_path'];
 
             // SQL変更部
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
                 $target = $img_name ? basename($img_name) : null;
-                $uploadPath = $target && !$deleteImg ? '../img/posts/'.$postId.'-'.$target : null;
+                $uploadPath = ($target && !$deleteImg) ? '../img/posts/'.$postId.'-'.$target : null;
 
                 // 内容を更新
                 $sql = $db -> query(
                     "UPDATE Posts SET
                         title = '$title',
                         content = '$text',
-                        img_path = '$uploadPath',
+                        -- img_path = '$uploadPath',
                         'date' = '$date'
                     WHERE post_id = $postId AND user_id = $userId"
                 );
@@ -63,7 +63,6 @@
             }
 
             $deleteImg = $_POST['deleteImg'] ?? false;
-            $res2 = $res3 = null;
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
 
