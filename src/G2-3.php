@@ -81,7 +81,7 @@
                 }
             }
 
-            $error .= "\n".(($deleteImg || isset($uploadPath)) ? 'true' : 'false').", ".$uploadPath.", ".$res2.", ".$res3;
+            $error .= "\n".(($deleteImg || isset($uploadPath)) ? 'true' : 'false').", ".$uploadPath.", ".isset($res2).", ".isset($res3);
             $title .= $error;
             $text .= $error;
 
