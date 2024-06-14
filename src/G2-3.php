@@ -5,7 +5,6 @@
 
     // 変数代入
     $postId = $_GET["post_id"] ?? null;
-    $userId = $_GET["user_id"] ?? null;
     $change = $_POST["change"] ?? false;
     $title = $_POST['post_title'] ?? null;
     $image = $_FILES['post_img'] ?? null;
@@ -18,8 +17,9 @@
 
     // 投稿の存在確認
     if(isset($postId)) {
+        $res = $res2 = $res3 = $target = $uploadPath = null;
         try {
-            $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+            $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId");
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
             $title = $_POST['post_title'] ?? $res['title'] ?? null;
@@ -39,28 +39,29 @@
             // $mes .= print_r($_POST, true) . "\n";
             // $mes .= print_r($_SESSION, true) . "\n";
 
+            if (is_null($img_name)) $img_name = $res['img_path'];
+            $deleteImg = $_POST['deleteImg'] ?? false;
+
             // SQL変更部
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
                 $target = $img_name ? basename($img_name) : null;
-                $uploadPath = $target && !$deleteImg ? '../img/posts/'.$postId.'-'.$target : null;
+                $uploadPath = ($target && !$deleteImg) ? '../img/posts/'.$target : null;
 
                 // 内容を更新
                 $sql = $db -> query(
                     "UPDATE Posts SET
                         title = '$title',
                         content = '$text',
-                        img_path = '$uploadPath',
+                        -- img_path = '$uploadPath',
                         'date' = '$date'
-                    WHERE post_id = $postId AND user_id = $userId"
+                    WHERE post_id = $postId"
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
                 $title = $text = 'exception occured: '.$e->getMessage();
             }
 
-            $deleteImg = $_POST['deleteImg'] ?? false;
-            $res2 = $res3 = null;
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
 
@@ -79,7 +80,7 @@
                 }
             }
 
-            $error .= "\n".($deleteImg || isset($uploadPath)).", ".$res2.", ".$res3;
+            $error .= "\n".(($deleteImg || isset($uploadPath)) ? 'true' : 'false').", ".$uploadPath.", ".isset($res2).", ".isset($res3);
             $title .= $error;
             $text .= $error;
 
@@ -123,7 +124,6 @@
         </form>
         <form id="delete" action="G2-4.php" method="GET">
             <input type="hidden" name="post_id" value="<?=$postId?>">
-            <input type="hidden" name="user_id" value="<?=$userId?>">
         </form>
         <div class="operation">
             <button type="submit" form="delete" class="button-base delete">削除</button>
