@@ -40,6 +40,7 @@
             // $mes .= print_r($_SESSION, true) . "\n";
 
             $target = $uploadPath = null;
+            if (is_null($img_name)) $img_name = $res['img_path'];
 
             // SQL変更部
             try {
