@@ -39,7 +39,7 @@ if (isset($postId)) {
 // 投稿に対するコメントを取得する関数
 function getCommentsByPostId($db, $postId) {
     try {
-        $stmt = $db->prepare("SELECT c.comment_ID, c.content, c.date, u.user_name
+        $stmt = $db->prepare("SELECT c.comment_ID, c.content, c.date, c.user_id, u.user_name
                                 FROM Comments c 
                                 JOIN Users u ON c.user_id = u.user_id 
                                 WHERE c.post_id = :postId 
@@ -116,7 +116,9 @@ $comments = getCommentsByPostId($db, $postId);
                                 <!-- SQLは画像取得対応しているからできればimg取得方式に変えたい -->
                                 <img class="icon-image" src="../img/user_icon.jpg">
                                 <span class="username"><?=htmlspecialchars($comment['user_name'])?></span>
-                                <button class="ellipsis" onclick="location.href='G2-5.php?id=<?=htmlspecialchars($comment['comment_ID'])?>'">...</button>
+                                <?php if ($comment['user_id'] == $my_userId): ?>
+                                    <button class="ellipsis" onclick="location.href='G2-5.php?id=<?=htmlspecialchars($comment['comment_ID'])?>'">...</button>
+                                <?php endif; ?>
                             </div>
                             <div class="comment-box">
                                 <p><?=htmlspecialchars($comment['content'])?></p>
