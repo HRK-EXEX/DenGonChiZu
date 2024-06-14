@@ -60,6 +60,7 @@
             }
 
             $deleteImg = $_POST['deleteImg'] ?? false;
+            $res2 = $res3 = null;
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
 
