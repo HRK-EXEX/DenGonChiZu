@@ -66,16 +66,18 @@
                 $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
                 $res2 = $db -> query($str) -> fetch(PDO::FETCH_OBJ);
                 
-                unlink($res2);
+                // unlink($res2);
 
                 if (!$deleteImg) {
                     $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
                     $res3 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
 
-                    if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
-                        $error = "ファイルのアップロードに失敗しました。";
-                    }
+                    // if (!move_uploaded_file($img_name_tmp, $uploadPath)) {
+                    //     $error = "ファイルのアップロードに失敗しました。";
+                    // }
                 }
+
+                echo $res2.", ".$res3;
             }
 
             // リダイレクト
