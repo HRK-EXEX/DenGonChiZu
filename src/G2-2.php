@@ -95,7 +95,7 @@ $comments = getCommentsByPostId($db, $postId);
     <div class="parent">
         <?php if ($my_userId === $postUserId): ?>
         <div class="edit">
-        <button onclick="location.href='G2-3.php?post_id=<?php echo $postID; ?>'" class="button-base proceed">編集</button>
+        <button id="editButton" class="button-base proceed">編集</button>
         </div>
         <?php endif; ?>
         <div class="show-part">
@@ -137,5 +137,12 @@ $comments = getCommentsByPostId($db, $postId);
             </form>
         </div>
     </div>
+    
+    <script>
+        document.getElementById('editButton').addEventListener('click', function() {
+            var postID = <?php echo json_encode($postID); ?>;
+            location.href = 'G2-3.php?post_id=' + encodeURIComponent(postID);
+        });
+    </script>
 </body>
 </html>
