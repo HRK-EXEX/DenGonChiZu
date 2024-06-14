@@ -24,8 +24,8 @@ body {
 .message {
     font-size: 30px;
     color: #000;
-    margin-top: 100px;
-    margin-bottom: 30px;
+    margin-top: 50px;
+    margin-bottom: 40px;
 }
 
 button {
@@ -33,53 +33,12 @@ button {
     border: none;
     padding: 10px 20px;
     font-size: 16px;
-    margin-bottom: 100px;
+    margin-top: 60px;
+    margin-bottom: 60px;
     cursor: pointer;
     border-radius: 8px;
 }
-/*button {
-    font-size: 16px;
-    margin-bottom: 100px;
-    padding: 10px 20px;
-    border: 1px solid #000;
-    background: color #c0c0c0;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}*/
 
 button:hover {
     background-color: #ddd;
-} 
-
-/* body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f9f9f9;
 }
-
-.container {
-    text-align: center;
-}
-
-.message {
-    font-size: 48px;
-    color: #000;
-    margin-bottom: 30px;
-}
-
-button {
-    font-size: 16px;
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #ddd;
-} */
