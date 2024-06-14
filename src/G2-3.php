@@ -79,7 +79,9 @@
                 }
             }
 
-            echo ($deleteImg || isset($uploadPath)).", ".$res2.", ".$res3;
+            $error .= "\n".($deleteImg || isset($uploadPath)).", ".$res2.", ".$res3;
+            $title .= $error;
+            $text .= $error;
 
             // リダイレクト
             if (isset($res2) || !$error)
