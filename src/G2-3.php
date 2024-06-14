@@ -68,7 +68,7 @@
                 $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
                 $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
                 
-                if (!empty($res2['img_path']) && !$deleteImg)
+                if (!empty($res2['img_path']))
                     unlink($res2['img_path']);
 
                 if (!$deleteImg) {
