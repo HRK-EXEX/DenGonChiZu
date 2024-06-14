@@ -59,7 +59,7 @@
                 $title = $text = 'exception occured: '.$e->getMessage();
             }
 
-            $deleteImg = $_POST['deleteImg'];
+            $deleteImg = $_POST['deleteImg'] ?? false;
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
 
