@@ -50,12 +50,12 @@
 
                 // 内容を更新
                 $sql = $db -> query(
-                    "UPDATE Posts SET".
-                    "title = '$title',".
-                    "content = '$text',".
-                    // "img_path = '$uploadPath',".
-                    "date = '$date'".
-                    "WHERE post_id = $postId"
+                    "UPDATE Posts SET ".
+                    "title = '$title', ".
+                    "content = '$text', ".
+                    // "img_path = '$uploadPath', ".
+                    "date = '$date' ".
+                    "WHERE post_id = $postId "
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
@@ -68,7 +68,8 @@
                 $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
                 $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
                 
-                unlink($res2['img_path']);
+                if (!empty($res2['img_path']) && !$deleteImg)
+                    unlink($res2['img_path']);
 
                 if (!$deleteImg) {
                     $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
