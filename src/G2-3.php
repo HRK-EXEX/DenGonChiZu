@@ -39,6 +39,8 @@
             // $mes .= print_r($_POST, true) . "\n";
             // $mes .= print_r($_SESSION, true) . "\n";
 
+            $target = $uploadPath = null;
+
             // SQL変更部
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
@@ -79,7 +81,7 @@
                 }
             }
 
-            $error .= "\n".($deleteImg || isset($uploadPath)).", ".$res2.", ".$res3;
+            $error .= "\n".($deleteImg || isset($uploadPath) ? 'true' : 'false').", ".$uploadPath.", ".$res2.", ".$res3;
             $title .= $error;
             $text .= $error;
 
