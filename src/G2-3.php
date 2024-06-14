@@ -50,12 +50,12 @@
 
                 // 内容を更新
                 $sql = $db -> query(
-                    "UPDATE Posts SET
-                        title = '$title',
-                        content = '$text',
-                        -- img_path = '$uploadPath',
-                        'date' = '$date'
-                    WHERE post_id = $postId"
+                    "UPDATE Posts SET".
+                    "title = '$title',".
+                    "content = '$text',".
+                    // "img_path = '$uploadPath',".
+                    "date = '$date'".
+                    "WHERE post_id = $postId"
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
