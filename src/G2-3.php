@@ -76,9 +76,9 @@
                     //     $error = "ファイルのアップロードに失敗しました。";
                     // }
                 }
-
-                echo $res2.", ".$res3;
             }
+
+            echo ($deleteImg || isset($uploadPath)).", ".$res2.", ".$res3;
 
             // リダイレクト
             if (isset($res2) || !$error)
