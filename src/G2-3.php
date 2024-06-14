@@ -41,6 +41,7 @@
             // $mes .= print_r($_SESSION, true) . "\n";
 
             if (is_null($img_name)) $img_name = $res['img_path'];
+            $deleteImg = $_POST['deleteImg'] ?? false;
 
             // SQL変更部
             try {
@@ -62,7 +63,6 @@
                 $title = $text = 'exception occured: '.$e->getMessage();
             }
 
-            $deleteImg = $_POST['deleteImg'] ?? false;
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
 
