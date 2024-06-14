@@ -59,9 +59,9 @@
                 $title = $text = 'exception occured: '.$e->getMessage();
             }
 
+            $deleteImg = $_POST['deleteImg'];
             // 画像送信部
-            if (isset($uploadPath)) {
-                $deleteImg = $_POST['deleteImg'];
+            if ($deleteImg || isset($uploadPath)) {
 
                 $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
                 $res2 = $db -> query($str) -> fetch(PDO::FETCH_OBJ);
