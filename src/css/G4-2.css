@@ -20,7 +20,7 @@ body{
     display: flex;
     align-items: center;
     margin-left: 2cm;
-    margin-top: 50px;
+    margin-top: 0.5rem;
   }
 
   p {
