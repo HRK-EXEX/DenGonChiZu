@@ -5,7 +5,6 @@
 
     // 変数代入
     $postId = $_GET["post_id"] ?? null;
-    $userId = $_GET["user_id"] ?? null;
     $change = $_POST["change"] ?? false;
     $title = $_POST['post_title'] ?? null;
     $image = $_FILES['post_img'] ?? null;
@@ -20,7 +19,7 @@
     if(isset($postId)) {
         $res = $res2 = $res3 = $target = $uploadPath = null;
         try {
-            $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+            $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId");
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
             $title = $_POST['post_title'] ?? $res['title'] ?? null;
@@ -56,7 +55,7 @@
                         content = '$text',
                         -- img_path = '$uploadPath',
                         'date' = '$date'
-                    WHERE post_id = $postId AND user_id = $userId"
+                    WHERE post_id = $postId"
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
@@ -125,7 +124,6 @@
         </form>
         <form id="delete" action="G2-4.php" method="GET">
             <input type="hidden" name="post_id" value="<?=$postId?>">
-            <input type="hidden" name="user_id" value="<?=$userId?>">
         </form>
         <div class="operation">
             <button type="submit" form="delete" class="button-base delete">削除</button>
