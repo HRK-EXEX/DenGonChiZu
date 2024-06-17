@@ -45,7 +45,7 @@
             // SQL変更部
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
-                $target = $img_name ? basename($img_name) : null;
+                $target = !empty($img_name) ? basename($img_name) : null;
                 $uploadPath = ($target && !$deleteImg) ? '../img/posts/'.$target : null;
 
                 // 内容を更新
@@ -61,6 +61,8 @@
             } catch (PDOException $e) {
                 $mes = 'exception occured: '.$e->getMessage();
             }
+
+            echo $uploadPath;
 
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
