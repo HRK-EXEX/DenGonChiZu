@@ -1,7 +1,6 @@
 <?php
     require 'php/db.php';
     $postId = $_GET["post_id"] ?? null;
-    $userId = $_GET["user_id"] ?? null;
     $posted = $_POST["posted"] ?? false;
     $mes = "以下の投稿を削除しようとしています。<br>本当に実行しますか？";
 
@@ -15,14 +14,14 @@
     // 投稿の存在確認
     if(isset($postId)) {
         try {
-            $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+            $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId");
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-            $title = $_POST['post_title'] ?? $res['title'] ?? null;
-            $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
-            $text = $_POST['post_text'] ?? $res['content'] ?? null;
+            $title = $res['title'] ?? null;
+            $image = $res['img_path'] ?? null;
+            $text = $res['content'] ?? null;
         } catch (PDOException $e) {
-            $mes = 'exception occured: '.$e->getMessage();
+            $mes = 'exception occured (select): '.$e->getMessage();
         }
 
         // 削除ボタンが押されたかの確認＆投稿処理
@@ -41,7 +40,7 @@
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
-                $mes = 'exception occured: '.$e->getMessage();
+                $mes = 'exception occured (delete): '.$e->getMessage();
             }
 
             // リダイレクト
