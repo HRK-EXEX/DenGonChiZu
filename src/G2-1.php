@@ -16,24 +16,24 @@
 
     $mes = "新規投稿";
 
-    // 投稿ボタンが押されたかの確認＆投稿処理
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $date = date("Y-m-d H:i:s");
-        // $mes = $date . "\n";
-        // $mes .= print_r($_FILES, true) . "\n";
-        // $mes .= print_r($_POST, true) . "\n";
-        // $mes .= print_r($_SESSION, true) . "\n";
+    if (isset($userId)) {
+        // 投稿ボタンが押されたかの確認＆投稿処理
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $date = date("Y-m-d H:i:s");
+            // $mes = $date . "\n";
+            // $mes .= print_r($_FILES, true) . "\n";
+            // $mes .= print_r($_POST, true) . "\n";
+            // $mes .= print_r($_SESSION, true) . "\n";
 
-        try {
-            // ファイルが既に存在するかチェック
-            if (file_exists($target)) {
-                $error = "アップロードされたファイルは既に存在します。";
-            }
+            try {
+                // ファイルが既に存在するかチェック
+                if (file_exists($target)) {
+                    $error = "アップロードされたファイルは既に存在します。";
+                }
 
-            // SQL挿入部
-            $userId = $_SESSION['user']['user_id'] ?? null;
+                // SQL挿入部
+                $userId = $_SESSION['user']['user_id'] ?? null;
 
-            if (isset($userId)) {
                 // まずは画像が空のデータを挿入
                 $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', null, '$date', 0)";
                 $sql = $db -> query($str);
@@ -63,13 +63,13 @@
                 // リダイレクト
                 if (isset($res2) || !$error)
                     header("Location: G1-1.php");
-            } else $error = "この操作を行うにはログインが必要です。";
-        } catch (Throwable $e) {
-            $mes = ''.$e->getMessage()."\n".$post_id.$str;
+            } catch (Throwable $e) {
+                $mes = ''.$e->getMessage()."\n".$post_id.$str;
+            }
         }
 
         if ($error) $mes = ''.$error."\n";
-    }
+    } else $mes .= "を行うにはログインが必要です。";
 ?>
 
 <!DOCTYPE html>
