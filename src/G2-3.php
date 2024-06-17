@@ -15,8 +15,6 @@
 
     $mes = "投稿編集";
 
-    echo "img_name: ", ($img_name), "<br>";
-
     // 投稿の存在確認
     if(isset($postId)) {
         $res = $res2 = $res3 = $target = $uploadPath = null;
@@ -63,16 +61,14 @@
                 $mes = 'exception occured: '.$e->getMessage();
             }
 
-            echo "<br>", $uploadPath;
-
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
 
                 $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
                 $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
                 
-                // if (!empty($res2['img_path']))
-                // unlink($res2['img_path']);
+                if (!empty($res2['img_path']))
+                unlink($res2['img_path']);
 
                 if (!$deleteImg && !empty($image)) {
                     $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
