@@ -51,9 +51,7 @@
     <div class="title">
         <h4>会員情報変更</h4>
     </div>
-    <hr  color="black">
-
-    <!-- id受け取り,selectで情報表示 -->
+    <hr class="hr">
 
     <?php
         $user_id = $_POST['user_id'];
@@ -76,7 +74,7 @@
             ?></p>
         <?php else: ?>
 
-    <form action="G4-2.php" method="post"><!-- update -->
+    <form action="G4-2.php" method="post">
         <div class="table-container">
             <div class="column is-offset-one-quarter">
                 <table class="table is-striped is-fullwidth">

@@ -22,6 +22,10 @@ body{
   margin-top: -50px;
 }
 
+.hr{
+  border-top: 2px solid dimgrey;
+}
+
 .add-button {
   margin-right: auto;
 }
