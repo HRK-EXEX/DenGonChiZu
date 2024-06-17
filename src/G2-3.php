@@ -107,7 +107,7 @@
 
     <div class="parent">
         <form id="modify" class="main-part" method="POST">
-            <div class="method"><?=$mes?></div>
+            <h1 class="method"><?=$mes?></h1>
             <input type="hidden" name="change" value="true">
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">

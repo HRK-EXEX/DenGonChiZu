@@ -3,7 +3,7 @@
     $postId = $_GET["post_id"] ?? null;
     $userId = $_GET["user_id"] ?? null;
     $posted = $_POST["posted"] ?? false;
-    $mes = "投稿編集";
+    $mes = "以下の投稿を削除しようとしています。<br>本当に実行しますか？";
 
     // 投稿の存在確認
     if(isset($postId)) {
@@ -59,7 +59,7 @@
 
     <div class="parent">
         <form id="modify" class="main-part" method="POST">
-            <div class="method">以下の投稿を削除しようとしています。<br>本当に実行しますか？</div>
+            <h1 class="method"><?=$mes?></h1>
             <div class="box-base title"><?=$title?></div>
             <div class="box-base image-box">
             <img name="post_img" class="image" src="../img/
