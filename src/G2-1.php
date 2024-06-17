@@ -65,10 +65,10 @@
                     header("Location: G1-1.php");
             } else $error = "この操作を行うにはログインが必要です。";
         } catch (Throwable $e) {
-            $title = $text = ''.$e->getMessage()."\n".$post_id.$str;
+            $mes = ''.$e->getMessage()."\n".$post_id.$str;
         }
 
-        if ($error) $title = $text = ''.$error."\n";
+        if ($error) $mes = ''.$error."\n";
     }
 ?>
 
@@ -87,7 +87,7 @@
 
     <div class="parent">
         <form id="newing" class="main-part" method="post" enctype="multipart/form-data">
-            <div class="method"><?=$mes?></div>
+            <h1><div class="method"><?=$mes?></div></h1>
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." required value="<?=$title?>">
             <div class="box-base image-box">
                 <input type="file" name="post_img" accept="image/*"/><br>

@@ -59,7 +59,7 @@
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
-                $title = $text = 'exception occured: '.$e->getMessage();
+                $mes = 'exception occured: '.$e->getMessage();
             }
 
             // 画像送信部
