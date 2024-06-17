@@ -36,7 +36,7 @@
             
             try {
                 $sql = $db -> query(
-                    "DELETE FROM Posts WHERE post_id = $postId AND user_id = $userId"
+                    "DELETE FROM Posts WHERE post_id = $postId"
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
