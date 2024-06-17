@@ -72,7 +72,7 @@
             <?php
                 if (isset($res['img_path'])) {
                     if ($res['img_path']) {;
-                        echo $image.'.png">';
+                        echo $image.'.png';
                     } else echo '../img/NoImage.png';
                 }
             ?>
