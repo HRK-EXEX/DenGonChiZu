@@ -15,7 +15,7 @@
 
     $mes = "投稿編集";
 
-    echo "img_name: "+ ($img_name ?? "null") +"\n";
+    echo "img_name: ", ($img_name), "\n";
 
     // 投稿の存在確認
     if(isset($postId)) {
