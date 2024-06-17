@@ -29,14 +29,6 @@ button {
   padding: 0.5em 1em;
 }
 
-/* .buttons {
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-auto-flow: column;
-  gap: 100px;
-  width: fit-content;
-}  */
-
 .buttons{
   display: flex;
   justify-content: flex-end;
