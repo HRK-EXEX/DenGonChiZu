@@ -15,6 +15,8 @@
 
     $mes = "投稿編集";
 
+    echo "img_name: "+$img_name+"\n";
+
     // 投稿の存在確認
     if(isset($postId)) {
         $res = $res2 = $res3 = $target = $uploadPath = null;
@@ -53,7 +55,6 @@
                     "UPDATE Posts SET ".
                     "title = '$title', ".
                     "content = '$text', ".
-                    // "img_path = '$uploadPath', ".
                     "date = '$date' ".
                     "WHERE post_id = $postId "
                 );
