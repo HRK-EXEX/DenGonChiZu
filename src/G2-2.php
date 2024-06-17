@@ -113,7 +113,7 @@ $comments = getCommentsByPostId($db, $postId);
                     <?php foreach ($comments as $comment): ?>
                         <div class="comment-info">
                             <div class="user">
-                                <!-- SQLは画像取得対応しているからできればimg取得方式に変えたい -->
+                                <!-- SQLは画像取得対応しているからできればDB取得方式に変えたい -->
                                 <img class="icon-image" src="../img/user_icon.jpg">
                                 <span class="username"><?=htmlspecialchars($comment['user_name'])?></span>
                                 <?php if ($comment['user_id'] == $my_userId): ?>
@@ -132,12 +132,13 @@ $comments = getCommentsByPostId($db, $postId);
             </div>
         </div>
         <div class="operation">
-            <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?post_id=' . $postId . '&user_id=' . $my_userId; ?>">
-                <input class="comment-input" name="comment-input" placeholder="コメントを入力...">
-                <button type="submit" class="button-base send">送信</button>
-            </form>
-        </div>
+    <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?post_id=' . $postId . '&user_id=' . $my_userId; ?>" style="display: flex; align-items: center; width: 100%;">
+        <input class="comment-input" name="comment-input" placeholder="コメントを入力...">
+        <button type="submit" class="button-base send">送信</button>
+    </form>
+</div>
+
     </div>
 
 
