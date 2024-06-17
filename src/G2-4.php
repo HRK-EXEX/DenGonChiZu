@@ -5,6 +5,13 @@
     $posted = $_POST["posted"] ?? false;
     $mes = "以下の投稿を削除しようとしています。<br>本当に実行しますか？";
 
+    $title = $_POST['post_title'] ?? null;
+    $image = $_FILES['post_img'] ?? null;
+    $text = $_POST['post_text'] ?? null;
+    $img_name = $image['name'] ?? null;
+    $img_name_tmp = $image['tmp_name'] ?? null;
+    $error = null;
+
     // 投稿の存在確認
     if(isset($postId)) {
         try {
