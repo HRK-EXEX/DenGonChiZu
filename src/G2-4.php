@@ -70,10 +70,10 @@
             <div class="box-base image-box">
             <?php
                 if (isset($res['img_path'])) {
-                    echo '<img name="post_img" class="image" src="../img/';
+                    echo '<img name="post_img" class="image" src="';
                     if (!empty($res['img_path'])) {;
                         echo basename($img_path).'.png';
-                    } else echo 'NoImage.png';
+                    } else echo '../img/NoImage.png';
                     echo '">';
                 }
             ?>
