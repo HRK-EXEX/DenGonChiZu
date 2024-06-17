@@ -71,7 +71,7 @@
                 if (!empty($res2['img_path']))
                     unlink($res2['img_path']);
 
-                if (!$deleteImg && isset($image)) {
+                if (!$deleteImg && !empty($image)) {
                     $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
                     $res3 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
 
