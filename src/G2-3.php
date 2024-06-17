@@ -109,12 +109,12 @@
     <?php include 'side.php'; ?>
 
     <div class="parent">
-        <form id="modify" class="main-part" method="POST">
+        <form id="modify" class="main-part" method="post" enctype="multipart/form-data">
             <h1 class="method"><?=$mes?></h1>
             <input type="hidden" name="change" value="true">
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
-                <input type="file" name="post_img" accept="image/*" /><br>
+                <input type="file" name="post_img" accept="image/*"/><br>
                 <div>
                     <input type="checkbox" id="deleteImg">
                     <label for="deleteImg">画像を削除する</label>
