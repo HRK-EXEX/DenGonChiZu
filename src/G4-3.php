@@ -53,7 +53,7 @@
     <?php else: ?>
         <h1 class="title is-3">退会を確定しますか</h1>
             <div class="buttons">
-                <form action="G4-3.php" method="post"><!-- delete -->
+                <form action="G4-3.php" method="post">
                     <?php
                         echo '<input type="hidden" name="delete_flg" value="true">'; 
                         echo '<input type="hidden" name="user_id" value="' , $user_id ,'">';

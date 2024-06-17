@@ -45,7 +45,7 @@
             // SQL変更部
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
-                $target = $img_name ? basename($img_name) : null;
+                $target = !empty($img_name) ? basename($img_name) : null;
                 $uploadPath = ($target && !$deleteImg) ? '../img/posts/'.$target : null;
 
                 // 内容を更新
@@ -62,16 +62,18 @@
                 $mes = 'exception occured: '.$e->getMessage();
             }
 
+            echo $uploadPath;
+
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
 
                 $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
                 $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
                 
-                if (!empty($res2['img_path']))
-                    unlink($res2['img_path']);
+                // if (!empty($res2['img_path']))
+                // unlink($res2['img_path']);
 
-                if (!$deleteImg) {
+                if (!$deleteImg && !empty($image)) {
                     $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
                     $res3 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
 

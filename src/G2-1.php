@@ -14,6 +14,7 @@
 
     if (empty($target)) $target = 'null';
 
+    $userId = $_SESSION['user']['user_id'] ?? null;
     $mes = "新規投稿";
 
     if (isset($userId)) {
@@ -30,10 +31,6 @@
                 if (file_exists($target)) {
                     $error = "アップロードされたファイルは既に存在します。";
                 }
-
-                // SQL挿入部
-                $userId = $_SESSION['user']['user_id'] ?? null;
-
                 // まずは画像が空のデータを挿入
                 $str = "INSERT INTO Posts VALUE (null, $userId, '$title', '$text', null, '$date', 0)";
                 $sql = $db -> query($str);

@@ -58,9 +58,8 @@
             <button class="button is-danger is-large" onclick="location.href='G4-3.php'">退会</button>
         </div>
     </div>
-    <hr  color="black">
+    <hr class="hr">
 
-    <!-- selectで情報取得,user_idを送信  -->
     <form action="G4-2.php" method="post">
         <div class="container">
             <div class="columns is-centered">

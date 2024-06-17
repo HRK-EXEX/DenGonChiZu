@@ -22,6 +22,10 @@ body{
   margin-top: -50px;
 }
 
+.hr{
+  border-top: 2px solid dimgrey;
+}
+
 .add-button {
   margin-right: auto;
 }
@@ -35,8 +39,6 @@ body{
   text-indent: 0.8em; 
   font-weight: bold; 
   margin-left: 30px;
-  /* margin-top:14px; */
-  /* margin-bottom:14px; */
 } 
 
 .left-column {
@@ -47,7 +49,6 @@ body{
 .right-column {
   display: block;
   margin-left: 300px;
-  /* margin-right: 5em; */
   margin-top: 2em;
 }
 

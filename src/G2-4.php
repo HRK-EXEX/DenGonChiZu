@@ -1,21 +1,27 @@
 <?php
     require 'php/db.php';
     $postId = $_GET["post_id"] ?? null;
-    $userId = $_GET["user_id"] ?? null;
     $posted = $_POST["posted"] ?? false;
     $mes = "以下の投稿を削除しようとしています。<br>本当に実行しますか？";
+
+    $title = $_POST['post_title'] ?? null;
+    $image = $_FILES['post_img'] ?? null;
+    $text = $_POST['post_text'] ?? null;
+    $img_name = $image['name'] ?? null;
+    $img_name_tmp = $image['tmp_name'] ?? null;
+    $img_path = $error = null;
 
     // 投稿の存在確認
     if(isset($postId)) {
         try {
-            $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId AND user_id = $userId");
+            $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId");
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-            $title = $_POST['post_title'] ?? $res['title'] ?? null;
-            $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
-            $text = $_POST['post_text'] ?? $res['content'] ?? null;
+            $title = $res['title'] ?? null;
+            $img_path = $res['img_path'] ?? null;
+            $text = $res['content'] ?? null;
         } catch (PDOException $e) {
-            $mes = 'exception occured: '.$e->getMessage();
+            $mes = 'exception occured (select): '.$e->getMessage();
         }
 
         // 削除ボタンが押されたかの確認＆投稿処理
@@ -30,11 +36,11 @@
             
             try {
                 $sql = $db -> query(
-                    "DELETE FROM Posts WHERE post_id = $postId AND user_id = $userId"
+                    "DELETE FROM Posts WHERE post_id = $postId"
                 );
                 $res = $sql -> fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
-                $mes = 'exception occured: '.$e->getMessage();
+                $mes = 'exception occured (delete): '.$e->getMessage();
             }
 
             // リダイレクト
@@ -62,15 +68,15 @@
             <h1 class="method"><?=$mes?></h1>
             <div class="box-base title"><?=$title?></div>
             <div class="box-base image-box">
-            <img name="post_img" class="image" src="../img/
             <?php
                 if (isset($res['img_path'])) {
-                    if ($res['img_path']) {;
-                        echo $image.'.png">';
-                    } else echo '../img/NoImage.png';
+                    echo '<img name="post_img" class="image" src="../img/';
+                    if (!empty($res['img_path'])) {;
+                        echo basename($img_path).'.png';
+                    } else echo 'NoImage.png';
+                    echo '">';
                 }
             ?>
-            ">
             </div>
             <div class="box-base content"><?=$text?></div>
         </form>
