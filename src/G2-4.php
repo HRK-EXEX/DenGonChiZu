@@ -9,7 +9,7 @@
     $text = $_POST['post_text'] ?? null;
     $img_name = $image['name'] ?? null;
     $img_name_tmp = $image['tmp_name'] ?? null;
-    $error = null;
+    $img_path = $error = null;
 
     // 投稿の存在確認
     if(isset($postId)) {
@@ -18,7 +18,7 @@
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
             $title = $res['title'] ?? null;
-            $image = $res['img_path'] ?? null;
+            $img_path = $res['img_path'] ?? null;
             $text = $res['content'] ?? null;
         } catch (PDOException $e) {
             $mes = 'exception occured (select): '.$e->getMessage();
@@ -68,15 +68,15 @@
             <h1 class="method"><?=$mes?></h1>
             <div class="box-base title"><?=$title?></div>
             <div class="box-base image-box">
-            <img name="post_img" class="image" src="../img/
             <?php
                 if (isset($res['img_path'])) {
-                    if ($res['img_path']) {;
-                        echo $image.'.png';
-                    } else echo '../img/NoImage.png';
+                    echo '<img name="post_img" class="image" src="../img/';
+                    if (!empty($res['img_path'])) {;
+                        echo basename($img_path).'.png';
+                    } else echo 'NoImage.png';
+                    echo '">';
                 }
             ?>
-            ">
             </div>
             <div class="box-base content"><?=$text?></div>
         </form>
