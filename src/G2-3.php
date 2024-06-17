@@ -15,7 +15,7 @@
 
     $mes = "投稿編集";
 
-    echo "img_name: ", ($img_name), "\n";
+    echo "img_name: ", ($img_name), "<br>";
 
     // 投稿の存在確認
     if(isset($postId)) {
@@ -63,7 +63,7 @@
                 $mes = 'exception occured: '.$e->getMessage();
             }
 
-            echo $uploadPath;
+            echo "<br>", $uploadPath;
 
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
