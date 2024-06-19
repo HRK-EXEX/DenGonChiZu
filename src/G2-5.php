@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "エラー: コメントの更新に失敗しました。";
         }
 
-        header("Location: G2-2.php");
+        header("Location: G2-2.php?post_id=".htmlspecialchars($comment_ID));
         exit();
     } elseif ($action == 'delete') {
         // コメントをデータベースから削除
