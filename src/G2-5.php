@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute([$comment_ID]);
 
         if ($stmt->rowCount() > 0) {
-            echo "<h1>コメントが削除されました</h1>";
+            // echo "<h1>コメントが削除されました</h1>";
         } else {
             echo "エラー: コメントの削除に失敗しました。";
         }
