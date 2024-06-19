@@ -130,14 +130,19 @@ $comments = getCommentsByPostId($db, $postId);
                     <p>コメントがありません。</p>
                 <?php endif; ?>
             </div>
+            <div class="infomation">
+                <?php
+                    echo "コメント数：".count($comments)."\tいいね数：".$res['post_good'];
+                ?>
+            </div>
         </div>
         <div class="operation">
-    <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?post_id=' . $postId . '&user_id=' . $my_userId; ?>" style="display: flex; align-items: center; width: 100%;">
-        <input class="comment-input" name="comment-input" placeholder="コメントを入力...">
-        <button type="submit" class="button-base send">送信</button>
-    </form>
-</div>
+            <button onclick="location.href='G1-1.php'" class="button-base back">戻る</button>
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?post_id=' . $postId . '&user_id=' . $my_userId; ?>" style="display: flex; align-items: center; width: 100%;">
+                <input class="comment-input" name="comment-input" placeholder="コメントを入力...">
+                <button type="submit" class="button-base send">送信</button>
+            </form>
+        </div>
 
     </div>
 

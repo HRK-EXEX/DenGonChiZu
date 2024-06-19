@@ -117,7 +117,6 @@
                 $positions = $this->calculatePosition($index,$totalPosts); // すべての投稿の位置を一度に取得
                 $position = $positions[$index]; // 各投稿の位置を取得
                 echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
-
                 
                 echo '    <div class="user-info">';
                 echo '        <a href="G3-1.php?user_id=' . htmlspecialchars($post->user_id) . '">';

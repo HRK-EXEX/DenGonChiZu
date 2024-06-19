@@ -17,7 +17,11 @@
 .comments_area {
     border: 1px solid black;
     overflow-y: auto;
-    height: 30vh;
+    height: 20vh;
+}
+
+.infomation_area {
+    height: 8vh;
 }
 
 .title-base {
