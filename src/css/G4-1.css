@@ -24,6 +24,7 @@ body{
 
 .hr{
   border-top: 2px solid dimgrey;
+  margin-bottom: 50px;
 }
 
 .add-button {
