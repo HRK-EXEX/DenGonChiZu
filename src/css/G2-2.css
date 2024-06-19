@@ -22,6 +22,8 @@
 
 .infomation_area {
     height: 8vh;
+    border: 1px solid black;
+    text-align: center;
 }
 
 .title-base {

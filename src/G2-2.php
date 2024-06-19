@@ -130,7 +130,7 @@ $comments = getCommentsByPostId($db, $postId);
                     <p>コメントがありません。</p>
                 <?php endif; ?>
             </div>
-            <div class="infomation">
+            <div class="infomation_area">
                 <?php
                     echo "コメント数：".count($comments)."\tいいね数：".$res['post_good'];
                 ?>
