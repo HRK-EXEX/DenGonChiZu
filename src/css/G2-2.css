@@ -76,12 +76,11 @@
 }
 .image-box{
 	width: auto;
-    object-fit: cover;
 	text-align: center;
 }
 .image{
 	text-align:center;
-    width: 500px;
+    /* object-fit: cover; */
     height: 250px;
 }
 

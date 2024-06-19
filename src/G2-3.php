@@ -46,7 +46,7 @@
             try {
                 // まずは画像ファイルの確認をし、ファイル名を確定
                 $target = !empty($img_name) ? basename($img_name) : null;
-                $uploadPath = ($target && !$deleteImg) ? '../img/posts/'.$target : null;
+                $uploadPath = (!empty($target) && !$deleteImg) ? '../img/posts/'.$target : null;
 
                 // 内容を更新
                 $sql = $db -> query(
