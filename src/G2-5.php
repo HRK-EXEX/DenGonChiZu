@@ -11,6 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $comment = $_POST['comment'];
     $comment_ID = intval($_POST['comment_ID']);
 
+    // 遷移に必要なパラメータを取得
+    $stmt = $db -> query("SELECT * FROM Comments WHERE comment_ID = $comment_ID");
+    $cmt = $stmt -> fetch(PDO::FETCH_ASSOC);
+    $post_ID = htmlspecialchars($cmt['post_ID']);
+    $user_ID = htmlspecialchars($cmt['user_ID']);
+
     if ($action == 'confirm' && !empty($comment)) {
         // コメントを更新
         $stmt = $db->prepare("UPDATE Comments SET content = ? WHERE comment_ID = ?");
@@ -23,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "エラー: コメントの更新に失敗しました。";
         }
 
-        header("Location: G2-2.php?post_id=".htmlspecialchars($comment_ID));
+        header("Location: G2-2.php?post_id=$post_ID&user_id=$user_ID");
         exit();
     } elseif ($action == 'delete') {
         // コメントをデータベースから削除
@@ -36,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "エラー: コメントの削除に失敗しました。";
         }
 
-        header("Location: G2-2.php?post_id=".htmlspecialchars($comment_ID));
+        header("Location: G2-2.php?post_id=$post_ID&user_id=$user_ID");
         exit();
     } else {
         echo "<h1>不明なアクションです</h1>";
