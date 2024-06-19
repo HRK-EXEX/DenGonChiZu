@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute([$comment, $comment_ID]);
 
         if ($stmt->rowCount() > 0) {
-            echo "<h1>コメントが更新されました</h1>";
-            echo "<p>コメント: " . htmlspecialchars($comment) . "</p>";
+        //     echo "<h1>コメントが更新されました</h1>";
+        //     echo "<p>コメント: " . htmlspecialchars($comment) . "</p>";
         } else {
             echo "エラー: コメントの更新に失敗しました。";
         }
