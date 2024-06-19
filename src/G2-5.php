@@ -1,5 +1,4 @@
 <?php require 'php/db.php'; ?>
-
 <?php
 // コメントIDの取得
 $comment_ID = 1; // デフォルトのコメントID
