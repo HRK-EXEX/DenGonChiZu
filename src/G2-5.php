@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "エラー: コメントの削除に失敗しました。";
         }
 
-        header("Location: G2-2.php");
+        header("Location: G2-2.php?post_id=".htmlspecialchars($comment_ID));
         exit();
     } else {
         echo "<h1>不明なアクションです</h1>";
