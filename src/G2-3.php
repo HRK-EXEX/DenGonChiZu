@@ -63,7 +63,6 @@
 
             // 画像送信部
             if ($deleteImg || isset($uploadPath)) {
-
                 $str = "SELECT img_path FROM Posts WHERE post_id = ".$postId;
                 $res2 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
                 
@@ -80,7 +79,7 @@
 
             // リダイレクト
             if (isset($res2) || !$error)
-                header("Location: G1-1.php");
+                header("Location: G2-2.php");
         }
     } else {
         echo '<link rel="stylesheet" href="css/side.css">';
