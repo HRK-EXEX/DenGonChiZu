@@ -1,9 +1,16 @@
 <?php
 session_start();
+require 'php/db.php';
 
-$_SESSION = array();
-
-session_destroy();
+if (isset($_SESSION['user'])) {
+    // ユーザーがログインしている場合、ログアウト処理を行う
+    $_SESSION = array();
+    session_destroy();
+} else {
+    // ユーザーがログインしていない場合、ログインページにリダイレクトする
+    header("Location: G1-6.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
