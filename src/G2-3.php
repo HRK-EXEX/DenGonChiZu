@@ -68,12 +68,14 @@
                 
                 if (!empty($res2['img_path']))
                 unlink($res2['img_path']);
-
+                
                 $str = "UPDATE Posts SET img_path = '$uploadPath' WHERE post_id = ".$postId;
                 $res3 = $db -> query($str) -> fetch(PDO::FETCH_ASSOC);
-                
-                if(!empty($image) && !move_uploaded_file($img_name_tmp, $uploadPath)) {
-                    $error = "ファイルのアップロードに失敗しました。";
+                    
+                if (!$deleteImg) {
+                    if(!empty($image) && !move_uploaded_file($img_name_tmp, $uploadPath)) {
+                        $error = "ファイルのアップロードに失敗しました。";
+                    }
                 }
             }
 
