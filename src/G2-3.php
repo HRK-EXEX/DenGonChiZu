@@ -79,7 +79,7 @@
 
             // リダイレクト
             if (isset($res2) || !$error)
-                header("Location: G2-2.php");
+                header("Location: G2-2.php?postId=$post_id");
         }
     } else {
         echo '<link rel="stylesheet" href="css/side.css">';
