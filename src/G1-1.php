@@ -154,5 +154,6 @@
 <button id="addCommentButton"></button>
 
 <script src="js/G1-1.js"></script>
+<script src="js/G1-1_ajax.js"></script>
 </body>
 </html>

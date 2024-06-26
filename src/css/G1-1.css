@@ -91,3 +91,14 @@ body {
 .comment-count, .like-count {
     margin-right: 10px;
 }
+
+/* Ajax対応部分 */
+
+.like-icon {
+    cursor: pointer;
+    color: rgb(193, 193, 193); /* 初期の色 */
+}
+
+.like-icon.liked {
+    color: red; /* いいねを押した後の色 */
+}
