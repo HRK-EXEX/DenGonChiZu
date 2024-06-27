@@ -108,28 +108,34 @@
             return $positions;
         }
         
+        public function fetchUserLikes($userId) {
+            $query = 'SELECT post_id FROM Good WHERE user_id = ?';
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$userId]);
+            return $stmt->fetchAll(PDO::FETCH_COLUMN);
+        }
         
-        //取得した情報を使って投稿を表示する
-        public function displayPosts() {
-            $posts = $this->fetchPosts(); 
-            $totalPosts = count($posts); // 合計値から配置間隔の割り出しをする用
+        public function displayPosts($userId) {
+            $posts = $this->fetchPosts();
+            $likedPosts = $this->fetchUserLikes($userId);
+            $totalPosts = count($posts);
+        
             foreach ($posts as $index => $post) {
-                $positions = $this->calculatePosition($index,$totalPosts); // すべての投稿の位置を一度に取得
-                $position = $positions[$index]; // 各投稿の位置を取得
-                echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
+                $positions = $this->calculatePosition($index, $totalPosts);
+                $position = $positions[$index];
+                $isLiked = in_array($post->post_id, $likedPosts);
                 
+                echo '<div class="post-container" style="top: ' . $position['y'] . 'px; left: ' . $position['x'] . 'px;">';
                 echo '    <div class="user-info">';
                 echo '        <a href="G3-1.php?user_id=' . htmlspecialchars($post->user_id) . '">';
                 echo '            <img src="../img/user_icon.jpg" alt="ユーザのアイコン">';
                 echo '        </a>';
-
                 echo '        <span class="username">' . htmlspecialchars($post->user_name) . '</span>';
                 echo '    </div>';
                 echo '    <div class="post-content">';
                 echo '        <a href="G2-2.php?post_id=' . htmlspecialchars($post->post_id) . '&user_id=' . htmlspecialchars($post->user_id) . '">';
                 echo '            <p>' . nl2br(htmlspecialchars($post->title)) . '</p>';
                 echo '        </a>';
-                // img_pathがnullでない、かつ画像が存在する場合のみ表示
                 if (!empty($post->img_path) && file_exists(__DIR__ . '/../img/' . $post->img_path)) {
                     echo '        <img src="' . htmlspecialchars($post->img_path) . '" alt="投稿画像">';
                 }
@@ -137,16 +143,19 @@
                 echo '    <div class="interaction">';
                 echo '        <span class="comment-icon">💬</span>';
                 echo '        <span class="comment-count">' . htmlspecialchars($post->comment_count) . '</span>';
-                echo '        <span class="like-icon" data-post-id="' . htmlspecialchars($post->post_id) . '">❤️</span>';
+                echo '        <span class="like-icon ' . ($isLiked ? 'liked' : '') . '" data-post-id="' . htmlspecialchars($post->post_id) . '">❤️</span>';
                 echo '        <span class="like-count">' . htmlspecialchars($post->post_good) . '</span>';
                 echo '    </div>';
                 echo '</div>';
             }
         }
+        
     }
 
+    $userId = $_SESSION['user']['user_id'];
     $post = new Post();
-    $post->displayPosts();
+    $post->displayPosts($userId);
+    
     ?>
 </div>
 
