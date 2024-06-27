@@ -137,7 +137,7 @@
                 echo '    <div class="interaction">';
                 echo '        <span class="comment-icon">💬</span>';
                 echo '        <span class="comment-count">' . htmlspecialchars($post->comment_count) . '</span>';
-                echo '        <span class="like-icon">❤️</span>';
+                echo '        <span class="like-icon" data-post-id="' . htmlspecialchars($post->post_id) . '">❤️</span>';
                 echo '        <span class="like-count">' . htmlspecialchars($post->post_good) . '</span>';
                 echo '    </div>';
                 echo '</div>';
