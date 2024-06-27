@@ -5,7 +5,6 @@
 
     // 変数代入
     $postId = $_GET["post_id"] ?? null;
-    $change = $_POST["change"] ?? false;
     $title = $_POST['post_title'] ?? null;
     $image = $_FILES['post_img'] ?? null;
     $text = $_POST['post_text'] ?? null;
@@ -32,7 +31,7 @@
         }
 
         // 投稿ボタンが押されたかの確認＆投稿処理
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && $change) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $date = date("Y-m-d H:i:s");
             // $mes = $date . "\n";
             // $mes .= print_r($_FILES, true) . "\n";
@@ -42,12 +41,12 @@
             if (is_null($img_name)) $img_name = $res['img_path'];
             $deleteImg = $_POST['deleteImg'] ?? false;
 
+            // まずは画像ファイルの確認をし、ファイル名を確定
+            $target = !empty($img_name) && $img_name != $res['img_path'] ? basename($img_name) : null;
+            $uploadPath = (!empty($target) && !$deleteImg) ? '../img/posts/'.$target : null;
+
             // SQL変更部
             try {
-                // まずは画像ファイルの確認をし、ファイル名を確定
-                $target = !empty($img_name) && $img_name != $res['img_path'] ? basename($img_name) : null;
-                $uploadPath = (!empty($target) && !$deleteImg) ? '../img/posts/'.$target : null;
-
                 // 内容を更新
                 $sql = $db -> query(
                     "UPDATE Posts SET ".
@@ -106,12 +105,11 @@
     <div class="parent">
         <form id="modify" class="main-part" method="post" enctype="multipart/form-data">
             <h1 class="method"><?=$mes?></h1>
-            <input type="hidden" name="change" value="true">
             <input name="post_title" class="box-base title" placeholder="投稿タイトルを入力..." value="<?=$title?>">
             <div class="box-base image-box">
                 <input type="file" name="post_img" accept="image/*"/><br>
                 <div>
-                    <input type="checkbox" id="deleteImg">
+                    <input type="checkbox" id="deleteImg" value="true">
                     <label for="deleteImg">画像を削除する</label>
                 </div>
             </div>
