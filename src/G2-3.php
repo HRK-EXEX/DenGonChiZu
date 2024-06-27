@@ -109,7 +109,7 @@
             <div class="box-base image-box">
                 <input type="file" name="post_img" accept="image/*"/><br>
                 <div>
-                    <input type="checkbox" name="deleteImg" value="true">
+                    <input type="checkbox" id="deleteImg" name="deleteImg" value="true">
                     <label for="deleteImg">画像を削除する</label>
                 </div>
             </div>
