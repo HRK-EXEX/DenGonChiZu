@@ -12,8 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             xhr.open('POST', 'php/like_post.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send('post_id=' + encodeURIComponent(postId) + '&action=' + action);
-            alert(postId);
-            alert("a");
+
 
             // 成功した場合の処理
             xhr.onload = function() {
