@@ -34,7 +34,7 @@ try {
     session_start();
     $_SESSION['user'] = $user;
 
-    $message = "登録完了。";
+    $message = "登録完了";
 
 
 
