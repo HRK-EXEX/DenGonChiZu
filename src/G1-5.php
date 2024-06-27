@@ -34,9 +34,9 @@ try {
     session_start();
     $_SESSION['user'] = $user;
 
-    // リダイレクト
-    header("Location: G1-1.php");
-    exit();
+    $message = "登録完了。";
+
+
 
 } catch (PDOException $e) {
     $message = "エラーが発生しました: " . $e->getMessage();
@@ -55,7 +55,6 @@ try {
 <body>
     <div class="container">
         <h1><?php echo $message; ?></h1>
-        <?php if ($message == "登録が完了しました。"): ?>
             <p>以下の情報で登録が完了しました：</p>
             <table>
                 <tr>
@@ -71,7 +70,11 @@ try {
                     <td><?php echo htmlspecialchars($birthdate); ?></td>
                 </tr>
             </table>
-        <?php endif; ?>
+
+            <a href="G1-1.php" class="button">TOP画面に戻る</a>
+
+        
     </div>
 </body>
 </html>
+

@@ -21,7 +21,6 @@ if (isset($_POST['post_id']) && isset($_POST['action'])) {
     $postId = $_POST['post_id'];
     $action = $_POST['action'];
 
-    // ユーザIDは仮に1とします（実際にはセッション等から正確なユーザIDを取得する必要があります）
     $userId = $_SESSION['user']['user_id'];
 
     if ($action === 'like') {
