@@ -66,6 +66,10 @@ try {
                     <td><?php echo htmlspecialchars($mail); ?></td>
                 </tr>
                 <tr>
+                    <td>パスワード</td>
+                        <td>********</td>
+                    </tr>
+                <tr>
                     <td>生年月日</td>
                     <td><?php echo htmlspecialchars($birthdate); ?></td>
                 </tr>
