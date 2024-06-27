@@ -38,7 +38,7 @@
             // $mes .= print_r($_POST, true) . "\n";
             // $mes .= print_r($_SESSION, true) . "\n";
 
-            if (is_null($img_name)) $img_name = $res['img_path'];
+            if (!$deleteImg && is_null($img_name)) $img_name = $res['img_path'];
             $deleteImg = $_POST['deleteImg'] ?? false;
 
             // まずは画像ファイルの確認をし、ファイル名を確定
