@@ -17,11 +17,19 @@
             $sql = $db -> query("SELECT * FROM Posts WHERE post_id = $postId");
             $res = $sql -> fetch(PDO::FETCH_ASSOC);
 
-            $title = $res['title'] ?? null;
-            $img_path = $res['img_path'] ?? null;
-            $text = $res['content'] ?? null;
+            if(!empty($res)) {
+                $title = $_POST['post_title'] ?? $res['title'] ?? null;
+                $image = $_POST['post_img'] ?? $res['img_path'] ?? null;
+                $text = $_POST['post_text'] ?? $res['content'] ?? null;
+            } else {
+                echo '<link rel="stylesheet" href="css/side.css">';
+                include 'side.php';
+                die('<h3>この投稿は利用できません。</h3>');
+            }
         } catch (PDOException $e) {
-            $mes = 'exception occured (select): '.$e->getMessage();
+            echo '<link rel="stylesheet" href="css/side.css">';
+            include 'side.php';
+            die('<h3>この投稿は利用できません。</h3>');
         }
 
         // 削除ボタンが押されたかの確認＆投稿処理
