@@ -82,7 +82,7 @@
         </form>
         <div class="operation">
             <?php
-                echo "<button onclick=\"location.href='G2-3.php?post_id=$postId&user_id=$userId'\" class=\"button-base back\">戻る</button>";
+                echo "<button onclick='window.history.back()' class='button-base back'>戻る</button>";
             ?>
             <button type="submit" form="modify" class="button-base delete">削除</button>
         </div>
