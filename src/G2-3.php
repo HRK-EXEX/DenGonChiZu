@@ -43,7 +43,7 @@
             if (!$deleteImg && is_null($img_name)) $img_name = $res['img_path'];
 
             // まずは画像ファイルの確認をし、ファイル名を確定
-            $target = !empty($img_name) && $img_name != $res['img_path'] ? basename($img_name) : null;
+            $target = !empty($img_name) && $img_name != $res['img_path'] ? $postId.'-'.basename($img_name) : null;
             $uploadPath = (!empty($target) && !$deleteImg) ? '../img/posts/'.$target : null;
 
             // SQL変更部
