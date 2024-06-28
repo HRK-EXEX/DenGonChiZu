@@ -81,7 +81,9 @@
             <div class="box-base content"><?=$text?></div>
         </form>
         <div class="operation">
-            <button onclick="location.href='G2-2.php'" class="button-base back">戻る</button>
+            <?php
+                echo "<button onclick=\"location.href='G2-2.php?post_id=$postId'\" class=\"button-base back\">戻る</button>";
+            ?>
             <button type="submit" form="modify" class="button-base delete">削除</button>
         </div>
     </div>
