@@ -118,6 +118,7 @@
         </form>
         <form id="delete" action="G2-4.php" method="GET">
             <input type="hidden" name="post_id" value="<?=$postId?>">
+            <input type="hidden" name="user_id" value="<?=$userId?>">
         </form>
         <div class="operation">
             <button type="submit" form="delete" class="button-base delete">削除</button>

@@ -1,7 +1,7 @@
 <?php
     require 'php/db.php';
     $postId = $_GET["post_id"] ?? null;
-    $userId = $_SESSION['user']['user_id'] ?? null;
+    $userId = $_GET['user_id'] ?? null;
     $posted = $_POST["posted"] ?? false;
     $mes = "以下の投稿を削除しようとしています。<br>本当に実行しますか？";
 
