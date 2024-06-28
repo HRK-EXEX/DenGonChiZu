@@ -124,7 +124,7 @@
             <button type="submit" form="delete" class="button-base delete">削除</button>
 
             <?php
-                echo "<button onclick=\"location.href='G2-2.php?post_id=$postId&user_id=$userId'\" class=\"button-base back\">戻る</button>";
+                echo "<button onclick='window.history.back()' class='button-base back'>戻る</button>";
             ?>
             
             <button type="submit" form="modify" class="button-base proceed">投稿</button>
