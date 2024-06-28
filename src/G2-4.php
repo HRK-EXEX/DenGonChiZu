@@ -1,6 +1,7 @@
 <?php
     require 'php/db.php';
     $postId = $_GET["post_id"] ?? null;
+    $userId = $_SESSION['user']['user_id'] ?? null;
     $posted = $_POST["posted"] ?? false;
     $mes = "以下の投稿を削除しようとしています。<br>本当に実行しますか？";
 
@@ -82,7 +83,7 @@
         </form>
         <div class="operation">
             <?php
-                echo "<button onclick=\"location.href='G2-2.php?post_id=$postId'\" class=\"button-base back\">戻る</button>";
+                echo "<button onclick=\"location.href='G2-2.php?post_id=$postId&user_id=$userId'\" class=\"button-base back\">戻る</button>";
             ?>
             <button type="submit" form="modify" class="button-base delete">削除</button>
         </div>
